@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent()}} Liste des quizz {% endblock %}
+{% block contenu %}
+        <div class='container'>
+
+    <h1> Liste des quizz </h1> 
+    <div class="btn btn-info"><a href="{{ path('test_add') }}">Ajouter une quizz</a></div>
+    {% if not listTest is empty %}
+        {{ form_start(form)}} 
+<br>
+            <div class=" container">
+        <table class="table">
+            <tr>
+                <th>Thème</th>
+                <th>Nom du test</th>
+                <th>Niveau</th>
+                <th></th>
+
+
+            </tr>
+            {% for key,value in listTest %} 
+                <tr>
+                    <td><a href="{{ path('test_modify',{'id':value.id})}}">{{ value.theme.libelle }}</a></td>
+                    <td><a href="">{{ value.libelle }}</a></td>
+                    <td><a href="">{{ value.niveau.libelle }}</a></td>
+                    <td><input type="checkbox" name="cocher[]" value="{{ value.id }}"/></td>   
+
+                </tr>
+            {% endfor %}
+        </table>
+            </div>
+        {{ form_end(form)}}
+    {% else %}    Aucun quizz à afficher{% endif %}
+            </div>
+
+{% endblock %}

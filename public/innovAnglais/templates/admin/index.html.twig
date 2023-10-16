@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent()}} Panel Administrateur {% endblock %}
+{% block contenu %}
+    <div class="container">
+        <h1> Liste des utilisateurs bloqués </h1> 
+        {% if not listBannedIps is empty %}
+            <br>
+            <div class=" container">
+                <table class="table table-striped ">
+                    <thead class="black white-text">
+                        <tr>
+                            <th scope="col">Adresse IP</th>
+                            <th scope="col">Date de la tentative</th>
+                            <th scope="col">Utilisateur concerné</th>
+                        </tr>
+                    </thead>
+                    {% for key,value in listBannedIps %} 
+                        <tr>
+                            <td>{{ value.ipAddress }}</td>
+                            <td>Le {{ value.date|date('d-m-Y') }} à {{ value.date|date('H:i:s') }}</td>
+                            <td>{{ value.username }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        {% else %} Aucun utilisateur bloqué pour le moment. {% endif %}
+    </div>
+{% endblock %}

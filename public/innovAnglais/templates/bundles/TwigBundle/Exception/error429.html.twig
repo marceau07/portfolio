@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur {{ status_code }}, too many login attempts!{% endblock title %}
+
+{% block contenu %}
+    <h1>Security warning</h1>
+
+    <h2>Too many login attempts!</h2>
+
+    <p>
+        Too many failed login attempts detected. Your tried to login {{ constant('App\\Subscriber\\PostFail2BanSubscriber::MAX_LOGIN_FAILURE_ATTEMPTS') }}
+        times without success. You will <b>NOT</b> be able to login during <b>{{ constant('App\\Subscriber\\Fail2BanSubscriber::FAIL_TTL_HOUR') }}</b> hour(s) since now.
+        If you think it's a bug please contact us.
+    </p>
+
+    <p class="text-center">
+        <b>If you have lost your password please use the following form:</b><br/><br/>
+        <a href="{{ path('app_forgotten_password') }}"  type="button" class="btn btn-primary btn-lg">
+            <span>Demander un nouveau mot de passe</span>
+        </a>
+    </p>
+{% endblock %}

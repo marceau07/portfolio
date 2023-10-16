@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent()}} Liste des niveaux {% endblock %}{% block contenu %}
+    <div class='container'>
+        <h1> Liste des niveaux </h1> 
+        <div class="btn btn-info"><a href="{{ path('level_add') }}">Ajouter un niveau</a></div>
+        {% if not listLevel is empty %}
+            {{ form_start(form)}} 
+            <br>
+            <div class=" container">
+                <table class="table">
+                    <tr>
+                        <th>Libellé</th>
+                        <th></th>
+                    </tr>
+                    {% for key,value in listLevel %} 
+                        <tr>
+                            <td><a href="{{ path('level_modify',{'id':value.id})}}">{{ value.libelle }}</a></td>
+                            <td><input type="checkbox" name="cocher[]" value="{{ value.id }}"/></td>   
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {{ form_end(form)}}
+        {% else %}    Aucun niveau à afficher{% endif %}
+    </div>
+{% endblock %}

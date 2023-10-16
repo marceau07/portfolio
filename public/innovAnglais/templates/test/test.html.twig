@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+{% endblock %}
+{% block style %}
+    <style>
+        .theme, a {
+            font-size: smaller;
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+{% endblock %}
+{% block contenu %}
+    <div class="container">       
+        <div class="row" style="max-width: 95%;">
+        {% for value in listTheme %}
+            <a class="jumbotron col" href="{{ path('test_theme', {'id': value.id}) }}" style="text-decoration: none; text-align: center; padding: 100px; margin-top:50px; margin-right: 25px; background-color: #489CBE; z-index: auto;overflow: hidden;">
+                <p class="theme"><b>Thème</b>: {{ value.libelle }}</p>{{ value.icone|raw }}
+            </a>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}

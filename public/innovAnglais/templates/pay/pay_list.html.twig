@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent()}} Liste des paiements {% endblock %}{% block contenu %}
+    <div class="container">
+        <h1> Liste des paiements </h1>
+        <div class="btn btn-info"><a href="{{ path('pay_add') }}">Ajouter un paiment</a></div>
+        {% if not listPay is empty %}
+            {{ form_start(form)}} 
+            <br>
+            <div class=" container">
+            <table class="table">
+                <tr>
+                    <th>Utilisateur</th>
+                    <th>Abonnement</th>
+                    <th>Début de l'abonnement</th>
+                    <th>Fin de l'abonnement</th>
+                    <th></th>
+                </tr>
+                {% for key,value in listPay %} 
+                    <tr>
+                        <td><a href="">{{ value.utilisateur.username}}</a></td>
+                        <td><a href="{{ path('pay_modify',{'id':value.id})}}">{{ value.abonnement.libelle }}</a></td>
+                        <td><a href="">{{ value.dateDeb|date('d/m/Y')}}</a></td>
+                        <td><a href="">{{ value.dateFin |date('d/m/Y')}}</a></td>
+                        <td><input type="checkbox" name="cocher[]" value="{{ value.id }}"/></td>   
+
+                    </tr>
+                {% endfor %}
+            </table>
+            </div>
+            {{ form_end(form)}}
+    {% else %}    Aucun paiement à afficher{% endif %}
+            </div>
+
+{% endblock %}

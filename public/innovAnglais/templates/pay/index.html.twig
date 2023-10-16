@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block style %}
+    <style>
+        /* Media query for mobile viewport */
+        @media screen and (max-width: 400px) {
+            #paypal-button-container, #card-button {
+                width: 100%;
+            }
+        }
+
+        /* Media query for desktop viewport */
+        @media screen and (min-width: 400px) {
+            #paypal-button-container, #card-button {
+                width: 250px;
+            }
+        }
+    </style>
+{% endblock %}    
+
+{% block contenu %}
+    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+        <div class="container">
+            <div class="row">
+                <a href="../login">Connectez-vous pour payer</a>
+            </div>
+        </div>
+    {% else %}
+        <div class="container">
+            <div id="payments-methods" class="inline-form">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <form method="post" class="form-group">
+                            <div id="errors"></div>
+                            <input id="cardholder-name" class="form-control" type="text" placeholder="Titulaire de la carte" style="margin-bottom: 20px;">
+                            <div id="card-element"></div>
+                            <div id="card-errors" role="alert"></div>
+                            <a id="card-button" style="margin-top: 20px;" type="button" href='https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_HIp0pLw9G9ovonUx7Zf91neCltWs7oAM&scope=read_write'><img src='{{ asset('img/connect_with_stripe.png') }}'/></a>
+                        </form>
+                    </div>
+                    <div class="col-sm-6">
+                        <div id="paypal-button-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="payment-succeeded" class="alert alert-success"></div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block js %}
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://www.paypal.com/sdk/js?currency=EUR&client-id=AciXY4NF7AKPrdoPOtwIu5hPF6gM4EipQcniF8Rvez5AKtkaCeJ_Clk07Kxnj14WHNvRoGFDUocut_Ov"></script>
+    <script>
+        $('#payment-succeeded').hide();
+        paypal.Buttons({
+            style: {
+                color: 'blue',
+                shape: 'pill',
+                label: 'pay',
+                height: 40
+            },
+            createOrder: function (data, actions) {
+                // This function sets up the details of the transaction, including the amount and line item details.
+                return actions.order.create({
+                    purchase_units: [{
+                            amount: {
+                                currency_code: 'EUR',
+                                value: '{{ form.price }}'
+                            }
+                        }]
+                });
+            },
+            onApprove: function (data, actions) {
+                // This function captures the funds from the transaction.
+                return actions.order.capture().then(function (details) {
+                    // This function shows a transaction success message to your buyer.
+                    $('#payment-succeeded').text('Transaction complétée par ' + details.payer.name.given_name);
+                    $('#payments-methods').hide();
+                    $('#payment-succeeded').show();
+                });
+            }
+        }).render('#paypal-button-container');
+        // This function displays Smart Payment Buttons on your web page.
+    </script>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% block title %}Modifier du vocabulaire !
+{% endblock %}
+{% block contenu %}
+   <div class="container">
+ <h1> Modifier du vocabulaire </h1>
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div class="form-group">
+        {{ form_label(form.categorie, 'Catégorie:', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}        
+        <div class="col-sm-10"> 
+            {{ form_errors(form.categorie) }}
+            {{ form_widget(form.categorie) }}
+            {{ form_help(form.categorie) }} 
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.theme, 'Thème:', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}        
+        <div class="col-sm-10"> 
+            {{ form_errors(form.theme) }}
+            {{ form_widget(form.theme) }}
+            {{ form_help(form.theme) }} 
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.libelle, 'Libellé:', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}        
+        <div class="col-sm-10"> 
+            {{ form_errors(form.libelle) }}
+            {{ form_widget(form.libelle) }}
+            {{ form_help(form.libelle) }} 
+        </div>
+    </div>
+    {{ form_widget(form.save) }} 
+</div>
+{{ form_end(form) }}
+
+{% endblock %}

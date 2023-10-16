@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent()}} Liste des entreprises {% endblock %}{% block contenu %}
+        <div class="container">
+
+    <h1> Liste des entreprises </h1> 
+    <div class="btn btn-info"><a href="{{ path('firm_add') }}">Ajouter une entreprise</a></div>
+    {% if not listFirm is empty %}
+        {{ form_start(form)}} 
+<br>
+            <div class=" container">
+        <table class="table">
+            <tr>
+                <th>Nom</th>
+                <th></th>
+
+            </tr>
+            {% for key,value in listFirm %} 
+                <tr>
+                    <td><a href="{{ path('firm_modify',{'id':value.id})}}">{{ value.nom }}</a></td>
+                    <td><input type="checkbox" name="cocher[]" value="{{ value.id }}"/></td>   
+
+                </tr>
+            {% endfor %}
+        </table>
+            </div>
+        {{ form_end(form)}}
+    {% else %}    Aucune entreprise à afficher{% endif %}
+            </div>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent()}} Liste des thèmes {% endblock %}{% block contenu %}
+    <div class='container'>
+
+        <h1> Liste des thèmes </h1> 
+        <div class="btn btn-info"><a href="{{ path('theme_add') }}">Ajouter un thème</a></div>
+
+        {% if not listTheme is empty %}
+            {{ form_start(form)}} 
+            <br>
+            <div class=" container">
+                <table class="table">
+                    <tr>
+                        <th>Libellé</th>
+                        <th></th>
+
+
+                    </tr>
+                    {% for key,value in listTheme %} 
+                        <tr>
+                            <td><a href="{{ path('theme_modify',{'id':value.id})}}">{{ value.libelle }}</a></td>
+                            <td><input type="checkbox" name="cocher[]" value="{{ value.id }}"/></td>   
+
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {{ form_end(form)}}
+        {% else %}    Aucun thème à afficher{% endif %}
+    </div>
+
+{% endblock %}

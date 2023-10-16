@@ -1,0 +1,132 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    InnovAnglais | Selection du thème
+{% endblock %}
+{% block style %}
+    <style>
+        ul,li{
+            list-style:none;
+        }
+
+        .test li{
+            padding:20px;
+        }
+
+        .test li.theme{
+            background:#eee;
+            font-weight:bold;
+            font-size:120%;
+            border-bottom:1px #ddd solid;
+            cursor:pointer;
+        }
+
+        .test li.test-complet{
+            background:#ddd;
+            display:none;
+        }
+
+        .rotate{
+            -moz-transform:rotate(90deg);
+            -webkit-transform:rotate(90deg);
+            transform:rotate(90deg);
+        }
+
+        @media(max-width:800px){
+            #container{
+                width:90%;
+            }
+        }
+        .fa {
+            padding:5px;
+        }
+        .A0 {
+            color: blue;
+        }
+        .A1 {
+            color: green;
+        }
+        .A2 {
+            color: green;
+        }
+        .B1 {
+            color: orange;
+        }
+        .B2 {
+            color: orangered;
+        }
+        .C1 {
+            color: red;
+        }
+        .C2 {
+            color: red;
+        }
+    </style>
+{% endblock %}
+{% block contenu %}
+    <div class="container">       
+        <div class="col-sm-12">
+            <h2><a href="{{ path('test') }}"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>{{ themeName.libelle }}</h2>
+            <ul class="test" style="word-break: break-all;">
+                {% for n in levels %}
+                    <li class="theme">
+                        <i class="fa fa-chevron-right {% if app.user.niveau.libelleLevelUser|trim == n.libelle %} rotate {% endif %}" aria-hidden="true"></i>
+                        <span class="niveau-test {{ n.libelle }}"><b>Niveau</b> : {{ n.libelle }}</span>
+                    </li>
+                    {% if app.user.niveau.libelleLevelUser|trim == n.libelle %}
+                        <li class="test-complet" style="display: list-item;">
+                    {% else %} 
+                        <li class="test-complet">
+                    {% endif %}
+                        {% for value in listTest %}
+                            {% if value.niveau_id == n.idNiveau %}
+                                {% set val = themeName.libelle ~ ',' ~ n.libelle ~ ',' ~ value.test ~ ',' ~ value.id ~ ',' ~ app.user.id %}
+                                <a href="{{ path('test_do', {'id': val}) }}"><p><b>Catégorie</b>: {{ value.test }} <span class="icone">{{ value.icone|raw }}</span></p></a>
+                            {% endif %}
+                        {% endfor %}
+                    </li>
+                {% endfor %}
+                {#{% for key,value in listTest %}
+                    <li class="theme">
+                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                        <p><b>Intitulé</b> : {{ value.test }}</p>
+                    </li>
+                    <li class="test-complet">
+                        <p><b>Niveau</b>: {{ value.niveau }}</p>
+                    </li>
+                {% endfor %}#}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        var speed = "500";
+
+        $(document).ready(function () {
+            $('.icone').each(function() {
+               $(this).show(); 
+            });
+            $('.test-complet').each(function() { 
+                if(!this.outerHTML.includes('symfony')) {
+{#                    this.outerHTML = '<li class="test-complet" style="display: list-item;"><p>Pas de test disponible</p></li>';#}
+                    this.innerHTML = '<p>Pas de test disponible</p>';
+{#                    console.log(this.outerHTML, this.outerText);#}
+{#                    $('.test-complet').hide();#}
+                }
+            });
+            $('li.theme').on('click', function () {
+                $(this).next()
+                        .slideToggle(speed)
+                        .siblings('li.test-complet')
+                        .slideUp();
+                var arrow = $(this).children('.fa');
+                $('.fa').not(arrow).removeClass('rotate');
+                arrow.toggleClass('rotate');
+                $('.icone').each(function() {
+                    $(this).toggle(); 
+                });
+            });
+        });
+    </script>
+{% endblock %}

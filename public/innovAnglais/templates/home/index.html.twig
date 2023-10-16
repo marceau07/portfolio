@@ -1,0 +1,160 @@
+{% extends 'base.html.twig' %}
+
+{% block style %}
+    <style>
+        .titleTable {
+            height: 100px;
+            text-align: justify;
+            text-align-last: center;
+            justify-content: space-between;
+            background-color: #77b5fe;
+        }
+        .defaultColor {
+            color: #ACACAC;
+        }
+        .newColor {
+            color: #0069d9;
+        }
+        .fa-check {
+            color: green; 
+        }
+        .fa-times {
+            color: red;
+        }
+    </style>
+{% endblock %}
+
+{% block title %}
+    InnovAnglais | Accueil
+{% endblock %}
+
+{% block contenu %}
+
+    <img style="width: 100%" src='{{ asset('img/happy_woman.jpg') }}' alt="" />
+
+    <h1 style="text-align: center;">
+        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+            <a href="{{ path('signin') }}" class="btn purple">Commencez l'aventure<i class="fas fa-flag-usa" style="color:#489CBE;position: absolute;bottom: 0px; left: 10px; font-size: 2em;filter: brightness(0) invert(1);opacity: 0.13;z-index: auto;"></i></a>
+        {% else %}
+            <a href="{{ path('test') }}" class="btn purple">Commencez l'aventure<i class="fas fa-flag-usa" style="color:#489CBE;position: absolute;bottom: 0px;left: 10px;font-size: 2em;filter: brightness(0) invert(1);opacity: 0.13;z-index: auto;"></i></a>
+        {% endif %}
+    </h1>
+
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice ">
+            <h1 class='alert'>{{ message }}</h1>
+        </div>
+    {% endfor %}
+
+    <p style="text-align: center; "> Bienvenue sur Innov'Anglais, un site pour apprendre l'anglais facilement et ludiquement.</p>
+
+    <hr width='75%'>    
+    <div class='container'>
+        <h3>Améliore ton apprentissage avec nos offres Premium</h3>
+        <p>Apprendre une langue sur InnovAnglais est totalement gratuit. Cependant tu peux progresser plus vite grâce à nos offres Premium.</p>
+        <p><a href='#abonnements'>Découvrir les abonnements</a></p>
+    </div>
+    <hr width='75%'>
+        
+    <div class="container">
+        <h3>Apprends où que tu sois</h3>
+        <p>Augmente la productivité lors de tes pauses et tes trajets grâce à l'application mobile disponible <a href='//serveur1.arras-sio.com/symfony4-4017/mobileapps/apks/innovanglais.apk'>ici</a>.</p>
+    </div>
+    
+    <table class="table table-responsive-md" id='abonnements'>
+        <thead>
+            <tr>
+                <th></th>
+                <th><p class="titleTable pr-4 abo1 titleAbo1 text-white">Offre Basic</p></th>
+                <th><p class="titleTable pr-4 abo2 titleAbo2 text-white">Offre Standard</p></th>
+                <th><p class="titleTable pr-4 abo3 titleAbo3 text-white">Offre Premium</p></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Prix</th>
+                <th data-price="5" id="abo1" class="abo1">5,00 €*</th>
+                <th data-price="10" id="abo2" class="abo2">10,00 €*</th>
+                <th data-price="15" id="abo3" class="abo3">15,00 €*</th>
+            </tr>
+            <tr>
+                <th>Débloquez un test bonus</th>
+                <th><i class="fas fa-check abo1"></i></th>
+                <th><i class="fas fa-check abo2"></i></th>
+                <th><i class="fas fa-check abo3"></i></th>
+            </tr>
+            <tr>
+                <th>Débloquez deux tests bonus</th>
+                <th><i class="fas fa-times abo1"></i></th>
+                <th><i class="fas fa-check abo2"></i></th>
+                <th><i class="fas fa-check abo3"></i></th>
+            </tr>
+            <tr>
+                <th>Débloquez trois tests bonus</th>
+                <th><i class="fas fa-times abo1"></i></th>
+                <th><i class="fas fa-times abo2"></i></th>
+                <th><i class="fas fa-check abo3"></i></th>
+            </tr>
+        </tbody>
+        <caption>*Obtenez -20% avec le code <span class='code'>BTSINFO</span></caption>
+    </table>
+    <a id="btnPay" class="btn btn-md btn-info">Choisir ce plan</a>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $('i').addClass('defaultColor');
+        $('#btnPay').addClass('disabled');
+        $('.abo1').on('click', function (event) {
+            $('.abo1').addClass('newColor');
+            $('.titleAbo1').css("background-color", "#0069d9");
+            $('.abo2').removeClass('newColor');
+            $('.titleAbo2').css("background-color", "#77B5FE");
+            $('.abo3').removeClass('newColor');
+            $('.titleAbo3').css("background-color", "#77B5FE");
+            $('#btnPay').removeClass('disabled');
+            {#var value = $('#abo1').data('price').toString();
+            var href = '{{ path('pay', {'price': 'value_price'}) }}';
+            href = href.replace('value_price', value);#}
+{#            $('#btnPay').attr('href', href);#}
+{#            var href = 'https://buy.stripe.com/fZe5nH20Nb5G4uc4gi';#} // Prod
+            var href = 'https://buy.stripe.com/test_6oEbJd6HweKMaK4aEE'; // Recette
+            $('#btnPay').attr('href', href);
+            $('#btnPay').attr('target', '_blank');
+        });
+        $('.abo2').on('click', function (event) {
+            $('.abo2').addClass('newColor');
+            $('.titleAbo2').css("background-color", "#0069d9");
+            $('.abo1').removeClass('newColor');
+            $('.titleAbo1').css("background-color", "#77B5FE");
+            $('.abo3').removeClass('newColor');
+            $('.titleAbo3').css("background-color", "#77B5FE");
+            $('#btnPay').removeClass('disabled');
+            {# var value = $('#abo2').data('price').toString();
+            var href = '{{ path('pay', {'price': 'value_price'}) }}';
+            href = href.replace('value_price', value);
+            $('#btnPay').attr('href', href);#}
+{#            var href = 'https://buy.stripe.com/dR6dUdcFr3Dee4M5kl';#} // Prod
+            var href = 'https://buy.stripe.com/test_9AQ14z1nccCEdWgaEF'; // Recette
+            $('#btnPay').attr('href', href);
+            $('#btnPay').attr('target', '_blank');
+        });
+        $('.abo3').on('click', function (event) {
+            $('.abo3').addClass('newColor');
+            $('.titleAbo3').css("background-color", "#0069d9");
+            $('.abo1').removeClass('newColor');
+            $('.titleAbo1').css("background-color", "#77B5FE");
+            $('.abo2').removeClass('newColor');
+            $('.titleAbo2').css("background-color", "#77B5FE");
+            $('#btnPay').removeClass('disabled');
+           {# var value = $('#abo3').data('price').toString();
+            var href = '{{ path('pay', {'price': 'value_price'}) }}';
+            href = href.replace('value_price', value);
+            $('#btnPay').attr('href', href);#}
+{#            var href = 'https://buy.stripe.com/aEUg2laxjgq0gcU8ww';#} // Prod
+            var href = 'https://buy.stripe.com/test_7sI7sX2rgfOQbO83ce'; // Recette
+            $('#btnPay').attr('href', href);
+            $('#btnPay').attr('target', '_blank');
+        });
+    </script>
+{% endblock %}

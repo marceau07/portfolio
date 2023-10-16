@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent()}} Liste des catégories {% endblock %}
+{% block contenu %}
+    <div class="container">
+
+        <h1> Liste des catégories </h1> 
+
+        <div class="btn btn-info white-text"><a class="white" href="{{ path('category_add') }}">Ajouter une catégorie</a></div>
+
+        {% if not listCategory is empty %}
+            {{ form_start(form)}} 
+            <br>
+            <div class=" container">
+                <table class="table table-striped ">
+                    <thead class="black white-text">
+                        <tr>
+                            <th scope="col">Libellé</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    {% for key,value in listCategory %} 
+                        <tr>
+                            <td><a href="{{ path('category_modify',{'id':value.id})}}">{{ value.libelle }}</a></td>
+                            <td><input type="checkbox" class="defaultUnchecked" name="cocher[]" value="{{ value.id }}"/></td>   
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {{ form_end(form)}}
+        {% else %}    Aucune catégorie à afficher{% endif %}
+    </div>
+{% endblock %}

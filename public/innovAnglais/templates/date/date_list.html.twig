@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent()}} Liste des dates {% endblock %}{% block contenu %}
+        <div class="container">
+
+    <h1> Liste des dates </h1> 
+    <div class="btn btn-info"><a href="{{ path('date_add') }}">Ajouter une date</a></div>
+    {% if not listDate is empty %}
+        {{ form_start(form)}} 
+        <br>
+            <div class=" container">
+        <table class="table">
+            <tr>
+                <th>Date</th>
+                                <th></th>
+
+            </tr>
+            {% for key,value in listDate %} 
+                <tr>
+                    <td><a href="{{ path('date_modify',{'id':value.id})}}">{{ value.date|date("d/m/Y") }}</a></td>
+                    <td><input type="checkbox" name="cocher[]" value="{{ value.id }}"/></td>   
+
+                </tr>
+            {% endfor %}
+        </table>
+            </div>
+        {{ form_end(form)}}
+
+    {% else %}    Aucune date à afficher{% endif %}
+            </div>
+
+{% endblock %}

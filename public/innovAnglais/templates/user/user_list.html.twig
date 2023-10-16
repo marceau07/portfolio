@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent()}} Liste des utilisateurs {% endblock %}{% block contenu %}
+        <div class='container'>
+
+    <h1> Liste des utilisateurs </h1> 
+    {% if not listUser is empty %}
+        <br>
+            <div class=" container">
+        <table class="table">
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Entreprise</th>
+                <th>Âge</th>
+                <th>Niveau</th>
+            </tr>
+                    {% for key,value in listUser %} 
+                <tr>
+                    <td>{{ value.lastNameUser }}</td>
+                    <td>{{ value.firstNameUser }}</td>
+                    <td>{{ value.entreprise.nom }}</td>
+                    <td>{{ value.age }}</td>
+                    <td>{{ value.niveau.libelleLevelUser }}</td>
+                   </tr>
+                    {% endfor %}
+        </table>
+            </div>
+    {% else %}    Aucun utilisateur à afficher{% endif %}
+        </div>
+{% endblock %}

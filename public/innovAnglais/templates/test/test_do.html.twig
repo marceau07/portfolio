@@ -1,0 +1,259 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Faire le Quiz : {{ testes[0].libelleTest}}
+{% endblock %}
+{% block style %}
+{#    {% if (form.effectuer.date|date('Y-m-d H:i:s') < form.effectuer.date|date_modify('+ 1 hour')|date('Y-m-d H:i:s')) and form.effectuer.resultat is not null %}<meta http-equiv="Refresh" content="60;">{% endif %}#}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/loading-bar.css') }}"/>
+    <script type="text/javascript" src="{{ asset('js/loading-bar.js') }}"></script>
+    <style>
+        .ldBar-label:after {
+            content: ""; /* change from % to '' */
+            font-size: 0.6em;
+        }
+        .questions {
+            margin: 50px 50px 50px 50px; 
+            background-color: wheat;
+        }
+        #vecteur_cours_en_ligne {
+            display: block;
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hidden {
+            display: none;
+        }
+        .btnCommencer:hover {
+            color: #FFFFFF;
+            background-color: #752DEB !important;
+            {% if (form.effectuer.date|date('Y-m-d H:i:s') < form.effectuer.date|date_modify('+ 1 hour')|date('Y-m-d H:i:s')) and form.effectuer.resultat is not null %}
+                cursor: not-allowed;
+            {% endif %}
+        }
+    </style>
+{% endblock %}
+{% block contenu %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1><a href="{{ path('test_theme', {'id': testes[0].idTheme}) }}"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>&nbsp;Vous effectuez le test : {{ testes[0].libelleTest }}</h1>
+                {#{% if form.effectuer.resultat is not null %}
+                    <p>{{ form.effectuer.message }}</p>#}
+{#                {% else  %}#}
+                    <h3>Sur le thème "{{ testes[0].libelleTheme }}", niveau {{ testes[0].libelleNiveau }}</h3>
+                    {% set difference = date(form.effectuer.date|date_modify('+ 1 hour')|date('Y-m-d H:i:s')).diff(date('now')) %}
+                    {% set leftMinutes = difference.i %}
+                    {% if form.effectuer.resultat < 4 %}<div id="recommencer">Perdu avec&nbsp;<span id="nbErreur">{{ 4-form.effectuer.resultat }}</span>&nbsp;erreur{% if 4-form.effectuer.resultat > 1 %}s{% endif %}{% if (form.effectuer.date|date('Y-m-d H:i:s') < form.effectuer.date|date_modify('+ 1 hour')|date('Y-m-d H:i:s')) and form.effectuer.resultat is not null %}<br/>Vous devez attendre <span id="tempsRestant">{{ leftMinutes }}</span> minutes pour pouvoir réessayer le test{% endif %}</div>{% endif %}
+                    {% if form.effectuer.resultat == 4 %}<div id="gagne">Gagné en&nbsp;<span id="tempsPasse">{{ form.effectuer.temps }}</span>&nbsp;secondes</div>{% endif %}
+                    {% if form.effectuer.resultat != 4 %}
+                        <div class="text-center" id="vecteur_cours_en_ligne_centre">
+                            <img id="vecteur_cours_en_ligne" src="{{ asset('img/vecteur_cours_en_ligne.svg') }}"/>
+                            <button class="btn btnCommencer" style="background-color: #6610f2; border-radius: 2em;" id="start" onclick="commencerTest();" {% if (form.effectuer.date|date('Y-m-d H:i:s') < form.effectuer.date|date_modify('+ 1 hour')|date('Y-m-d H:i:s')) and form.effectuer.resultat is not null %}title="Vous devez attendre {{ leftMinutes }} minutes pour pouvoir réessayer le test" disabled{% endif %}><span id="libelleBtnCommencer">Commencer</span>&nbsp;le test</button>
+                        </div>
+                        <div id="test" style="text-align: center;padding-top: 100px;">
+                        {% set i = 1 %}
+                        {% set j = 0 %}
+                        <input type="hidden" id="nbQuestions" name="nbQuestions" value="{{ fakeWords['questions']|length }}"/>
+                        <div class="ldBar" id="timer" data-preset="bubble" data-value="60"></div>
+                        {% for f in fakeWords['questions'] %}
+                            <div class="questions question{{ i }}">
+                                <h4>Question {{ i }}</h4>
+                                <h5>{{ f['question'] }}</h5>
+                                {# Quand le niveau est dans les A #}
+                                {% if level in ['A0', 'A1', 'A2'] %}
+                                    <div class="img-thumbnail" id="photo_indice_{{ i }}"></div>
+                                    <test><input type="radio" name="choix_reponse_question_{{ i }}" class="choix_reponse_question_{{ i }}" id="{{ f['mot_a_trouver'] }}" value="{{ f['mot_a_trouver'] }}" onclick="questionSuivante({{ i }}, $(this).val());"/>&nbsp;<label for="choix_reponse" onclick="afficherImage({{ i }}, '{{ asset('img/quiz/'~testes[0].libelleTheme~'/'~testes[0].libelleTest~'/'~f['mot_a_trouver']|capitalize~'.png') }}', '{{ f['mot_a_trouver']|capitalize }}');">{{ f['mot_a_trouver'] }}&nbsp;</label></test>
+                                    {% for m in f["mots_faux"] %}
+                                    <test><input type="radio" name="choix_reponse_question_{{ i }}" class="choix_reponse_question_{{ i }}" id="{{ m }}" value="{{ m }}" onclick="questionSuivante({{ i }}, $(this).val());"/>&nbsp;<label for="choix_reponse" onclick="afficherImage({{ i }}, '{{ asset('img/quiz/'~testes[0].libelleTheme~'/'~testes[0].libelleTest~'/'~m|capitalize~'.png') }}', '{{ m|capitalize }}');">{{ m }}&nbsp;</label></test>
+                                    {% endfor %}
+                                    {% set i = i+1 %}
+                                    {% set j = j+1 %}
+                                {% endif %}
+                                {% if level in ['B1', 'B2'] %}
+                                    <test><img onclick="questionSuivante({{ i }}, $(this).prop('alt'));" alt="{{ f['mot_a_trouver']|capitalize }}" name="choix_reponse_question_{{ i }}" class="choix_reponse_question_{{ i }}" id="{{ f['mot_a_trouver']|capitalize }}" src="{{ asset('img/quiz' ~ testes[0].libelleTest ~ '/' ~ testes[0].libelleNiveau ~ '/' ~ f['mot_a_trouver']|capitalize ~ '.png') }}"/></test>
+                                    {% for m in f["mots_faux"] %}
+                                    <test><img onclick="questionSuivante({{ i }}, $(this).prop('alt'));" alt="{{ m|capitalize }}" name="choix_reponse_question_{{ i }}" class="choix_reponse_question_{{ i }}" id="{{ m|capitalize }}" src="{{ asset('img/quiz' ~ testes[0].libelleTest ~ '/' ~ testes[0].libelleNiveau ~ '/' ~ m|capitalize ~ '.png') }}"/></test>
+                                    {% endfor %}
+                                    {% set i = i+1 %}
+                                    {% set j = j+1 %}
+                                {% endif %}
+                                {% if level in ['C1', 'C2'] %}
+                                    <test><input type="text" name="reponse_question_{{ i }}" class="reponse_question_{{ i }} reponse_input" onkeydown=" if(event.keyCode == 13) {questionSuivante({{ i }}, $(this).val());}" placeholder="Votre proposition ici..."/></test>
+                                    {% set i = i+1 %}
+                                    {% set j = j+1 %}
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+{#                {% endif %}#}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}
+    <script>
+        $(document).ready(function () {
+            $('.questions').addClass('hidden');
+            $('.img-thumbnail').addClass('hidden');
+            $('#timer').addClass('hidden');
+            {% if form.effectuer.resultat != 4 %}$('#gagne').addClass('hidden');{% endif %}
+            $('#recommencer').addClass('hidden');
+            bar1 = new ldBar('#timer');
+            partieTerminee = false;
+            melangerReponses(1);
+            {% if form.effectuer.resultat < 4 and form.effectuer.resultat is not null %}
+                $('#recommencer').removeClass('hidden');
+                $('#libelleBtnCommencer').text('Recommencer');
+            {% endif %}
+            $('#start').removeClass('hidden');
+            {% if (form.effectuer.date|date('Y-m-d H:i:s') < form.effectuer.date|date_modify('+ 1 hour')|date('Y-m-d H:i:s')) and form.effectuer.resultat is not null %}
+                var leftMinutes = 60 - new Date().getMinutes();
+                setInterval(function() {
+                    $('#tempsRestant').text(leftMinutes);
+                    leftMinutes = leftMinutes - 1;
+                }, 60000);
+            {% endif %}
+        });
+        
+        function verifierReponses() {
+            var pts = 0;
+            {% if level in ['A0', 'A1', 'A2'] %}
+                {% for f in fakeWords['questions'] %}
+                    if($('#{{ f['mot_a_trouver'] }}').is(':checked')) {
+                        pts++;
+                    }
+                {% endfor %}
+            {% elseif level in ['B1', 'B2'] %}
+                {% for f in fakeWords['questions'] %}
+                    if($('#{{ f['mot_a_trouver'] }}').hasClass('reponseChoisie')) {
+                        pts++;
+                    }
+                {% endfor %}
+            {% elseif level in ['C1', 'C2'] %}
+                $('.reponse_input').each(function() {
+                    {% for f in fakeWords['questions'] %}
+                    if($(this).val() == "{{ f['mot_a_trouver'] }}") {
+                        pts++;
+                    }
+                    {% endfor %}
+                });
+            {% endif %}
+            return pts;
+        }
+        
+        function melangerReponses(question) {
+            var parent = $(".question" + question);
+            var inputs = $(".question" + question).children('test');
+            while(inputs.length) {
+                parent.append(inputs.splice(Math.floor(Math.random() * inputs.length), 1)[0]);
+            }
+        }
+        
+        function questionSuivante(question, reponse) {
+            var questionSuivante = question++;
+            var nbQuestions      = $('#nbQuestions').val();
+            $('#' + reponse).addClass('reponseChoisie');
+            $('#photo_indice_' + questionSuivante).addClass('hidden');
+            $('.choix_reponse_question_' + questionSuivante).each(function() {
+               $(this).prop('disabled', true);
+            });
+            $('.reponse_question_' + questionSuivante).each(function() {
+               $(this).prop('disabled', true);
+            });
+            if(question <= nbQuestions) {
+                melangerReponses(question);
+                if(!$('#photo_indice_' + question).hasClass('hidden')) $('#photo_indice_' + question).addClass('hidden');
+                $('.question' + question).removeClass('hidden');                
+            } else {
+                finPartie(true);
+            }
+        }
+            
+        function commencerTest() {
+            {% if form.effectuer.resultat < 4 %}
+                $('#recommencer').addClass('hidden');
+            {% endif %}
+            $('#start').addClass('hidden');
+            $('#vecteur_cours_en_ligne_centre').addClass('hidden');
+            $('#timer').removeClass('hidden');
+            $('.question1').removeClass('hidden');
+            seconds = 60;
+            setInterval(function () {
+                bar1.set(seconds);
+                if(!partieTerminee) {
+                    seconds--;
+                }
+                if (seconds === 0) {
+                    finPartie(false);
+                }
+            }, 1200);
+        }
+        
+        function finPartie(reussie) {
+            $('#timer').addClass('hidden');
+            if(reussie) {
+                partieTerminee = true;
+                switch(verifierReponses()) {
+                    case 0:
+                        $('#recommencer').removeClass('hidden');
+                        $('#nbErreur').text(calculTempsPasse());
+                        break;
+                    case 1:
+                        $('#recommencer').removeClass('hidden');
+                        $('#nbErreur').text(calculTempsPasse());
+                        break;
+                    case 2:
+                        $('#recommencer').removeClass('hidden');
+                        $('#nbErreur').text(calculTempsPasse());
+                        $('#tempsPasse').text(calculTempsPasse());
+                        break;
+                    case 3:
+                        $('#ameliorer').removeClass('hidden');
+                        $('#nbErreur').text(calculTempsPasse());
+                        $('#tempsPasse').text(calculTempsPasse());
+                        break;
+                    case 4:
+                        $('#gagne').removeClass('hidden');
+                        $('#tempsPasse').text(calculTempsPasse());
+                        break;
+                }
+                var user_id     = {{ app.user.id }};
+                var test_id     = {{ testes[0].idTest }};
+                var date        = "{{ date()|date('Y-m-d H:00:00') }}";
+                var resultat    = verifierReponses();
+                var temps       = calculTempsPasse();
+                $.ajax({
+                    url: '../test_complete',
+                    type: 'post',
+                    data: { 
+                        testComplete: 1,
+                        date: date,
+                        user_id: user_id,
+                        test_id: test_id,
+                        resultat: resultat,
+                        temps: temps
+                    },
+                    onSuccess: function() {
+                        console.log('réussi');
+                    },
+                    onComplete: function() {
+                    }
+                });
+                window.location.reload();
+            } else {
+                $('#perdu').removeClass('hidden');
+            }
+        }
+        
+        function calculTempsPasse() {
+            return $('#timer').attr('data-value') - $('#timer .ldBar-label')[0].innerText;
+        }
+
+        function afficherImage(question, src, alt) {
+            $('.img-thumbnail').addClass('hidden');
+            if($('#photo_indice_' + question).hasClass('hidden')) $('#photo_indice_' + question).html('<img src="' + src + '" alt="' + alt + '"/>').removeClass('hidden'); 
+        }
+    </script>
+{% endblock %}

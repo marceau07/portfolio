@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+{% endblock %}
+{% block contenu %}
+    <h1>Mon compte</h1>
+
+    <div class="container" style="text-align: justify;">
+
+        <table>   <label class="label">Pseudonyme :</label>  {{ app.user.username }}<br>
+            <label class="label"> Nom :</label> {{ app.user.lastNameUser }}<br>
+
+            <label class="label">  Prénom :</label>  {{ app.user.firstNameUser }}<br>
+            {% if is_granted('ROLE_ADMIN') %} 
+                <label class="label"> Rôle :</label> Administrateur<br>
+            {% else %} 
+                {% if is_granted('ROLE_USER') %}
+                    <label class="label">  Rôle :</label> Utilisateur<br>
+                {% endif %} 
+            {% endif %} 
+            <label class="label"> Âge :  </label>         {{ app.user.age }}<br>
+            <label class="label"> Entreprise :   </label>        {{ app.user.entreprise.nom }}<br>
+            <label class="label"> Niveau :  </label>         {{ app.user.niveau.libelleLevelUser}}
+        </table>
+
+
+
+
+
+    </div>
+{% endblock %}

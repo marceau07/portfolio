@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+{% endblock %}
+{% block contenu %} <h1> Ajouter une entreprise </h1> 
+         
+
+  <div class="container">
+  <h1> Ajouter une entreprise !</h1>
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+        <div class="form-group">
+            {{ form_label(form.nom, 'Nom:', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}        
+            <div class="col-sm-10"> 
+                {{ form_errors(form.nom) }}
+                {{ form_widget(form.nom) }}
+                {{ form_help(form.nom) }} 
+            </div>
+        </div>
+            {{ form_widget(form.save) }} 
+        </div>
+        {{ form_end(form) }}
+    
+{% endblock %}

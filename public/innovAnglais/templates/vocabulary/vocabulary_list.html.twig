@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent()}} Liste du vocabulaire {% endblock %}{% block contenu %}
+    <div class='container'>
+
+        <h1> Liste du vocabulaire </h1> 
+        <div class="btn btn-info"><a href="{{ path('vocabulary_add') }}">Ajouter du vocabulaire</a></div>
+
+        {% if not listVocabulary is empty %}
+            {{ form_start(form)}} 
+            <br>
+            <div class=" container">
+            <table class="table">
+                <tr>
+                    <th>Catégorie</th>
+                    <th>Thème</th>
+{#                    <th>Libellé</th>#}
+                    <th></th>
+                </tr>
+                {% for key,value in listVocabulary %} 
+                    <tr>
+                        <td><a href="{{ path('vocabulary_modify',{'id':value.id})}}">{{ value.categorie.libelle }}</a></td>
+                        <td><a href="">{{ value.theme.libelle }}</a></td>
+{#                        <td><a href="">{{ value.libelle }}</a></td>#}
+                        <td><input type="checkbox" name="cocher[]"  value="{{ value.id }}"/> <span class="checkmark"></span></td>   
+
+                    </tr>
+                {% endfor %}
+            </table>
+            </div>
+            {{ form_end(form)}} 
+       
+    {% else %}    Aucun vocabulaire à afficher{% endif %}
+     </div>
+{% endblock %}
