@@ -1,0 +1,18 @@
+<table>
+    <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Ville</th>
+        <th>Niveau</th>
+        <th>Equipe</th>
+    </tr>
+    {% for e in listeE %} 
+        <tr>
+            <td>{{e.lastNameEmployee}}</td>
+            <td>{{e.firstNameEmployee}} </td>
+            <td> {{e.cityEmployee}} </td>
+            <td> {{e.levelEmployee}} </td>
+            <td> {{e.nameTeam}} </td>
+        </tr> 
+    {% endfor %}    
+</table>

@@ -1,0 +1,17 @@
+{
+    "name": "parcinformatique/fbconnect",
+    "authors": [
+	{
+		"name": "root",
+		"email": "contact@parcinformatique.fr"
+	}
+    ],
+    "require": {
+	"facebook/graph-sdk" : "5.*",
+	"twig/twig" : "2.*",
+	"mobiledetect/mobiledetectlib": "^2.8",
+	"spipu/html2pdf": "^5.2",
+	"guzzlehttp/guzzle": "^6.4",
+        "phpoffice/phpspreadsheet": "^1.22"
+    }
+}

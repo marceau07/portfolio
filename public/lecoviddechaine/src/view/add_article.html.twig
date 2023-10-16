@@ -1,0 +1,76 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Ajouter un article{{ parent() }} {% endblock %}
+
+{% block style %}
+    <link rel='stylesheet' href='css/add_article.css'>
+{% endblock %}
+
+{% block header %}Ajouter un article{% endblock %}
+
+{% block content %} 
+    <div class='row justify-content-between'>
+        {% if form.valide is defined %}
+            {% if form.valide == true%}
+                <div class='alert alert-success'>{{ form.message }}</div>
+            {% else %}
+                <div class='alert alert-danger'>{{ form.message }}</div>
+            {% endif %}
+        {% else %}
+            <div class='col-md-8'>
+                <article>
+                    <form action="index.php?page=addarticle" method="post" enctype="multipart/form-data" id="addarticle">
+                        <fieldset class='contour'>
+                            <legend>Ajouter un article</legend>
+                            <div class='form-group'>
+                                <input class='col-md-12' form="addarticle" type="text" id="titleArticle" name='titleArticle' placeholder="Titre de l'article" required autofocus title="Titre de l'article"/>
+                            </div>
+                            <div class='form-group'>
+                                <textarea class='col-md-12' form='addarticle' id='contentArticle' name='contentArticle' placeholder="Contenu de l'article" required title="Contenu de l'article"></textarea>
+                            </div>
+                            <div class='form-group'>
+                                <input class='col-md-12' form='addarticle' id="sourceArticle" name="sourceArticle" placeholder="Source..." required title="Source de l'article"/>
+                            </div>
+                            <div class='form-group'>
+                                <p class="checkbox"><input class='col-md-12' form="addarticle" onclick="imageArticleBool();" type="checkbox" id='imageArticleYN' name='imageArticleYN' >Voulez-vous ajouter une image d'illustration ?</p>                        
+                                <input class="checkbox" type="file"
+                                       id="imageArticle" name="imageArticle">
+                            </div>
+                            <div class='form-group'>
+                                <select class='col-md-12' form='addarticle' name='idCategory' required title="Catégorie de l'article">
+                                    <option selected disabled>Catégories</option>
+                                    {% for c in listC %}
+                                        <option value="{{ c.idCategory }}">{{ c.labelCategory }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>                        
+                            <div class='form-group'>
+                                <input type='hidden' value='{{ session.idUser }}' name='idUser'/>
+                                <input type='submit' name='btAjouterArticle' value='Ajouter' />
+                            </div>
+                        </fieldset>
+                    </form>
+                </article>
+            </div>
+            <div class='col-md-4 text-align-end'>
+                <fieldset class='contour'>
+                    <legend>Format</legend>
+                    <b>Titre</b>
+                </fieldset>
+            </div>                      
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        imageArticleBool();
+        function imageArticleBool() {
+            if ($('#imageArticleYN').is(':checked')) {
+                $('#imageArticle').show();
+            } else {
+                $('#imageArticle').hide();
+            }
+        }
+    </script>
+{% endblock %}

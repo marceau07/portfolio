@@ -1,0 +1,66 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Gestion des modules {% endblock %}
+
+{% block contenu %} <h1> Gestion des modules </h1> 
+
+    {% if form.valide is defined %} 
+        {% if form.valide == true %}
+            <h1 class="h3 mb-3 font-weight-normal">{{ form.message }}</h1>
+        {% else %}  
+            <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+        {% endif %}         
+    {% endif %}         
+
+    <div class="panel">
+        <!-- Default panel contents -->
+        <div class="panel-heading background-violet">Liste des modules                         {% if session.idRoleUser == 2 %}
+            - <a href="index.php?page=moduleadd" class="blanc">Ajouter un module</a></div>                            {%endif%}                   
+
+
+        <!-- Table -->
+        <div class="table-responsive">
+            <table id="dtBasicExample" class="table table-bordered table-responsive-sm table-striped align-content-sm-center">
+                <thead> <tr>
+                        <th>#</th>
+                        <th>Nom du module</th>
+                        <th>Description</th>
+
+
+
+                        <th></th>
+                    </tr>  </thead>
+                    {% for m in listeM %}
+                    <tr>
+                        <td>{{m.idModule}}</td>
+                        <td>{{m.labelModule}}</td>
+                        <td>{{m.descModule}} </td>
+                        <td></td>
+
+
+                    </tr> 
+                {% endfor %}    
+            </table>
+        </div><a href="index.php?page=modulePDFWS">Télécharger sous format PDF <i class="far fa-file-pdf"></i></a>
+    </div>
+
+{% endblock %} 
+
+{% block js %} 
+    <script src="js/jquery.tabledit_Module.js" type="text/javascript"></script>
+    <script>
+        $('#dtBasicExample').Tabledit({
+            url: 'index.php?page=module',
+            columns: {
+                identifier: [0, 'idModule'],
+                editable: [[1, 'labelModule'], [2, 'descModule']]
+            }
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#dtBasicExample').DataTable();
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+{% endblock %}

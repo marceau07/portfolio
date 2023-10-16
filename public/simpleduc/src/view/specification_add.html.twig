@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Ajouter une specification{% endblock %}
+
+{% block contenu %}
+    {% if form.valide is defined %} 
+        {% if form.valide == true %}
+             <div style="margin: 0 auto;  text-align: center;">
+            <h1>Ajout réussi</h1>
+              <a href="index.php?page=specificationadd">Ajouter un nouveau cahier des charges</a><br>
+              <a href="index.php?page=specification" >Retourner sur la liste des cahiers des charges</a>
+             </div>
+        {% else %} 
+            <h1 class="h3 mb-3 font-weight-normal">{{ form.valide.message }}</h1> 
+        {% endif %}     
+    {% else %}      
+        <div class="panel-body">
+            <form  class="form-signin" action="index.php?page=specificationadd" method="post" enctype="multipart/form-data">
+                <label for="idContract" class="sr-only">Responsable:</label>
+                <select name="idContract" class="form-control">
+                    <option value="non">N/A</option> 
+                    {% for c in listeC %}
+                        <option value="{{ c.idContract }}">{{ c.labelContract }}</option>
+                    {% endfor%}    
+                </select>    
+                <select name="idFirm" class="form-control">
+                    <option value="non">N/A</option> 
+                    {% for f in listeF %}
+                        <option value="{{ f.idFirm }}">{{ f.nameFirm }}</option> 
+                    {% endfor%}    
+                </select>    
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Fichier:</label>  
+                    <div class="col-md-4 ">
+                        <div class="input-group">
+                            <span class="input-group-addon"></span>
+                            <input name="fileSpecification" placeholder="Fichier ..." class="form-control" type="file" ><p>pdf, PDF, doc, DOC, docx, DOCX, odt, ODT, txt</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" name="btAdd">Ajouter</button>
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}

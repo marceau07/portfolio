@@ -1,0 +1,32 @@
+{# Génération du PDF #}
+{% block style %}
+    <link href="css/pdf.css" rel="stylesheet" type="text/css"/>
+
+    <table>
+        <thead >
+            <tr>
+                <th >I.P.</th>
+                <th >Système d'exploitation</th>
+                <th >Etat</th>
+                <th >Employe rattaché au PC</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for o in liste %}
+                <tr>
+                    <td>{{ o.ip }} </td>
+                    <td>{{ o.nomOs }} </td>
+                    {% if o.nomStatut == 'Hors ligne' %}
+                        <td style='background: red;'>{{ o.nomStatut }} </td>
+                    {% elseif o.nomStatut =='En ligne'%}
+                        <td style='background: green;'>{{ o.nomStatut }} </td>
+                    {% endif %}
+                    <td>{{ o.unEmploye }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+    <br/>
+    <hr/>
+{% endblock %}

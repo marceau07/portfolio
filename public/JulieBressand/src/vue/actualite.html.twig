@@ -1,0 +1,97 @@
+{% extends "base.html.twig" %}
+
+{% block style %}
+    <style>
+
+        .background {
+            background: url('../web/images/bg01.jpg') ;
+            background-size: cover;
+            background-repeat: no-repeat;  }
+
+        .edit, .del {
+            float: right;  }
+
+        .separationBorder {
+            height: 3px;
+            background: #3d992e;
+            max-width: 125px;  }
+
+
+     {#   .title-a {
+            margin-top: 0px;
+            margin-left: 10px;
+            font-size: 22px;
+            border-left: 3px solid #3d992e;
+            padding-left: 8px;
+            text-align: left;
+            line-height: 1.8;
+            font-family: Verdana;rgb(46, 121, 54);  }#}
+
+      {#  .message-a {
+            margin-top: 0px;
+            margin-left: 10px;rgb(31, 148, 39)
+            font-size: 15px;
+            font-family: 'Open Sans', Arial, sans-serif;
+            line-height: 1.4;  }#}
+
+        .publish-a {
+            margin-top: 0px;
+            margin-left: 10px;
+            font-size: 12px;  }
+
+        .pull-left{
+            margin-top: 0px;
+            margin-left: 10px;
+            text-align: left;
+        }
+    </style>
+
+{% endblock %}
+
+
+
+{% block contenue %}
+
+
+    {% if form.valide is defined %}
+        {% if form.valide == true %}
+            <h1 >{{ form.message }}</h1><br><br>
+        {% else %}
+            <h1 >{{ form.message }}</h1><br><br>
+        {% endif %}
+    {% endif %}
+    <div class="site-section">
+        <div class="container">
+
+            <div class="row justify-content-center mb-5">
+                <div class="col-md-7">
+                    <h2 id="service" class="site-section-heading font-weight-light text-black text-center">Les actualités du cabinet</h2>
+                </div>
+            </div>
+            {% for a in liste %}
+                <div class="h-100 p-4 p-lg-5 bg-light site-block-feature-7">
+                    <h2 class="text-black h2">{{a.titre}}</h2>
+                    <p> {{a.message}}.</p>
+
+                    <div class="publish-a pull-left">Publié par <strong>Julie Bressand</strong> le {{a.date|date('d/m/Y')}}
+                        {%if session.role == 2 %}
+                            <div class="del">    
+{#                                <a href="actualite_{{ a.idactu }}_supprimer">SUPPRIMER&nbsp;&nbsp;&nbsp;&nbsp;</a>#}
+                                <a href="../web/index.php?page=actualite&idactu={{ a.idactu }}&supprimer=supprimer">SUPPRIMER&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                            </div>
+                            <div class="edit">
+{#                                <a href="gestionActualite_{{ a.idactu }}_editer">EDITER&nbsp;&nbsp;&nbsp;&nbsp;</a><br/>#}
+                                <a href="../web/index.php?page=gestionActualite&idactu={{ a.idactu }}&supprimer=editer">EDITER&nbsp;&nbsp;&nbsp;&nbsp;</a><br/>
+                            </div><br/>
+                        {% endif %}
+                    </div>
+                </div>
+                <br><center><div class="separationBorder"></div></center><br>
+                {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block newsletter %}
+
+{% endblock %}

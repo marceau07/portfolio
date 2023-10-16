@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/style-signin.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} - Se connecter {% endblock %}
+{% block contenu %}
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v3.2&appId=2298613000410502&autoLogAppEvents=1"></script>
+{% if form.valide is defined %} 
+    {% if form.valide == true %}
+        <h1 class="h3 mb-3 font-weight-normal">Connexion réussie</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Bienvenue sur le site</h1>
+        {% if session.role == 1 %}
+            <h1 class="h3 mb-3 font-weight-normal">Vous êtes administrateur du site</h1>
+        {% else %}
+            <h1 class="h3 mb-3 font-weight-normal">Vous êtes un client du site </h1>
+        {% endif%}
+    {% else %}
+        <h1 class="h3 mb-3 font-weight-normal">Echec de la connexion</h1> 
+        <h1 class="h3 mb-3 font-weight-normal">Erreur : {{form.message}}</h1>
+        <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=connexion">Retourner sur la page de connexion</a></h1>
+    {% endif %}
+{% else %}
+    <form class="form-signin" action="index.php?page=connexion" method="post">
+        <h1 class="h3 mb-3 font-weight-normal">Connectez-vous sur votre espace personel</h1>
+        <label for="inputEmail" class="sr-only">Email:</label>
+        <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email" required autofocus>
+        <label for="inputPassword" class="sr-only">Mot de passe:</label>
+        <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Mot de passe" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="btConnecter">Se connecter</button>
+    </form>
+    
+    <a href="index.php?page=forgetmdp"><p>Mot de passe oublié ?</p></a>
+    
+    <!-- Bouton connexion avec facebook, non fontionnel car serveur pas en HTTPS-->
+    
+    <!--<p>OR</p>
+    <div id="fb-root"></div>
+    <div class="fb-login-button" data-size="large" data-button-type="login_with" data-auto-logout-link="true" data-use-continue-as="false"></div>-->
+{% endif %} 
+{% endblock %} 

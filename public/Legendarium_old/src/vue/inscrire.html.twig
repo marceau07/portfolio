@@ -1,0 +1,58 @@
+{% extends "base.html.twig" %}
+{% block style %}
+    <link href="css/inscription.css" rel="stylesheet"> {% endblock %}
+    {% block title %} {{ parent() }} - Inscription {% endblock %}
+    {% block logo %}
+
+    {% endblock %}
+    {% block contenu %} 
+        {% if form.valide is defined %} 
+            {% if form.valide == true %}
+                {% if form.resul == true %}
+                    {% include 'inscriptionReussie.html.twig'%}                
+                {% endif %} 
+            {% else %}
+                {% include 'echecInscription.html.twig'%}
+            {% endif %} 
+        {% else %}  
+            <div class="col-md-12">
+                <div class="container" id="log-in-form">
+                    <h1>&nbsp;&nbsp;&nbsp;Inscrivez-vous !</h1><br><br>
+                    <div class="row">
+                        <form action="index.php?page=inscrire" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <input type="text" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email" required autofocus>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="nom" name="nom" class="form-control" placeholder="Nom" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="prenom" name="prenom" class="form-control" placeholder="Prénom" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="pseudo" name="pseudo" class="form-control" placeholder="Pseudo" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="mdp" name="mdp" class="form-control" placeholder="Mot de Passe" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="mdp2" name="mdp2" class="form-control" placeholder="Confirmation du mot de passe" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="number" id="telephone" name="telephone" class="form-control" placeholder="Numéro de téléphone" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" id="role" name="role" value="0">
+                            </div>
+                            <div class="form-group">
+                                <input type="file" id="photo" name="photo" class="form-control">
+                            </div>
+                            <div class="form-group form-group-btn">
+                                <button type="submit" name="btInscrire" class="btn btn-success btn-lg">S'inscrire !</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endif %}  
+    {% endblock %} 

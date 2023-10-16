@@ -1,0 +1,27 @@
+{% extends "fr/base.html.twig" %}
+
+{% block title %}Memory module {{ parent() }}{% endblock %}
+
+{% block style %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <fieldset style="background-color: grey; padding: 77px 1em 10px 1em; margin: 280px;" id="fieldsetMemory">
+                <i class="fas fa-question-circle" style="color: #004d40; bottom: 55px; cursor: pointer;" title="Obtenir de l'aide" onclick="window.open('//ktane.fandom.com/wiki/Memory', '_blank');"></i>
+                <i class="fas fa-circle memory" style="color: red; left: 388px; bottom: 55px;"></i>                
+                <span style="padding: 44px 0px 105px 26rem; background-color: black;"><center style="padding-right: 100px;"><span style="color: white; font-size: xx-large;">{{ form.randomNumber }}</span></center></span>
+                <span style="padding: 116px 0px 163px 85px; margin-left: 430px; background-color: black;"><span style="background-color: red;">{{ form.randomNumber }}</span></span>
+                <div class="row" style="padding: 40px 0px 0px 15px;">
+                {% for n in numbers %}
+                    <span style="padding: 45px; border: solid black; cursor: pointer;">{{ n }}</span>
+                {% endfor %}
+                </div>
+            </fieldset>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+{% endblock %}

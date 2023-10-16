@@ -1,0 +1,63 @@
+{% extends "base.html.twig" %}
+
+{# Page de la liste des OS #}
+
+{% block title %} Liste des OS {% endblock %}
+{% block contenu %}
+    <div id="content">
+
+        <table id="dtBasicExample" class="table table-striped table-bordered table-responsive-sm" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th class="th-sm">Nom de l'OS
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for os in listeOS %}
+                    <tr>
+                        <td>{{os.nomOs}}</td>
+                    </tr>
+                {% endfor %}
+        </table>
+
+    </div>
+
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        $('#dtBasicExample').Tabledit({
+            url: 'index.php?page=os',
+            columns: {
+                identifier: [0, 'idOs'],
+                editable: [[1, 'nomOs']]
+            },
+            onDraw: function () {
+                console.log('onDraw()');
+            },
+            onSuccess: function (data, textStatus, jqXHR) {
+                console.log('onSuccess(data, textStatus, jqXHR)');
+                console.log(data);
+                console.log(textStatus);
+                console.log(jqXHR);
+            },
+            onFail: function (jqXHR, textStatus, errorThrown) {
+                console.log('onFail(jqXHR, textStatus, errorThrown)');
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            },
+            onAlways: function () {
+                console.log('onAlways()');
+            },
+            onAjax: function (action, serialize) {
+                console.log('onAjax(action, serialize)');
+                console.log(action);
+                console.log(serialize);
+            }
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "base.html.twig" %}
+
+{# Page d'acces au profil/modification/suppression #}
+
+
+{% block title %} {{ parent() }} - Mon compte {% endblock %}
+
+{% block contenu %}
+    {% if form.valide is defined %}
+        {% if form.valide == false %}
+            <div class="alert alert-warning" role="alert">{{ form.message }}</div>
+        {% else %}
+            <div class="alert alert-success" role="alert">{{ form.message }}</div>
+        {% endif %}
+    {% else %}
+        <div class="container">
+            <h1>Mon compte</h1>
+            <div class="col-sm-6">
+                <form class="well form-horizontal" action="index.php?page=monCompte" method="post" id="contact_form">
+                    <div class="form-group">
+                        <label class="col-sm control-label">Nom</label>  
+                        <div class="col-sm inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"></span>
+                                <input  name="nomEmploye" placeholder="Nom" class="form-control" type="text" value="{{ form.profile.nomEmploye }}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm control-label">Prénom</label>  
+                        <div class="col-sm inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"></span>
+                                <input  name="prenomEmploye" placeholder="Prénom" class="form-control" type="text" value="{{ form.profile.prenomEmploye }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"></span>
+                                <input  name="idEmploye" placeholder="ID" class="form-control" type="hidden" value="{{ form.profile.idEmploye }}">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Button -->
+                    <div class="form-group">
+                        <label class="col-sm control-label"></label>
+                        <div class="col-sm">
+                            <button type="submit" class="btn btn-blue" name="btModifier">&nbsp;Modifier&nbsp;&nbsp;<span class="fas fa-paper-plane"></span></button>
+                            <a class="btn btn-danger" href="index.php?page=supprimer"><span class="fas fa-trash"></span>&nbsp;&nbsp;Supprimer mon compte</a>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

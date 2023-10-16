@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block style %}<link href="css/style-signin.css" rel="stylesheet"> {% endblock %}
+
+{% block title %} {{ parent() }} Modifier un rôle {% endblock %}
+
+{% block contenu %} 
+
+    {% if form.role is defined %} 
+
+        {% if form.role != null %}
+
+            <h1>Modifier un rôle</h1>
+
+            <form class="form-signin" action="index.php?page=modifrole" method="post" enctype="application/x-www-form-urlencoded">
+                <h1 class="h3 mb-3 font-weight-normal">Modifier un rôle</h1>
+
+                <label for="id" class="sr-only">ID</label>
+                <input type="hidden" name="id" value="{{ form.role.id }}"/>
+
+                <label for="libelle" class="sr-only">Libelle</label>
+                <input type="text" id="libelle" name="libelle" class="form-control" placeholder="Modifier le libelle" required>    
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit" name="btModifier">Modifier</button>
+            </form>  
+
+        {% endif %}
+
+    {% else %}  
+
+        <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=role">Retourner sur la liste des rôles</a></h1>
+
+    {% endif %}
+
+{% endblock %}

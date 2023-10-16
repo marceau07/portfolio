@@ -1,0 +1,14 @@
+<table>
+    <tr>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Version</th>
+    </tr>
+    {% for s in listeS %} 
+        <tr>
+            <td>{{s.nameSkill}}</td>
+            <td>{{s.descSkill}}</td>
+            <td>{{s.versionSkill}}</td>
+        </tr> 
+    {% endfor %}    
+</table>

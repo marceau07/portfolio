@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - le jeu {% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="../TemplateData/style.css">
+    <script src="../TemplateData/UnityProgress.js"></script>  
+    <script src="../Build/UnityLoader.js"></script>
+    <script>
+        var gameInstance = UnityLoader.instantiate("gameContainer", "../Build/HTML5.json", {onProgress: UnityProgress});
+    </script>
+{% endblock %}
+
+{% block contenu %}
+    {% if form.isMobile == "isiOS" %}
+        <a style="background-color: pink" href="#">IOS</a>
+    {% elseif form.isMobile == "isAndroid" %}
+        <a style="background-color: pink" href="#">Android</a>
+    {% endif %}
+    {% if form.isMobile == "isMobile" %}
+        <a style="background-color: pink" href="#">IS MOBILE</a>
+    {% elseif form.isMobile == "isNonMobile" %}
+        <a style="background-color: pink" href="#">NON MOBILE</a>
+    {% endif %}
+    <div class="webgl-content">
+        <div id="gameContainer" style="width: 600px; height: 800px"></div>
+    </div>
+{% endblock %}

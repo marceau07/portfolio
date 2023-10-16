@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block style %}<link href="css/style-signin.css" rel="stylesheet"> {% endblock %}
+
+{% block title %} {{ parent() }} Modifier un type {% endblock %}
+
+{% block contenu %} 
+
+    {% if form.type is defined %} 
+
+        {% if form.type != null %}
+
+            <h1>Modifier un type</h1>
+
+            <form class="form-signin" action="index.php?page=modiftype" method="post" enctype="application/x-www-form-urlencoded">
+                <h1 class="h3 mb-3 font-weight-normal">Modifier un type</h1>
+
+                <label for="libelle" class="sr-only">Libelle</label>
+                <input type="text" id="libelle" name="libelle" class="form-control" placeholder="Modifier le libelle" value="{{form.type.libelle}}" required>
+
+                <label for="inputId" class="sr-only">ID</label>
+                <input type="hidden" name="id" value="{{ form.type.id }}"/>
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit" name="btModifier">Modifier</button>
+            </form>
+
+        {% endif %}
+
+    {% else %}  
+
+        <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=type">Retourner sur la liste des types</a></h1>
+
+    {% endif %}
+
+{% endblock %}

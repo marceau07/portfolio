@@ -1,0 +1,95 @@
+<div class="justify-content-center mb-12">
+    <div data-aos="fade-up" data-aos-delay="200">
+        <div class="row">
+            <h2 class="col-sm-12 text-black mb-2 text-center">Avis&nbsp;clients</h2>
+        </div>
+        <hr width="75%" color="green">
+        <div class="owl-carousel nonloop-block-13" style='width: 100%;'>
+            {% for av in form.avis %}
+                <div class="container-fluid">
+                    <div class="block-testimony-1 pull-left">
+                        <h4 class="font-size-10 text-black left h4">{{ av.nom|upper }} {{ av.prenom|capitalize }}  
+                            {% if av.email == session.login %}
+{#                                <a href="/gestionAvis_{{ av.id }}"><span class="icon-edit right h6"></span></a>#}
+                                <a href="../web/index.php?page=gestionAvis&idavis={{ av.id }}"><span class="icon-edit right h6"></span></a>
+                            {% endif %}
+                        </h4>
+                        <ul class="circles left">
+                            {% if av.note == 0 %}
+                                <li class='circle'></li>
+                                <li class='circle'></li>
+                                <li class='circle'></li>
+                                <li class='circle'></li>
+                                <li class='circle'></li>
+                                {% elseif av.note == 05 %}
+                                <li class='circle half'></li>
+                                <li class='circle'></li>
+                                <li class='circle'></li>
+                                <li class='circle'></li>
+                                <li class='circle'></li>
+                                {% elseif av.note == 10 %}    
+                                <li class='circle full'></li>
+                                <li class='circle'></li>
+                                <li class='circle'></li>
+                                <li class='circle'></li>
+                                <li class='circle'></li>
+                                {% elseif av.note == 15 %}    
+                                <li class='circle full'></li>
+                                <li class='circle half'></li>
+                                <li class='circle'></li>
+                                <li class='circle'></li>
+                                <li class='circle'></li>    
+                                {% elseif av.note == 20 %}    
+                                <li class='circle full'></li>
+                                <li class='circle full'></li>
+                                <li class='circle'></li>
+                                <li class='circle'></li>
+                                <li class='circle'></li>
+                                {% elseif av.note == 25 %}    
+                                <li class='circle full'></li>
+                                <li class='circle full'></li>
+                                <li class='circle half'></li>
+                                <li class='circle'></li>
+                                <li class='circle'></li>
+                                {% elseif av.note == 30 %}    
+                                <li class='circle full'></li>
+                                <li class='circle full'></li>
+                                <li class='circle full'></li>
+                                <li class='circle'></li>
+                                <li class='circle'></li>
+                                {% elseif av.note == 35 %}    
+                                <li class='circle full'></li>
+                                <li class='circle full'></li>
+                                <li class='circle full'></li>
+                                <li class='circle half'></li>
+                                <li class='circle'></li>
+                                {% elseif av.note == 40 %}    
+                                <li class='circle full'></li>
+                                <li class='circle full'></li>
+                                <li class='circle full'></li>
+                                <li class='circle full'></li>
+                                <li class='circle'></li>
+                                {% elseif av.note == 45 %}    
+                                <li class='circle full'></li>
+                                <li class='circle full'></li>
+                                <li class='circle full'></li>
+                                <li class='circle full'></li>
+                                <li class='circle half'></li>
+                                {% elseif av.note == 50 %}    
+                                <li class='circle full'></li>
+                                <li class='circle full'></li>
+                                <li class='circle full'></li>
+                                <li class='circle full'></li>
+                                <li class='circle full'></li>                
+                                {% endif %}
+                        </ul>
+                        <blockquote class="mb-2">
+                            <p>{{ av.message }}</p>
+                        </blockquote>
+                    </div>
+                    <br/>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

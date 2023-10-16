@@ -1,0 +1,256 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Accueil{{ parent() }}{% endblock %}
+
+{% block style %}
+    {#    <link href="css/carousel.css" rel="stylesheet" type="text/css"/>#}
+{% endblock %}
+
+
+{% block header %}Accueil{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 mr-3 arabia">
+                <div class='pb-4 d-flex flex-column text-center'>
+                    <h5 class="font-weight-bold"><i class="far fa-newspaper"></i>&nbsp;Actualités</h5>
+                    {% for c in form.categories %}
+                        <a href='?page=articlecategory&labelCategory={{ c.labelCategory|capitalize }}' class="text-dark">{{ c.labelCategory|capitalize }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-sm article">
+                <h2>Le Coronavirus (Covid-19), qu'est-ce que c'est ?</h2>
+                <hr>
+                <div id="index-content">
+                    <div class="d-flex flex-row">
+                        <div class="justify-content-start">
+                            <p>Cette maladie est appelée COVID-19 car:</p>
+                            <ul>
+                                <li>
+                                    "Co" pour "corona",
+                                </li>
+                                <li>
+                                    "vi" pour "virus",
+                                </li>
+                                <li>
+                                    "d" pour "disease", signifiant "maladie" en anglais.
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="justify-content-end pl-2">
+                            <img src="../web/img/index/covid_img.png"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <p>La maladie nommée COVID-19 ou plus communément Coronavirus est une ‎maladie infectieuse découverte récemment. ‎
+                        La majorité des personnes atteintes de cette maladie ‎ne ressentiront que des symptômes bénins ou ‎modérés et guériront sans traitement particulier. ‎
+                        Propagation
+                        Le virus qui entraîne le COVID-19 se transmet ‎principalement par des gouttelettes produites ‎lorsqu’une personne infectée tousse, éternue, ou ‎lors d’une expiration. Ces gouttelettes sont trop ‎lourdes pour rester dans l’air et tombent ‎rapidement sur le sol ou sur toute surface proche.‎
+                        Vous pouvez être infecté en respirant le virus, si ‎vous êtes à proximité d’une personne malade, ou en ‎touchant une surface contaminée puis vos yeux, ‎votre nez ou votre bouche.‎
+                    </p>
+                    <div id="index-content2"> 
+                        <table class="table table-responsive-md table-hover">
+                            <caption>Les données proviennent de cette <a href="//covid19api.com">API</a>, elles ont été actualisées le <span id="refreshDate"></span> à <span id="heure"></span>.</caption>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th scope="col">Monde&nbsp;(<span id="nb"></span>)</th>
+                                    <th scope="col" id="pays"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>Cas confirmés</th>
+                                    <th id="TotalConfirmed"></th>
+                                    <th id="totalConfirmed"></th>
+                                </tr>
+                                <tr>
+                                    <th>Guérisons</th>
+                                    <th id="TotalRecovered"></th>
+                                    <th id="totalRecovered"></th>
+                                </tr>
+                                <tr>
+                                    <th>Décès</th>
+                                    <th id="TotalDeaths"></th>
+                                    <th id="totalDeaths"></th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 ml-3 arabia d-flex flex-column text-center">
+                <h5 class="font-weight-bold"><i class="far fa-question-circle"></i>&nbsp;FAQ</h5>
+                {% for c in form.categories %}
+                    <a href='?page=faq#{{ c.labelCategory|lower }}' class="text-dark">{{ c.labelCategory|capitalize }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <hr>
+        <div class="d-flex flex-center">
+            <div class="col-sm-6 article">
+                <h2>Provenance du virus</h2>
+                <hr>
+                <div id="index-content">
+                    <p>Il existe plusieurs hypothèses concernant la provenance du virus.</p>
+                    <ul class="list-unstyled">
+                        <li>
+                            <div class="d-flex text-justify">
+                                <p>
+                                    Il pourrait s'agir de la chauve-souris où a été détecté un virus très proche du Sars-CoV-2. 
+                                    Le 7 février 2020, des scientifiques de l'Université d'agriculture du sud de la Chine ont 
+                                    identifié le pangolin comme un "possible hôte intermédiaire" soupçonné d'avoir transmis le coronavirus à l'homme. 
+                                    Ce petit mammifère consommé dans le sud de la Chine pourrait être impliqué comme hôte intermédiaire entre la chauve-souris et l'homme.
+                                </p>
+                                <img src="../web/img/index/pangolin.png" class="pl-2" height="150" alt='Représentation d\'un pangolin'/>
+                            </div>
+                        </li>
+                        <br/>
+                        <li>
+                            <div class="d-flex text-justify flex-row-reverse">
+                                <p>
+                                    Le 17 avril, le Professeur Luc Montagnier, Prix Nobel de médecine en 2008, interrogé par <i>Pourquoi Docteur</i>
+                                    réfute cette hypothèse de contamination. 
+                                    Selon lui, le nouveau coronavirus a été fabriqué dans des laboratoires de Wuhan : 
+                                    "Le laboratoire de la ville de Wuhan s'est spécialisé sur les coronavirus depuis très longtemps [...] ils ont une expertise dans ce domaine" rappelle-t-il.
+                                </p>
+                                <img src="../web/img/index/wuhan_labo.jpg" class="pr-2" height="150" alt='Image du laboratoire de Wuhan, Chine'/>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>    
+        <hr>
+        <div class="d-flex flex-center">
+            <div class="col-sm-6 article">
+                <h2>Graphiques</h2>
+                <hr>
+                <div id="graphsCarousels" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" >
+                        <div class="carousel-item active">
+                            <div id="graph_total_cas_confirmes"></div>
+                        </div>
+                        <div class="carousel-item">
+                            <div id="graph_total_deces"></div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#graphsCarousels" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#graphsCarousels" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>    
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" src="//www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        function formatDataNumber(number) {
+            const arrayNumber = number.toString().split("");
+            let count = 0;
+            let processedNumber = [];
+            for (let i = arrayNumber.length - 1; i >= 0; i--) {
+                if (count === 3) {
+                    processedNumber.unshift(" ");
+                    count = 0;
+                }
+                processedNumber.unshift(arrayNumber[i]);
+                count++;
+            }
+            return processedNumber.join("");
+        }
+
+        fetch('https://api.covid19api.com/summary')
+                .then(response => response.json())
+                .then(json => {
+                    const arrayCountry = json.Countries.filter(aCountry => {
+                        return aCountry.TotalConfirmed > 0;
+                    });
+                    document.getElementById("nb").innerHTML = arrayCountry.length.toString() + " pays concernés";
+                    return arrayCountry.length;
+                }).catch(e => {
+            console.log(e);
+        });
+
+        fetch('https://api.covid19api.com/summary')
+                .then(response => response.json())
+                .then(json => {
+                    const countryObject = json.Countries.find(aCountry => aCountry.Country === "France");
+                    const refreshDate = new Date(countryObject.Date);
+                    document.getElementById("TotalConfirmed").innerHTML = formatDataNumber(json.Global.TotalConfirmed);
+                    document.getElementById("TotalRecovered").innerHTML = formatDataNumber(json.Global.TotalRecovered);
+                    document.getElementById("TotalDeaths").innerHTML = formatDataNumber(json.Global.TotalDeaths);
+                    document.getElementById("pays").innerHTML = countryObject.Country;
+                    document.getElementById("totalConfirmed").innerHTML = formatDataNumber(countryObject.TotalConfirmed);
+                    document.getElementById("totalDeaths").innerHTML = formatDataNumber(countryObject.TotalDeaths);
+                    document.getElementById("refreshDate").innerHTML = refreshDate.toLocaleDateString();
+                    document.getElementById("heure").innerHTML = `${refreshDate.getHours()}:${refreshDate.getMinutes() < 10 ? '0' : ''}${refreshDate.getMinutes()}`;
+                    document.getElementById("totalRecovered").innerHTML = formatDataNumber(countryObject.TotalRecovered);
+
+                    google.charts.load("current", {packages: ["corechart"]});
+                    google.charts.setOnLoadCallback(drawChartConfirmed);
+                    function drawChartConfirmed() {
+                        var data = google.visualization.arrayToDataTable([
+                            ["Element", "Density", {role: "style"}],
+                            ["France", countryObject.TotalConfirmed, "blue"],
+                            ["Monde", json.Global.TotalConfirmed, "red"]
+                        ]);
+
+                        var view = new google.visualization.DataView(data);
+                        view.setColumns([0, 1,
+                            {calc: "stringify",
+                                sourceColumn: 1,
+                                type: "string",
+                                role: "annotation"},
+                            2]);
+
+                        var options = {
+                            title: "Nombre de cas confirmés depuis le début de la crise",
+                            bar: {groupWidth: "50%"},
+                            legend: {position: "none"},
+                            backgroundColor: '#f9f7f1'
+                        };
+                        var chart = new google.visualization.BarChart(document.getElementById("graph_total_cas_confirmes"));
+                        chart.draw(view, options);
+                    }
+                    
+                    google.charts.setOnLoadCallback(drawChartDeath);
+                    function drawChartDeath() {
+                        var data = google.visualization.arrayToDataTable([
+                            ["Element", "Density", {role: "style"}],
+                            ["France", countryObject.TotalDeaths, "blue"],
+                            ["Monde", json.Global.TotalDeaths, "red"]
+                        ]);
+
+                        var view = new google.visualization.DataView(data);
+                        view.setColumns([0, 1,
+                            {calc: "stringify",
+                                sourceColumn: 1,
+                                type: "string",
+                                role: "annotation"},
+                            2]);
+
+                        var options = {
+                            title: "Nombre de morts depuis le début de la crise",
+                            bar: {groupWidth: "50%"},
+                            legend: {position: "none"},
+                            backgroundColor: '#f9f7f1'
+                        };
+                        var chart = new google.visualization.BarChart(document.getElementById("graph_total_deces"));
+                        chart.draw(view, options);
+                    }
+                }).catch(e => {
+            console.log(e);
+            document.getElementById("index-content2").innerHTML = "Données actuellement non disponibles";
+        });
+    </script>
+{% endblock %}

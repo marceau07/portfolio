@@ -1,0 +1,82 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ form.article.labelCategory }}{{ parent() }}{% endblock %}
+
+{% block style %}
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="css/article.css" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block content %}
+    <div class="row" style="flex-direction: row-reverse; margin-right: 15px;">
+        <div class="col-xs-3">
+            <i id="type_icone_grille" style="cursor: pointer; font-size: 2.5em;" class="fas fa-grip-horizontal" onclick="changerVueListe($(this).data('vue'));" data-vue="grille"></i>&nbsp;&nbsp;
+            <i id="type_icone_ligne" style="cursor: pointer; font-size: 2em;" class="fas fa-grip-lines" onclick="changerVueListe($(this).data('vue'));" data-vue="ligne"></i>
+        </div>
+        <div class="col-xs-3">
+            <input name="id_category" id="id_category" type="hidden" value="{{ listA[0].idCategory }}"/>
+            <input class="form-control" name="filtre_date" id="filtre_date" placeholder="Sélectionner une date pour filtrer" onchange="actualiserListe();" autocomplet="off"/>
+        </div>
+    </div>
+    <div class="row">
+       {# {% for a in listA %}
+            <div class="col-sm-12 col-md-4 news-cards">
+                <div class="news-card-header row">
+                    <div class="col-md-4">
+                        {% if a.imageArticle == null %}
+                            <img src="img/articles/{{ a.labelCategory|lower|replace({'à':'a'})|replace({'é':'e'}) }}.png" />
+                        {% else %}
+                            <img src="{% if a.idCategory != 5 %}img/articles/{% endif %}{{ a.imageArticle }}" />
+                        {% endif %}
+                    </div>
+                    <div class="col-md-8"><h5>{{ a.titleArticle|striptags('<b>,<u>,<i>,<p>,<br>')|raw }}</h5></div>
+                </div>
+                <div class="news-card-body">
+                    <p>{{ a[11]|striptags('<b>,<u>,<i>,<p>,<br>')|raw }}...</p>
+                </div>
+                <div class="news-card-footer">
+                    <div class="">{{ a.dateArticle|date('d-m-Y') }}</div>
+                    <div class="" style="border: 1px solid green; background-color: greenyellow;">
+                        <a href="index.php?page=category#{{ a.labelCategory|lower }}">{{ a.labelCategory }}</a>
+                    </div>
+                    <div class="justify-content-end text-right text-uppercase">
+                        {% if session.nicknameUser is defined %}
+                            <a href="?page=fullarticle&idArticle={{ a.idArticle }}">Voir l'article complet</a>
+                        {% else %}
+                            <a href="?page=login">Connectez-vous</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}#}
+        {% for a in listA %}
+            <div class="news-card">
+                <div class="meta">
+                    <div class="img">{% if a.imageArticle == null %}<img src="img/articles/{{ a.labelCategory|lower|replace({'à':'a'})|replace({'é':'e'}) }}.png"/>{% else %}<img src="{% if a.idCategory != 5 %}img/articles/{% endif %}{{ a.imageArticle }}"/>{% endif %}</div>
+                    <div class="details">
+                        <div class="date">{{ a.dateArticle|date('d-m-Y') }}</div>
+                        <div class="category">
+                            <a href="index.php?page=category#{{ a.labelCategory|lower }}">{{ a.labelCategory }}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="description">
+                    <h2>{{ a.titleArticle|striptags('<b>,<u>,<i>,<p>,<br>')|raw }}</h2>
+
+                    <p>{{ a[11]|striptags('<b>,<u>,<i>,<p>,<br>')|raw }}...</p>
+                    <p class="read-more">
+                        {% if session.nicknameUser is defined %}
+                            <a href="?page=fullarticle&idArticle={{ a.idArticle }}">Voir l'article complet</a>
+                        {% else %}
+                            <a href="?page=login">Connectez-vous</a>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block js %}
+    
+{% endblock %}

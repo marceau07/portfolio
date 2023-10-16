@@ -1,0 +1,131 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Article du {{ form.article.dateArticle|date('d/m/Y') }} | {{ form.article.labelCategory }}{{ parent() }}{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="css/textileToolbar.css">
+    <style>
+        .pull-left {
+            float: left;
+            text-align: start;
+            margin-left: 20px;  
+        }
+        .pull-right {
+            float: right;
+            text-align: end;
+            margin-right: 20px;
+        }
+        li {
+            text-align: left;
+        }
+    </style>
+{% endblock %}
+
+{% block header %}{{ form.article.labelCategory }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="col">
+            <article id="article">
+                <div id="titleContainer">
+                    <h3 id="titleArticleTags" class="d-none">{{ form.article.titleArticle }}</h3>
+                    <h3 id="titleArticleDisp">{{ form.article.titleArticle|striptags('<b>,<u>,<i>,<p>,<br>')|raw }}</h3>
+                </div>
+                <hr>
+                <div id="contentContainer">
+                    <div id="imageContainer" class='flex-center'>
+                        {% if form.article.imageArticle is not null %}
+                            <img id="imageArticleDisp" style="max-height: 200px;" src="{% if form.article.idCategory != 5 %}../web/img/articles/{% endif %}{{ form.article.imageArticle }}" class='float-left'/>
+                        {% else %}
+                            <img id="imageArticleDisp" style="max-height: 200px;" src="../web/img/articles/{{ form.article.labelCategory|lower|replace({'à':'a'})|replace({'é':'e'}) }}.png" width="250" height="200"/>
+                        {% endif %}
+                    </div>
+                    <br/>
+                    <div id="contentArticleTags" class="d-none">
+                        {{ form.article.contentArticle }}
+                    </div>
+                    <div id="contentArticleDisp" class='d-flex flex-column'>
+                        {{ form.article.contentArticle|striptags('<b>,<u>,<i>,<p>,<br>,<ol>,<li>,<ul>,<table>,<td>,<tr>,<div>,<a>,<img>')|raw }}
+                    </div>
+                    <div class="d-flex align-items-end flex-column">
+                        <button id="btn_save_article" class="btn btn-success btn-sm d-none" style="color: #FFFFFF;" onclick="sendData();">Enregistrer l'article</button>
+                    </div>
+                </div>
+                <hr>
+                <div class="row justify-content-between">
+                    <div class="pull-left">Source:&nbsp;<a target="_blank" class='text-dark' href="{{ form.article.sourceArticle }}"><u>{{ form.host }}</u></a>&nbsp;<i class="fas fa-recycle" style="color: red; cursor: pointer;" onclick="supprimerArticle({{ form.article.idArticle }});"></i></div>
+                    <div>{{ form.article.dateArticle|date('d/m/Y') }}</div>
+                    <div class="pull-right">{% if form.article.publisherArticle is not null %}{{ form.article.publisherArticle }}{% else %}{{ form.article.nicknameUser }}{% endif %}</div>
+                </div>
+            </article>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    {% if session is defined %}
+        {% if session.idRoleUser == 2 %}
+            <script src="js/jquery.textileToolbar.js"></script>
+            <script>
+                $("article").mouseenter(function () {
+                    $("#titleArticleDisp").append("<a id='fa-edit'>&nbsp;<i class='fas fa-edit'></i></a>");
+                    $("#fa-edit").click(function () {
+                        $("#titleArticleDisp").after("<input id='titleArticle' name='titleArticle' type='text' value='" + $("#titleArticleTags").text() + "' class='form-control'/>");
+                        $("#titleArticleDisp").remove();
+                        $("#titleArticle").textileToolbar({
+                            toolbar: ["italic", "underline"]
+                        });
+                        $("#contentArticleDisp").after("<textarea id='contentArticle' name='contentArticle' class='form-control'>" + $("#contentArticleTags").text() + "</textarea>");
+                        $("#contentArticle").prop('rows', $("#contentArticleTags").text().length/60);
+                        $("#contentArticleDisp").remove();
+                        $("#btn_save_article").removeClass('d-none');
+                        $("#contentArticle").textileToolbar({
+                            toolbar: ["p", "strong", "italic", "underline", "spacer", "ul", "ol"]
+                        });
+                    });
+                }).mouseleave(function () {
+                    $('#fa-edit').remove();
+                });
+                
+                function supprimerArticle(id_article) {
+                    $.ajax({
+                        url: "index.php?page=deletearticle",
+                        type: 'post',
+                        data: {
+                            id_article: id_article
+                        },
+                        success: function() {
+                            alert('Article supprimé');
+                            window.location.href = 'index.php?page=article';
+                        },
+                        error: function(result, statut, error) {
+                            console.log(error);
+                        }
+                    });
+                }
+
+                function sendData() {
+                    var idArticle = {{ form.article.idArticle }};
+                    var titleArticle = $('#titleArticle').val();
+                    var contentArticle = $('#contentArticle').val();
+                    $.ajax({
+                        url: "index.php?page=updatearticle",
+                        type: 'post',
+                        data: {
+                            idArticle: idArticle,
+                            titleArticle: titleArticle,
+                            contentArticle: contentArticle
+                        },
+                        success: function (data) {
+                            window.location.reload();
+                        },
+                        error: function (result, statut, error) {
+                            console.log(error);
+                        }
+                    });
+                }
+            </script>
+        {% endif %}
+    {% endif %}
+{#    <script src="//code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>#}
+{% endblock %}

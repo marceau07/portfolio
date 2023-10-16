@@ -1,0 +1,51 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Ajout d'une Entreprise {% endblock %}
+
+{% block contenu %} <h1> Ajout d'une entreprise </h1> 
+
+    {% if form.valide is defined %} 
+        {% if form.valide == true %}
+             <div style="margin: 0 auto;  text-align: center;">
+            <h1>Ajout réussi</h1>
+              <a href="index.php?page=firmadd">Ajouter une nouvelle entreprise</a><br>
+        <a href="index.php?page=firm">Retourner à la liste des entreprises</a>
+             </div>
+        {% else %} 
+            <h1 class="h3 mb-3 font-weight-normal">{{ form.valide.message }}</h1> 
+        {% endif %}     
+    {% else %}      
+
+        <div class="panel-body">
+            <form  class="form-signin" action="index.php?page=firmadd" method="post" enctype="application/x-www-form-urlencoded">
+
+                <label for="inputName" class="sr-only">Nom:</label>
+                <input type="text" id="inputName" name="inputName" class="form-control" placeholder="Saisir le nom" required autofocus>
+
+                <label for="inputCity" class="sr-only">Ville:</label>
+                <input type="text" id="inputCity" name="inputCity" class="form-control" placeholder="Saisir la ville" required autofocus>
+
+                <label for="inputZipCode" class="sr-only">Code Postal:</label>
+                <input type="number" id="inputZipCode" name="inputZipCode" class="form-control" placeholder="Saisir le code postal" required >
+
+                <label for="inputStreet" class="sr-only">Rue:</label>
+                <input type="text" id="inputStreet" name="inputStreet" class="form-control" placeholder="Saisir la rue" required >
+
+                <label for="inputTel" class="sr-only">Téléphone:</label>
+                <input type="number" id="inputTel" name="inputTel" class="form-control" placeholder="Saisir le téléphone" required >
+
+                <label for="inputFax" class="sr-only">Fax:</label>
+                <input type="number" id="inputFax" name="inputFax" class="form-control" placeholder="Saisir le fax" required >
+
+                <label for="inputIdContact" class="sr-only">Contact:</label>
+                <select name="inputIdContact" class="form-control">
+                    <option value="#" disabled selected>Contact non identifié</option> 
+                    {% for c in listeC %}
+                        <option value="{{ c.idContact }}">{{ c.firstNameContact }} {{ c.lastNameContact }}</option> 
+                    {% endfor%}
+                </select>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" name="btAdd">Ajouter l'entreprise</button>
+            </form>
+        </div>    
+    {% endif %}
+{% endblock %} 

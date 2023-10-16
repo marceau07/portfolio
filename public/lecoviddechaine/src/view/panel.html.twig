@@ -1,0 +1,270 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Panel administrateur{{ parent() }} {% endblock %}
+
+{% block style %}
+    <style>
+        #toast {
+            visibility: hidden;
+            max-width: 50px;
+            height: 50px;
+            /*margin-left: -125px;*/
+            margin: auto;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+
+            position: fixed;
+            z-index: 1;
+            left: 0;right:0;
+            bottom: 30px;
+            font-size: 17px;
+            white-space: nowrap;
+        }
+        #toast #img{
+            width: 50px;
+            height: 50px;
+
+            float: left;
+
+            padding-top: 16px;
+            padding-bottom: 16px;
+
+            box-sizing: border-box;
+
+
+            background-color: #111;
+            color: #fff;
+        }
+        #toast #desc{
+
+
+            color: #fff;
+
+            padding: 16px;
+
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        #toast.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, expand 0.5s 0.5s,stay 3s 1s, shrink 0.5s 2s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, expand 0.5s 0.5s,stay 3s 1s, shrink 0.5s 4s, fadeout 0.5s 4.5s;
+        }
+
+        @-webkit-keyframes fadein {
+            from {bottom: 0; opacity: 0;} 
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @-webkit-keyframes expand {
+            from {min-width: 50px} 
+            to {min-width: 350px}
+        }
+
+        @keyframes expand {
+            from {min-width: 50px}
+            to {min-width: 350px}
+        }
+        @-webkit-keyframes stay {
+            from {min-width: 350px} 
+            to {min-width: 350px}
+        }
+
+        @keyframes stay {
+            from {min-width: 350px}
+            to {min-width: 350px}
+        }
+        @-webkit-keyframes shrink {
+            from {min-width: 350px;} 
+            to {min-width: 50px;}
+        }
+
+        @keyframes shrink {
+            from {min-width: 350px;} 
+            to {min-width: 50px;}
+        }
+
+        @-webkit-keyframes fadeout {
+            from {bottom: 30px; opacity: 1;} 
+            to {bottom: 60px; opacity: 0;}
+        }
+
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 60px; opacity: 0;}
+        }
+    </style>
+{% endblock %}
+
+{% block content %} 
+    <div class="container">
+        <div class="row">
+            <div id="toast">
+                <div id="img"></div>
+                <div id="desc"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12" style="flex: auto;">
+                <h2>
+                    <i class="fas fa-newspaper" id="b_article_actif" data-color="green" onclick="changerCouleurIcone($(this).data('color'));" style="cursor: pointer;"></i>&nbsp;&nbsp;
+                    Articles <span id="typeArticleAffiche" style="font-weight: 600;">actifs</span> affichés&nbsp;
+                    <a class="fas fa-typewriter" href="index.php?page=addarticle" style="cursor: pointer; color: lightsteelblue;"></a>
+                </h2>
+            </div>
+            <div class="col-xs-12 hidden" id="articles_actifs">
+                <table id="table_articles_actifs" class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <th scope="col">Voir</th>
+                            <th scope="col">Titre</th>
+                            <th scope="col">Description&nbsp;</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Actif&nbsp;?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for a in form.articleActivated %}
+                            <tr>
+                                <th class="dt-bg-newspaper center" style="vertical-align: middle;"><i class="fas fa-eye" style="cursor: pointer;" onclick="window.location.href = 'index.php?page=fullarticle&idArticle={{ a.idArticle }}';">&nbsp;</i></th>
+                                <th class="dt-bg-newspaper">{{ a.titleArticle }}</th>
+                                <th class="dt-bg-newspaper">{{ a.contentArticle }}</th>
+                                <th class="dt-bg-newspaper" style="vertical-align: middle;">{{ a.dateArticle|date('d/m/Y') }}</th>
+                                <th class="dt-bg-newspaper" style="vertical-align: middle;"><input id="{{ a.idArticle }}" onclick="updateVisibility({{ a.idArticle }});" data-bool="{{ a.isActivated }}" type="checkbox" checked/></th>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 hidden" id="articles_inactifs">
+                <table id="table_articles_inactifs" class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <th scope="col">Voir</th>
+                            <th scope="col">Titre</th>
+                            <th scope="col">Description&nbsp;</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Actif&nbsp;?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for a in form.articleUnactivated %}
+                            <tr>
+                                <th class="dt-bg-newspaper center" style="vertical-align: middle;"><i class="fas fa-eye" style="cursor: pointer;" onclick="window.location.href = 'index.php?page=fullarticle&idArticle={{ a.idArticle }}';">&nbsp;</i></th>
+                                <th class="dt-bg-newspaper">{{ a.titleArticle }}</th>
+                                <th class="dt-bg-newspaper">{{ a.contentArticle }}</th>
+                                <th class="dt-bg-newspaper" style="vertical-align: middle;">{{ a.dateArticle|date('d/m/Y') }}</th>
+                                <th class="dt-bg-newspaper" style="vertical-align: middle;"><input id="{{ a.idArticle }}" onclick="updateVisibility({{ a.idArticle }});" data-bool="{{ a.isActivated }}" type="checkbox"/></th>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        $(document).ready(function() {
+            changerCouleurIcone('red');
+        });
+    </script>
+    <script>
+        function changerCouleurIcone(couleur) {
+            if(window.articles_actifs != undefined) {
+                $('#table_articles_actifs').DataTable().destroy();
+            }
+            if(window.articles_inactifs != undefined) {
+                $('#table_articles_inactifs').DataTable().destroy();
+            }
+            
+            
+            switch(couleur) {
+                case 'green':
+                    $('#b_article_actif').data('color', 'red');
+                    $('#typeArticleAffiche').html('inactifs');
+                    $('#articles_actifs').hide();
+                    $('#articles_inactifs').show();
+                    
+                    window.articles_inactifs = $('#table_articles_inactifs').DataTable({
+                        info: true,
+                        searching: true,
+                        paging: true,
+                        pageLength: 10, 
+                        scrollX: true, 
+                        language: {
+                            url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+                        }, 
+                        columnDefs: [
+                            {type: "date-euro", targets: [3]},
+                            {orderable: false, targets: [4]}
+                        ]
+                    });
+                    break;
+                case 'red':
+                    $('#b_article_actif').data('color', 'green');
+                    $('#typeArticleAffiche').html('actifs');
+                    $('#articles_inactifs').hide();
+                    $('#articles_actifs').show();
+                    
+                    window.articles_actifs = $('#table_articles_actifs').DataTable({
+                        info: true,
+                        searching: true,
+                        paging: true,
+                        pageLength: 10, 
+                        scrollX: true, 
+                        language: {
+                            url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+                        }, 
+                        columnDefs: [
+                            {type: "date-euro", targets: [3]}, 
+                            {orderable: false, targets: [4]}
+                        ]
+                    });
+                    break;
+            }
+            $('#b_article_actif').css('color', $('#b_article_actif').data('color'));
+        }
+        
+        function updateVisibility(pIdArticle) {
+            var idArticle = pIdArticle;
+            var isActivated = $('#' + pIdArticle).data('bool');
+            $.ajax({
+                url: "index.php?page=updatevisibilityarticle",
+                type: 'post',
+                data: {
+                    idArticle: idArticle,
+                    isActivated: isActivated
+                },
+                success: function (data) {
+                    $('#desc').html(data);
+                    $('#img').children("i").remove();
+                    var x = document.getElementById("toast");
+                    $('#img').append("<i class='fas fa-check-circle'></i>");
+                    $('#img').addClass("green");
+                    x.className = "show green";
+                    setTimeout(function () {
+                        x.className = x.className.replace("show", "");
+                        $('#img').children("i").remove();
+                        window.location.reload();
+
+                    }, 5000);
+                },
+                error: function (result, statut, error) {
+                    console.log(error);
+                }
+            });
+        }
+    </script>
+{% endblock %}

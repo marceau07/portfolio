@@ -1,0 +1,314 @@
+/* Sliders */
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  cursor: pointer;  
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #3d992e;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #3d992e;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+/* Sliders */
+
+.day {
+    background-color: #d3d3d3 !important;
+}
+.c-whitesmoke {
+    color: whitesmoke !important;
+}
+.night {
+    background-color: #181818 !important;
+}
+.c-grey {
+    color: grey !important;
+}
+
+#chart_stats_index {
+    width: 100%;
+    height: 50vh;
+}
+
+/*The device with borders*/ 
+.smartphone {
+    position: relative;
+    width: 360px;
+    height: 640px;
+    margin: auto;
+    border: 16px black solid;
+    border-top-width: 60px;
+    border-bottom-width: 60px;
+    border-radius: 36px;
+}
+
+/*The horizontal line on the top of the device*/ 
+.smartphone:before {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 5px;
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #333;
+    border-radius: 10px;
+}
+
+/*The circle on the bottom of the device*/ 
+.smartphone:after {
+    content: '';
+    display: block;
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    left: 50%;
+    bottom: -65px;
+    transform: translate(-50%, -50%);
+    background: #333;
+    border-radius: 50%;
+}
+
+/*The screen (or content) of the device*/ 
+.smartphone .content {
+    width: 360px;
+    height: 640px;
+    background: white;
+}
+.card{
+    height: 100%;
+    width: 100%;
+}
+.card-img-top{
+    max-height: 250px;
+    height: 100%;
+    width: 100%;
+}
+.card-footer {
+    margin-top: auto;
+}
+.card-text {
+    overflow-x: auto;
+    max-height: 150px;
+}
+.card:hover{
+    filter: drop-shadow(8px 8px 10px grey);
+}
+.card b {
+    color: #747373;
+    font-size: .9rem;
+}
+
+.archived {
+    color: red;
+}
+.wip {
+    color: orange;
+}
+.finished {
+    color: green;
+}
+.wrapper {
+  min-height: 100%;
+
+  /* Égal à la hauteur du footer */
+  /* Tient compte aussi d'une possible margin-bottom du dernier enfant */
+  margin-bottom: -50px;
+}
+.footer,
+.push {
+  height: 50px;
+}
+
+.footer i {
+    font-size: 2em;
+}
+
+hr{
+    max-width: 50%;
+    height: 2px;
+    background: #3d992e;
+}
+.separationBorderFull{
+    border-top: 3px solid #3d992e;
+    padding-top: 2vh;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+/* Style modale */
+#modale_statistiques_administration .night h5, #modale_statistiques_administration .night label, #modale_connexion_administration .night h5, #modale_connexion_administration .night label, #modale_administration_ajouter .night h5, #modale_administration_ajouter .night label, #modale_administration_ajouter .night #form_admin_file, #modale_administration_ajouter .night p {
+    color: #FFFFFF !important;
+}
+#modale_statistiques_administration .day h5, #modale_statistiques_administration .day label, #modale_connexion_administration .day h5, #modale_connexion_administration .day label, #modale_administration_ajouter .day h5, #modale_administration_ajouter .day label, #modale_administration_ajouter .day #form_admin_file, #modale_administration_ajouter .day p {
+    color: #000 !important;
+}
+#modale_statistiques_administration input, #modale_connexion_administration input, #modale_administration_ajouter input {
+    overflow: auto !important;
+}
+/* Fin style modale */
+
+/* Autre style */
+::-webkit-scrollbar{
+    width: 10px;
+}
+::-webkit-scrollbar-thumb{
+    background-color: #d5f7f7;
+    box-shadow: inset 0 0 6px rgba(0,0,0,.5);
+}
+::-webkit-scrollbar-track{
+    background-color: #212121;
+    box-shadow: inset 0 0 6px rgba(0,0,0,.4);
+}
+#body.day #thm_badge div {
+    background-color: #FFFFFF!important;
+}
+#body.day #thm_badge span.thm_nickname {
+    text-shadow: 0 0 black!important;
+}
+.hidden {
+    display: none;
+}
+#scrollUp, #scrollDown {
+    position:fixed;
+    right:10px;
+    bottom:10px;
+    cursor:pointer;
+    width:50px;
+    height:50px;
+    text-indent:-9999px;
+    display:none;
+    -webkit-border-radius:60px;
+    -moz-border-radius:60px;
+    border-radius:60px
+}
+#scrollUp span {
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-left:-8px;
+    margin-top:-12px;
+    height:0;
+    width:0;
+    border:8px solid transparent;
+}
+#scrollDown span {
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-left:-8px;
+    margin-top:-3px;
+    height:0;
+    width:0;
+    border:8px solid transparent;
+}
+#scrollUp:hover, #scrollDown:hover {
+    opacity:1;filter:"alpha(opacity=100)";
+    -ms-filter:"alpha(opacity=100)";
+}
+
+.multiselect {
+    width: 200px;
+}
+
+.selectBox {
+    position: relative;
+}
+
+.selectBox select {
+    width: 100%;
+    font-weight: bold;
+}
+
+.overSelect {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+#checkboxes {
+    display: none;
+    border: 1px #dadada solid;
+}
+.card .fa-btn-edit {
+    border: 1px solid;
+    border-radius: 50%;
+    padding: 2px;
+    background-color: #2c2222;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 1;
+    color: #afafaf;
+    cursor: pointer;
+}
+#form_edit_img {
+      color: transparent !important;
+  }
+#form_edit_img::before {
+    content: "Logo du site: ";
+    color: white;
+    margin-right: 10px; 
+}
+/* Fin autre style */
+
+@media screen and (max-width: 1499px) {
+    .dnone {
+        display: none;
+    }
+}

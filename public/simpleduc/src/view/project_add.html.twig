@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Ajout d'un projet {% endblock %}
+
+{% block contenu %} <h1> Ajout d'un projet </h1> 
+
+    {% if form.valide is defined %} 
+        {% if form.valide == true %}
+             <div style="margin: 0 auto;  text-align: center;">
+            <h1>Ajout réussi</h1>
+              <a href="index.php?page=projectadd">Ajouter un nouveau projet</a><br>
+        <a href="index.php?page=project">Retourner à la liste des projets</a>
+        </div>
+        {% else %} 
+            <h1 class="h3 mb-3 font-weight-normal">{{ form.valide.message }}</h1> 
+        {% endif %}     
+    {% else %}      
+
+        <div class="panel-body">
+            <form  class="form-signin" action="index.php?page=projectadd" method="post" enctype="application/x-www-form-urlencoded">
+                <label for="nameProject" class="sr-only">Nom du projet:</label>
+                <input type="text" id="nameProject" name="nameProject" class="form-control" placeholder="Saisir le nom du projet" required autofocus>
+
+                <label for="descProject" class="sr-only">Description :</label>
+                <input type="text" id="descProject" name="descProject" class="form-control" placeholder="Saisir une description" required >
+
+                <label for="idContractProject" class="sr-only">Contrat :</label>
+                <select name="idContractProject" class="form-control">
+                    <option value="#" disabled selected>Contrat non identifié</option> 
+                    {% for ct in listeCT %}
+                        <option value="{{ ct.idContract }}">{{ ct.labelContract }}</option> 
+                    {% endfor%}
+                </select>
+                <label for="idModuleProject" class="sr-only">Module :</label>
+                <select name="idModuleProject" class="form-control">
+                    <option value="#" disabled selected>Module non identifié</option> 
+                    {% for m in listeM %}
+                        <option value="{{ m.idModule }}">{{ m.labelModule }}</option> 
+                    {% endfor%}
+                </select>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" name="btAdd">Ajouter</button>
+            </form>
+        </div>    
+    {% endif %}
+{% endblock %} 

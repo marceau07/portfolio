@@ -1,0 +1,61 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Ajouter une activité {% endblock %}
+{% block contenu %}
+    <div class="container">
+        
+        <form class="well form-horizontal" action="index.php?page=ajouterActivite" method="post"  id="contact_form">
+            <fieldset>
+                <input name="codeAct" type="hidden">
+                <legend>Ajouter une activité</legend>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Nom de l'activité</label>  
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input  name="nomAct" placeholder="Quel sera le nom de l'activité ?" class="form-control"  type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" >Description de l'activité</label> 
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input name="descAct" placeholder="Description de l'activité" class="form-control" type="text">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group"> 
+                    <label class="col-md-4 control-label">Matériel</label>
+                    <div class="col-md-4 selectContainer">
+                        <div class="input-group">
+                            <select name="idMateriel" class="form-control selectpicker" >
+                                <option readonly>Matériels</option>
+                                {% for m in listeM %}
+                                    <option value="{{ m.codeMateriel }}" >{{ m.nomMateriel }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="items">
+                            <small>Vous ne trouvez pas votre matériel ?<a href="index.php?page=ajouterMateriel">&nbsp;Ajoutez en un !</a></small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Button -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label"></label>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-warning" name="btAjouterActivite">Envoyer <span class="glyphicon glyphicon-send"></span></button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+
+    <script src="../../web/js/modules/formAjouterClient.js" type="text/javascript"></script>
+
+{% endblock %}

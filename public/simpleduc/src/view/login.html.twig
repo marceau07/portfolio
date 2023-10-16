@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/style-signin.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} Erreur de connexion {% endblock %}
+
+{% block contenu %}
+    <div class="container">
+            <form class="form-signin" action="index.php?page=login" method="post" enctype="application/x-www-form-urlencoded">
+                <h1 class="h3 mb-3 font-weight-normal">Connectez-vous au tableau de bord</h1>
+                <label for="emailUser" class="sr-only">Email:</label>
+                <input type="email" id="emailUser" name="emailUser" class="form-control" placeholder="Email" required autofocus>
+                <label for="passwordUser" class="sr-only">Mot de passe:</label>
+                <input type="password" id="passwordUser" name="passwordUser" class="form-control" placeholder="Mot de passe" required>
+                <button class="btn btn-lg  btn-block" type="submit" name="btLogin">Se connecter</button>
+                <a href="index.php?page=signin">S'inscrire</a>  
+            </form>
+      
+    </div>
+{% endblock %} 

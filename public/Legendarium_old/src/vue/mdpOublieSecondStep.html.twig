@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+{% block title %} Récupérer ses identifiants - Etape 2 {% endblock %}
+
+{% block contenu %}
+    {% if form.valide is defined %} 
+        {% if form.valide == true %}
+            {% if form.resul == true %}
+                {% include 'mdpRequestSuccessSecondStep.html.twig'%}                
+            {% endif %} 
+        {% else %}
+            {% include 'mdpRequestFailSecondStep.html.twig'%}
+        {% endif %} 
+    {% else %}
+        <div class="col-md-12">
+            <div class="container">
+                <div class="row">
+                    <p>Veuillez renseigner le code secret qui vous a été transmis par mail (vérifier vos spams avant de réhitérer la manipulation)</p>
+                    <form class="form-signin" action="index.php?page=forgetmdpsecond" method="post" enctype="application/x-www-form-urlencoded">
+                        <input type="number" name="inputCode" placeholder="Code" required autofocus>
+                        <button class="btn btn-lg btn-primary btn-success" type="submit" name="btRecupererCode">Récupérer mes identifiants</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

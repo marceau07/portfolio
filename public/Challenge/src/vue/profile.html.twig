@@ -1,0 +1,91 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Mon compte {% endblock %}
+
+{% block contenu %}
+    <div class="container">
+        <h1>Mon compte</h1>
+        <div class="col-sm-6">
+            <form class="well form-horizontal" action="index.php?page=profile" method="post" id="contact_form">
+                <div class="form-group">
+                    <label class="col-sm control-label">Nom</label>  
+                    <div class="col-sm inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"></span>
+                            <input  name="nom" placeholder="Nom" class="form-control" type="text" value="{{ form.profile.nom }}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm control-label">Prénom</label>  
+                    <div class="col-sm inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"></span>
+                            <input  name="prenom" placeholder="Prénom" class="form-control" type="text" value="{{ form.profile.prenom }}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm control-label">Votre date de naissance est-elle correcte ?</label>  
+                    <div class="col-sm inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"></span>
+                            <input  name="dateNaiss" class="form-control" type="date" value="{{ form.profile.dateNaiss }}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm control-label">Votre code postal ?</label>  
+                    <div class="col-sm inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"></span>
+                            <input  name="cp" class="form-control" type="text" value="{{ form.profile.cp }}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm control-label">Votre ville ?</label>  
+                    <div class="col-sm inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"></span>
+                            <input  name="ville" class="form-control" type="text" value="{{ form.profile.ville }}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm control-label">Votre rue ?</label>  
+                    <div class="col-sm inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"></span>
+                            <input  name="rue" class="form-control" type="text" value="{{ form.profile.rue }}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm control-label">Votre numéro de mobile ?</label>  
+                    <div class="col-sm inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"></span>
+                            <input  name="telephone" class="form-control" type="text" value="{{ form.profile.tel }}">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Button -->
+                <div class="form-group">
+                    <label class="col-sm control-label"></label>
+                    <div class="col-sm">
+                        <button type="submit" class="btn btn-blue" name="btModifier">&nbsp;Modifier&nbsp;&nbsp;<span class="fas fa-paper-plane"></span></button>
+                        <a class="btn btn-danger" href="index.php?page=supprimer"><span class="fas fa-trash"></span>&nbsp;&nbsp;Supprimer mon compte</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,492 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 6 avr. 2019, 15:45:57
+    Author     : marce
+*/
+
+/*--------- GENERAL ---------*/
+
+
+a{
+    text-decoration: none !important;
+}
+
+body{
+    background-color: #000000;
+    text-align: center;
+    background-size: 100% 100%;
+    background-repeat: repeat-y;
+    height: 100vh;
+}
+
+#loader{
+    background-image: url(img/loader.svg);
+    width: 200px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+
+    .legendarium{
+        margin-bottom: 20px;
+    }
+
+    .panneau_lateral{
+        display: none !important;
+    }
+
+    .panneau_central{
+        width: 100% !important;
+        left:0 !important;
+        margin-bottom: 75px !important;
+    }
+
+    .mobileBouton{
+        display: block !important;
+    }
+
+}
+
+/*--------- ZONING ---------*/
+.legendarium{
+    max-width: 750px;
+    width: 100%;
+}
+
+.mobileBouton{
+    display: none;
+    position: fixed;
+    bottom: 5px;
+    width: 75px;
+    height: 75px;
+    z-index: 9999;
+    border-radius: 50%;
+    line-height: 75px;
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    background-color: #b3a05a;
+    color: #220d00;
+    box-shadow: 0px 0px 10px 1px #220d00, inset 0px 0px 10px 1px #220d00;
+    transition: background 0.5s, box-shadow 0.5s, color 0.5s;
+}
+.mobileBouton:hover{
+    background-color: #6f653c;
+    color: #fff2c3;
+    box-shadow: 0px 0px 10px 1px #220d00, inset 0px 0px 15px 5px #220d00;
+}
+
+.mobileBouton span, .closeMobile span{
+    line-height: 75px;
+}
+
+.closeMobile{
+    display: none;
+    position: fixed;
+    bottom: 5px;
+    width: 75px;
+    height: 75px;
+    z-index: 9999;
+    border-radius: 50%;
+    line-height: 75px;
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    background-color: #b3a05a;
+    color: #220d00;
+    box-shadow: 0px 0px 10px 1px #220d00, inset 0px 0px 10px 1px #220d00;
+    transition: background 0.5s, box-shadow 0.5s, color 0.5s;
+    left: 50%;
+    margin-left: -37.5px;
+    z-index: 10000;
+}
+.closeMobile:hover{
+    background-color: #6f653c;
+    color: #fff2c3;
+    box-shadow: 0px 0px 10px 1px #220d00, inset 0px 0px 15px 5px #220d00;
+}
+
+.infosBouton_mobile{
+    right: 5px;
+}
+
+.calendrierBouton_mobile{
+    left: 5px;
+}
+
+.mainContainer{
+	position: relative;
+}
+
+.panneau_central{
+	background: #35271e;
+    box-shadow: 0px 0px 25px 2px #000, inset 0px 0px 100px 20px #130a01;
+    display: inline-block;
+    min-height: 100vh;
+    left: 20%;
+    margin-bottom: 15px;
+    position: absolute;
+    width: 60%;
+    z-index: 999;
+    padding-bottom: 20px;
+}
+
+.panneau_lateral{
+	display: inline-block;
+	height: 95vh;
+	padding: 0;
+	position: absolute;
+	top: 40px;
+	width: 20%;
+}
+
+.panneau_lateral_display{
+    display: block !important;
+    position: fixed;
+    width: 94vw;
+    left: 3vw !important;
+    right: 3vw !important;
+    z-index: 10000;
+    top: 2vh;
+    height: 96vh;
+}
+.panneau_lateral_display .voletNavigation{
+    height: 100%;
+    width: 100%;
+    padding: 4% 0;
+    margin-left: 0;
+}
+
+.panneau_lateral_gauche{
+	left: 0;
+}
+
+.panneau_lateral_droite{
+	right: 0;
+}
+
+.voletNavigation{
+	background: #543e30;
+	height: 98%;
+    width: 90%;
+    position: relative;
+    padding-top: 4%;
+}
+
+.voletNavigation_gauche{
+	margin-left: 10%;
+}
+
+.voletNavigation_droite{
+	margin-right: 10%;
+}
+
+.contenu_lateral{
+	background-color: #FFF;
+	width: 92%;
+	margin-left: 4%;
+	height: 99%;
+}
+
+.titre{
+	font-size: 200%;
+    color: #c3835a;
+    border-bottom: 1px dashed #c3835a;
+    font-family: Ring;
+}
+
+/*--------- PAGE PRINCIPALE ---------*/
+.accesCatalogue{
+	height: 40px;
+    text-align: center;
+    width: 100%;
+    background: #368431;
+    color: #FFFFFF;
+    font-weight: 700;
+    line-height: 40px;
+    font-size: 1.3em;
+    cursor: pointer;
+    font-family: Ring;
+    transition: background 0.5s, box-shadow 0.5s;
+}
+
+.accesCatalogue:hover{
+    background: #123310;
+    box-shadow: inset 0px 0px 10px 0px #FFFFFF;
+}
+
+/*--------- INFOS ---------*/
+.infos{
+	text-align: left;
+    padding: 0 10px;
+    margin: 25px 0;
+    width: 100%;
+    height: 30px;
+}
+
+.infos_label{
+	display: inline-block;
+    font-size: 2.5em;
+    color: #c38369;
+    line-height: 100%;
+    float: left;
+    margin-right: 10px;
+}
+
+.infos_value{
+    display: inline-block;
+    color: #35271e;
+    font-size: 1.1em;
+    vertical-align: middle;
+    width: 80%;
+}
+.infos_valueLine{
+    line-height: 40px;
+}
+
+.map{
+    width: 94%;
+    height: 200px;
+    margin-left: 3%;
+    border: 3px dotted #5a4832;
+    margin-top: -10px;
+}
+
+.infos_valueLien{
+    display: inline-block;
+    color: #35271e;
+    font-size: 1.1em;
+    vertical-align: middle;
+    line-height: 40px;
+    font-size: 1.25em;
+}
+
+.infos_facebook{
+    background: url(img/logoFB.ico);
+    background-size: 150%;
+    background-position: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.infos_twitter{
+    background: url(img/logoTwitter.ico);
+    background-size: 100%;
+    background-position: 0 0;
+    width: 40px;
+    height: 40px;
+}
+
+/*--------- EVENT ---------*/
+.event{
+	width: 94%;
+    margin: 20px 3%;
+    background: #dbb095;
+    border: 3px double #241910;
+}
+
+.event_label{
+    font-family: Ring;
+    background: #c3835a;
+    color: #FFFFFF;
+    padding: 5px 5px 2px 5px;
+    font-size: 175%;
+}
+
+.event_value{
+	padding: 5px;
+}
+
+/*--------- EVENT ---------*/
+.billet{
+	width: 94%;
+    margin: 50px 3% 0 3%;
+    background: #FFFFFF;
+    position: relative;
+    min-height: 250px;
+    background-color: #fff2c3;
+    box-shadow: 3px 3px 25px 1px #000;
+}
+
+.billet_image{
+    max-width: 20%;
+    margin: 10px 10px 0 10px;
+}
+.billet:nth-child(2n) .billet_image{ float: left; }
+.billet:nth-child(2n+1) .billet_image{ float: right; }
+
+.billet_label{
+    font-family: "Ring";
+    font-size: 225%;
+    padding-top: 5px;
+}
+
+.billet_value{
+    font-size: 110%;
+}
+
+.billet_lien{
+    margin-top: 15px;
+    width: 100%;
+    text-align: right;
+    padding-right: 20px;
+    font-family: Ring;
+    font-size: 150%;
+    display: block;
+}
+
+/* RECHERCHE DEBUT */
+
+.rechercheForm{
+    position: absolute;
+    top: -60px;
+    left: 10%;
+    width: 90%;
+    padding: 1%;
+}
+
+.rechercheForm_input{
+    width: 80%;
+    line-height: 31px;
+    font-size: 1.5em;
+    padding: 0 10px;
+    color: #323232;
+    border: none;
+    border-radius: 5px 0 0 5px;
+    vertical-align: top;
+    outline: none;
+}
+
+.rechercheForm_button{
+    height: 30px;
+    width: 30px;
+    border-radius: 12px 5px 5px 12px;
+    margin-left: -5%;
+    background-color: #107618;
+    border: 1px groove #fff;
+    outline: none;
+    font-family: 'Glyphicons Halflings';
+    -webkit-font-smoothing: antialiased;
+    color: #f1f1f1;
+    font-size: 1.25em;
+    transition: background-color 0.5s;
+}
+.rechercheForm_button:hover{
+    background-color: #005608;
+}
+
+.rechercheResult{
+    display: none;
+    position: absolute;
+    top: -27px;
+    left: 17%;
+    width: 75%;
+    padding: 1%;
+    max-height: 300px;
+    height: 300px;
+    background: white;
+    z-index: 999;
+    border: 1px groove #666666;
+}
+
+.rechercheResult_titre{
+    font-family: Ring;
+    border-bottom: 2px solid #907e5d;
+    border-bottom-style: ridge;
+    margin: 0;
+    background: #e5d1ac;
+    border-radius: 50% 50% 0 0;
+    border-top: 1px solid #907e5d;
+    font-size: 1.25em;
+}
+
+.rechercheResult_ligne{
+    margin: 0;
+    padding: 2px;
+    cursor: pointer;
+}
+.rechercheResult_ligne:nth-child(even){
+    background: #EFEFEF;
+}
+.rechercheResult_ligne:hover{
+    background: #DEDEDE;
+}
+
+/* RECHERCHE DEBUT */
+
+/* PANIER DEBUT */
+
+.boutonPanier{
+    position: absolute;
+    top: -70px;
+    right: 17%;
+    width: 74%;
+    padding: 1%;
+    background: #32507c;
+    height: 40px;
+    line-height: 1.5em;
+    color: #FFFFFF;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Ring;
+    font-size: 1.5em;
+    transition: box-shadow 0.5s;
+}
+.boutonPanier:hover{
+    box-shadow: inset 0px 0px 15px 0px #000000;
+}
+
+.boutonPanier_icon{
+    margin-right: 10px;
+    line-height: 1.5em;
+    vertical-align: text-bottom;
+    font-family: 'Glyphicons Halflings';
+    -webkit-font-smoothing: antialiased;
+}
+
+/* PANIER FIN */
+
+/* LISTE GENRE DEBUT */
+
+.ui-accordion .ui-accordion-header {
+    border: none;
+    background: #e8d6a3;
+    outline: none;
+    text-align: left;
+    padding-left: 15% !important;
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+    color: #635236 !important;
+    font-weight: 700 !important;
+}
+
+.ui-accordion .ui-accordion-content {
+    padding: 0 !important;
+}
+
+.listeGenre_livre{
+    height: 25px;
+    line-height: 25px;
+    cursor: pointer;
+}
+.listeGenre_livre:nth-child(even){
+    background: #fcffd2;
+}
+.listeGenre_livre:hover{
+    background: #f8e58a;
+}
+
+/* LISTE GENRE FIN */
+
+
+

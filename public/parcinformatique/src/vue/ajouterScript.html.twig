@@ -1,0 +1,84 @@
+{% extends "base.html.twig" %}
+
+{# Page d'ajout de Script#}
+
+
+{% block title %} {% endblock %}
+
+{% block contenu %}
+    {% if form.valide is defined %}
+        {% if form.valide == false %}
+            <div class="alert alert-warning" role="alert">{{ form.message }}</div>
+        {% else %}
+            <div class="alert alert-success" role="alert">{{ form.message }}</div>
+        {% endif %}
+    {% else %}
+        <form class="well form-horizontal" action="index.php?page=ajouterScript" method="post" id="script_form" enctype="multipart/form-data">
+            <fieldset>
+                <legend>Ajouter un script</legend>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Nom du script:</label>  
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"></span>
+                            <input name="nomScript" placeholder="Quel sera le nom du script ?" class="form-control" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Description du script:</label>  
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"></span>
+                            <input name="descScript" placeholder="Description..." class="form-control" type="textarea">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Version:</label>  
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"></span>
+                            <input name="version" placeholder="Quel sera la version du script ?" class="form-control" type="text">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group"> 
+                    <label class="col-md-4 control-label">Operating System:</label>
+                    <div class="col-md-4 selectContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                            <select name="idOs" class="form-control selectpicker">
+                                <option>OS ?</option>
+                                {% for os in listeOS %}
+                                    <option value="{{ os.idOs }}">{{os.nomOs}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="items">
+                            <small>Vous ne trouvez pas votre OS ?<a href="index.php?page=ajouterOs">&nbsp;Ajoutez en un !</a></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Fichier:</label>  
+                    <div class="col-md-4 ">
+                        <div class="input-group">
+                            <span class="input-group-addon"></span>
+                            <input name="fichier" placeholder="Fichier ..." class="form-control" type="file" >
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Button -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label"></label>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-warning" name="btAjouterScript">Ajouter un Script<span class="glyphicon glyphicon-send"></span></button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    {% endif %}
+{% endblock %}

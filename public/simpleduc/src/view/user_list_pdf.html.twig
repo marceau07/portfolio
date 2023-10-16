@@ -1,0 +1,28 @@
+{# Génération du PDF #}
+{% block style %}
+    <link href="css/pdf.css" rel="stylesheet" type="text/css"/>
+
+    <table>
+        <thead >
+            <tr>
+                <th >Email</th>
+                <th >Nom</th>
+                <th >Prenom</th>
+                <th >Rôle</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for u in listeU %}
+                <tr>
+                    <td>{{ u.emailUser }} </td>
+                    <td>{{ u.firstNameUser }} </td>
+                    <td>{{ u.lastNameUser }} </td>
+                    <td>{{ u.labelRole }} </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+    <br/>
+    <hr/>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Modification d'un projet {% endblock %}
+
+{% block contenu %} <h1> Modification d'un projet </h1> 
+
+    {% if form.project is defined %} 
+        {% if form.project != null %}    
+            <div class="panel-body">
+                <form class="form-signin" action="index.php?page=projectmodify" method="post" enctype="application/x-www-form-urlencoded">
+                    
+                    <input type="hidden" id="idProject" name="idProject" value="{{form.project.idProject}}"/> 
+
+                    <label for="nameProject" >Nom:</label>
+                    <input type="text" id="nameProject" name="nameProject" class="form-control" placeholder="Nom" value="{{form.project.nameProject}}" required autofocus>
+
+                    <label for="descProject" >Description:</label>
+                    <input type="text" id="descProject" name="descProject" class="form-control" placeholder="Description" value="{{form.project.descProject}}" required>
+
+                    <label for="idContractProject" >Contrat:</label>
+                    <select name="idContractProject" class="form-control">
+                    <option value="{{ form.project.idContractProject }}">{{form.project.labelContract}}</option> 
+                    {% for c in listeC %}
+                       <option value="{{ c.idContract }}">{{ c.labelContract }}</option>
+                    {% endfor%}    
+                </select>    
+                <label for="idModuleProject" >Contrat:</label>
+            <select name="idModuleProject" class="form-control">
+                    <option value="{{ form.project.idModuleProject }}">{{form.project.labelModule}}</option> 
+                    {% for m in listeM %}
+                       <option value="{{ m.idModule }}">{{ m.labelModule }}</option>
+                    {% endfor%}    
+                </select>   
+
+                    <input type="hidden" name="idTeam" value="{{ form.team.idTeam }}"/>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btModify">Modifier</button>
+                </form>
+            </div> 
+        {% else %}  
+            {% if form.valide == true %}
+                <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+                <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=project" class="violet">Retourner sur la liste des projets</a></h1>
+            {% else %}    
+        <h1 class="alert alert-info" role="alert">{{ form.message }}</h1> 
+                <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=project" class="violet">Retourner sur la liste des projets</a></h1>
+            {% endif %} 
+        {% endif %} 
+    {% else %} 
+        <h1 class="alert alert-info" role="alert">{{ form.message }}</h1> 
+        <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=project" class="violet">Retourner sur la liste des projets</a></h1>
+
+    {% endif %}
+{% endblock %} 

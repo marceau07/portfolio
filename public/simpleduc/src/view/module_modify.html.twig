@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Modification d'un module {% endblock %}
+
+{% block contenu %} <h1> Modification d'un module </h1> 
+
+    {% if form.module is defined %} 
+        {% if form.module != null %}    
+            <div class="panel-body">
+                <form  class="form-signin" action="index.php?page=modulemodify" method="post" enctype="application/x-www-form-urlencoded">
+                    <input type="hidden" id="id" name="idModule" value="{{form.module.idModule}}"/> 
+
+                    <label for="labelModule" class="sr-only">Nom:</label>
+                    <input type="text" id="labelModule" name="labelModule" class="form-control" placeholder="Saisir le nom" value="{{form.module.labelModule}}" required autofocus>
+
+                    <label for="descModule" class="sr-only">Description:</label>
+                    <input type="text" id="descModule" name="descModule" class="form-control" placeholder="Saisir la dsecription" value="{{form.module.descModule}}" required >
+
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btModify">Modifier</button>
+                </form>
+            </div> 
+        {% else %}  
+            {% if form.valide == true %}
+                <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+                <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=module" class="violet">Retourner sur la liste des modules</a></h1>
+            {% else %}    
+        <h1 class="alert alert-info" role="alert">{{ form.message }}</h1> 
+                <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=module" class="violet">Retourner sur la liste des modules</a></h1>
+            {% endif %} 
+        {% endif %} 
+    {% else %} 
+        <h1 class="alert alert-info" role="alert">{{ form.message }}</h1> 
+        <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=module" class="violet">Retourner sur la liste des modules</a></h1>
+
+    {% endif %}
+{% endblock %} 

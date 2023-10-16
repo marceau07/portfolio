@@ -1,0 +1,62 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Gestion des contacts {% endblock %}
+
+{% block contenu %} <h1> Gestion des contacts </h1> 
+
+    {% if form.valide is defined %} 
+        {% if form.valide == true %}
+            <h1 class="h3 mb-3 font-weight-normal">{{ form.message }}</h1>
+        {% else %}  
+            <h1 class="h3 mb-3 font-weight-normal">{{ form.message }}</h1>
+        {% endif %}         
+    {% endif %}         
+
+    <div class="panel">
+        <!-- Default panel contents -->
+        <div class="panel-heading background-violet">Liste des contacts                       
+            {% if session.idRoleUser == 2 %}- 
+            <a href="index.php?page=contactadd" class="blanc">Ajouter un contact</a></div>             
+            {% endif  %}
+        <!-- Table -->
+        <div class="table-responsive">
+            <table id="dtBasicExample" class="table table-hover table-striped">
+                 <thead> <tr>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Telephone</th>
+                    <th>Mail</th>
+                        {% if session.idRoleUser == 2 %}
+
+                        <th></th>
+                        <th></th>
+                        {% endif  %}
+                    <th></th>
+                </tr>  </thead>
+                {% for c in listeC %}
+                    <tr>
+                        <td>{{c.lastNameContact}}</td>
+                        <td>{{c.firstNameContact}}</td>
+                        <td>{{c.telContact}}</td>
+                        <td>{{c.mailContact}}</td>
+                        {% if session.idRoleUser == 2 %}
+                            <td><div class="btn-group btn-group-lg"><a href="index.php?page=contactmodify&idContact={{c.idContact}}"><i class="fas fa-edit"></i></a></div></td>
+                            <td><div class="btn-group btn-group-lg"><a href="index.php?page=contact&idContact={{c.idContact}}"><i class="fas fa-trash"></i></a></div></td>
+                                    {% endif %}
+                        <td></td>
+                    </tr> 
+                {% endfor %}    
+            </table>
+        </div><a href="index.php?page=contactPDFWS">Télécharger sous format PDF <i class="far fa-file-pdf"></i></a>
+    </div>
+
+{% endblock %} 
+
+{% block js %} 
+    <script>
+        $(document).ready(function () {
+            $('#dtBasicExample').DataTable();
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+{% endblock %}

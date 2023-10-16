@@ -1,0 +1,163 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Prendre un rendez-vous {% endblock %}
+
+{% block style %}
+    <link href="css/dateTimePicker.css" rel="stylesheet">
+{% endblock %}
+{% block contenu %}
+    <div class='container-fluid'>
+        <div class="app-container" ng-app="dateTimeApp" ng-controller="dateTimeCtrl as ctrl" ng-cloak>
+            <div date-picker
+                 datepicker-title="Choisissez une date"
+                 picktime="true"
+                 pickdate="true"
+                 pickpast="false"
+                 mondayfirst="false"
+                 custom-message="You have selected"
+                 selecteddate="ctrl.selected_date"
+                 updatefn="ctrl.updateDate(newdate)">
+
+                <form action="index.php?page=priserdv" method="post">
+                    <div class="datepicker"
+                         ng-class="{
+				'am': timeframe == 'am',
+				'pm': timeframe == 'pm',
+				'compact': compact
+			}">
+                        <div class="datepicker-header">
+                            <div class="datepicker-title" ng-if="datepicker_title">{{ '{{datepickerTitle}}' }}{{ '{{ localdate.toLocaleTimeString()}}' }}</div>
+                            <div class="datepicker-subheader"> {{ '{{ time}}' }}</div>
+                        </div>
+                        <div class="datepicker-calendar">
+                            <div class="calendar-header">
+                                <div class="goback" ng-click="moveBack()" ng-if="pickdate">
+                                    <svg width="30" height="30">
+                                    <path fill="none" stroke="#0DAD83" stroke-width="3" d="M19,6 l-9,9 l9,9"/>
+                                    </svg>
+                                </div>
+                                <div class="current-month-container"> {{ '{{ currentMonthName()}}' }} {{ '{{ currentViewDate.getFullYear()}}' }} </div>
+                                <div class="goforward" ng-click="moveForward()" ng-if="pickdate">
+                                    <svg width="30" height="30">
+                                    <path fill="none" stroke="#0DAD83" stroke-width="3" d="M11,6 l9,9 l-9,9" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="calendar-day-header">
+                                <span ng-repeat="day in days" class="day-label">{{ '{{ day.short}}' }}</span>
+                            </div>
+                            <div class="calendar-grid" ng-class="{false: 'no - hover'}[pickdate]">
+                                <div
+                                    ng-class="{'no-hover': !day.showday}"
+                                    ng-repeat="day in month"
+                                    class="datecontainer"
+                                    ng-style="{'margin-left': calcOffset(day, $index)}"
+                                    track by $index>
+                                    <div class="datenumber" ng-class="{'day-selected': day.selected }" ng-click="selectDate(day)">
+                                        {{ '{{ day.daydate}}' }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timepicker" ng-if="picktime == 'true'">
+                            <div ng-class="{'am': timeframe == 'am', 'pm': timeframe == 'pm' }">
+                                <div class="timepicker-container-outer" selectedtime="time" timetravel>
+                                    <div class="timepicker-container-inner">
+                                        <div class="timeline-container" ng-mousedown="timeSelectStart($event)" sm-touchstart="timeSelectStart($event)">
+                                            <div class="current-time">
+                                                <div class="actual-time">{{ '{{ time}}' }}</div>
+                                            </div>
+                                            <div class="timeline">
+                                            </div>
+                                            <div class="hours-container">
+                                                <div class="hour-mark" ng-repeat="hour in getHours() track by $index"></div>
+                                            </div>
+                                        </div>
+                                        <div class="display-time">
+                                            <div class="decrement-time" ng-click="adjustTime('decrease')">
+                                                <svg width="24" height="24">
+                                                <path stroke="white" stroke-width="2" d="M8,12 h8"/>
+                                                </svg>
+                                            </div>
+                                            <div class="time" ng-class="{'time-active': edittime.active}">
+                                                <input type="text" class="time-input" ng-model="edittime.input" ng-keydown="changeInputTime($event)" ng-focus="edittime.active = true; edittime.digits = [];" ng-blur="edittime.active = false"/>
+                                                <div class="formatted-time">{{ '{{ edittime.formatted}}' }}</div>
+                                            </div>
+                                            <div class="increment-time" ng-click="adjustTime('increase')">
+                                                <svg width="24" height="24">
+                                                <path stroke="white" stroke-width="2" d="M12,7 v10 M7,12 h10"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="am-pm-container" id='choix'>
+                                            <div class="am-pm-button" ng-click="changetime('am');" id="am" onclick='choixAM();'>am</div>
+                                            <div class="am-pm-button" ng-click="changetime('pm');" id="pm" onclick='choixPM();'>pm</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-4 selectContainer">
+                                <div class="input-group">
+                                    <select name="idPrest" class="form-control selectpicker" >
+                                        <option readonly>Prestation</option>
+                                        {% for p in listeP %}
+                                            <option value="{{ p.idPrest }}" >{{ p.typePrest }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>                    
+
+                        <div class="form-group"> 
+                            <div class="col-md-4 selectContainer">
+                                <div class="input-group">
+                                    <select name="idRegle" class="form-control selectpicker" >
+                                        <option readonly>Règlement</option>
+                                        {% for r in listeR %}
+                                            <option value="{{ r.idRegle }}" >{{ r.typeRegle }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>                    
+
+
+                        <input type="hidden" name="jourY" value="{{ '{{ localdate.getFullYear() }}' }}"/>
+                        <input type="hidden" name="jourM" value="{{ '{{ localdate.getMonth() }}' }}"/>
+                        <input type="hidden" name="jourD" value="{{ '{{ localdate.getDate() }}' }}"/>
+                        <input type="hidden" name="heureH" value="{{ '{{ localdate.getHours() }}' }}"/>
+                        <input type="hidden" name="heureM" value="{{ '{{ localdate.getMinutes() }}' }}"/>
+                        <input type="hidden" name="choix"/>
+
+                        <div class="buttons-container">
+                            <button class="save-button" type="submit" name="btPriseRdv">RÉSERVER</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.min.js"></script>
+    <script src="js/dateTimePicker.js"></script>
+    <script>
+                                                function choixAM() {
+                                                    am = document.getElementById("am").style.background = "red";
+                                                    pm = document.getElementById("pm").style.background = "#7386D5";
+                                                    document.querySelector('[name=choix]').value = "am";
+                                                }
+                                                function choixPM() {
+                                                    pm = document.getElementById("pm").style.background = "red";
+                                                    am = document.getElementById("am").style.background = "#7386D5";
+                                                    document.querySelector('[name=choix]').value = "pm";
+                                                }
+    </script>
+{% endblock %}

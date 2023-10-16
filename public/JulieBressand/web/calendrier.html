@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Material Design Bootstrap</title>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <!-- Bootstrap core CSS -->
+        <link href="../web/mdb/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="../web/mdb/css/mdb.min.css" rel="stylesheet">
+        <!-- Your custom styles (optional) -->
+        <link href="../web/mdb/css/style.css" rel="stylesheet">
+    </head>
+
+    <body>
+
+        <!-- Start your project here-->
+        <div class="md-form">
+            <input placeholder="Selected date" type="text" id="date-picker-example" class="form-control datepicker">
+            <label for="date-picker-example">Try me...</label>
+        </div>
+        <!-- Start your project here-->
+
+        <!-- SCRIPTS -->
+        <!-- JQuery -->
+        <script type="text/javascript" src="../web/mdb/js/jquery-3.4.1.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="../web/mdb/js/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="../web/mdb/js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="../web/mdb/js/mdb.min.js"></script>
+        <script>
+            $('.datepicker').pickadate();
+            // Extend the default picker options for all instances.
+            $.extend($.fn.pickadate.defaults, {
+                monthsFull: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre',
+                    'Novembre', 'Décembre'],
+                weekdaysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+                today: 'aujourd\'hui',
+                clear: 'effacer',
+                formatSubmit: 'yyyy/mm/dd'
+            })
+
+            // Or, pass the months and weekdays as an array for each invocation.
+            $('.datepicker').pickadate({
+                monthsFull: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre',
+                    'Novembre', 'Décembre'],
+                weekdaysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+                today: 'aujourd\'hui',
+                clear: 'effacer',
+                formatSubmit: 'yyyy/mm/dd'
+            })
+        </script>
+    </body>
+
+</html>

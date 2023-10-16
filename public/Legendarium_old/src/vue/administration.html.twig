@@ -1,0 +1,185 @@
+{% extends "base.html.twig" %}
+{% block style %}
+        <link href="css/Administration.css" rel="stylesheet">
+{% endblock %}
+{% block title %}Administration{% endblock %}
+{% block contenu %}
+    <div class="body">
+    <div class="adminUsers">
+    <h1>Administration</h1>
+    <nav class="container">
+        <div class="mainBar__nav__inner">
+            <center>
+            <ul class="mainBar__nav__inner__links">
+                <span class="glyphicon glyphicon-home" style="color:grey"><a href="index.php"></a></span>
+                <span><a href="index.php?page=admin#catalogue">Catalogue</a></span>
+                <span><a href="index.php?page=admin#utilisateurs">Gérer les utilisateurs</a></span>
+                <span><a href="index.php?page=admin#jdr">Gérer les jeux de rôle</a></span>
+                <span><a href="index.php?page=admin#carousel">Gérer le carousel</a></span>
+            </ul>
+            </center>
+        </div>
+        
+    </nav>
+    
+    <br><br><br>
+    <div id="catalogue">
+        <h2>Catalogue</h2>
+            <div class="table-responsive">
+            <table class="table table-bordered">
+                <tr>
+                    <th>Id</th>
+                    <th>Titre</th>
+                    <th>ISBN</th>
+                    <th>Synopsis</th>
+                    <th>Prix</th>
+                    <th>Quantite</th>
+                    <th>Image</th>
+                    <th>Disponibilité</th>
+                    <th>Genre</th>
+                    <th>Auteur</th>
+                    <th>Editeur</th>
+                </tr>
+                {% for l in liste %}
+                <tr>
+                    <td>{{ l.idLivre }}</td>
+                    <td>{{ l.titre }}</td>
+                    <td>{{ l.isbn }}</td>
+                    <td>{{ l.synopsis }}</td>
+                    <td>{{ l.prix }} €</td>
+                    <td>{{ l.quantite }}</td>
+                    <td>{{ l.photo }}</td>
+                    <td>{{ l.idDisponibilite }}</td>
+                    <td>{{ l.idGenre }}</td>
+                    <td>{{ l.idAuteur }}</td>
+                    <td>{{ l.idEditeur }}</td>
+                {% endfor %}        
+            </table>
+    </div>
+        
+        <form class="form-signin" action="index.php?page=admin" method="post" enctype="multipart/form-data">
+            <h1 class="h3 mb-3">Ajouter un livre dans le catalogue !</h1>
+            
+            <label for="inputTitreLivre" class="sr-only">Titre:</label> 
+            <input type="text" id="inputTitreLivre" name="inputTitreLivre" class="form-control" placeholder="Titre" required autofocus>
+            <label for="inputIsbnLivre" class="sr-only">ISBN:</label>
+            <input type="number" id="inputIsbnLivre" name="inputIsbnLivre" class="form-control" placeholder="ISBN" required>
+            <label for="inputSynopsisLivre" class="sr-only">Synopsys:</label>
+            <input type="text" id="inputSynopsisLivre" name="inputSynopsisLivre" class="form-control" placeholder="Synopsis" required>
+            <label for="inputQuantiteLivre" class="sr-only">Quanite:</label>
+            <input type="number" id="inputQuantiteLivre" name="inputQuantiteLivre" class="form-control" placeholder="Quantite" required>
+            <label for="inputPrixLivre" class="sr-only">Prix:</label>
+            <input type="number" id="inputPrixLivre" name="inputPrixLivre" class="form-control" placeholder="Prix" required>
+            <select class="form-control" name="inputIdDisponibilite">
+                {% for d in formL.disponibilite %}
+                    <option value="{{d.id}}">{{ d.libelle }}</option>
+                {% endfor %}
+            </select>
+            <select class="form-control" name="inputIdGenreLivre">
+                {% for g in formL.genre %}
+                    <option value="{{g.id}}">{{g.libelle}}</option>
+                {% endfor %}
+            </select>
+            <select class="form-control" name="inputIdAuteurLivre">
+                {% for a in formL.auteur%}
+                    <option value="{{a.id}}">{{a.Nom}}</option>
+                {% endfor %}
+            </select>
+            <select class="form-control" name="inputIdEditeurLivre">
+                {% for e in formL.editeur %}
+                    <option value="{{e.id}}">{{e.libelle}}</option>
+                {% endfor %}
+            </select>
+            <label for="photo" class="sr-only">Photo :</label>
+            <input type="file" name="photo" id="photo" class="form-control"/>
+            <br>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" name="btAjouterLivre">
+                Ajouter un livre à la librairie</button>
+        </form>
+    </div>
+    <br>
+    <hr>
+    <br>
+    <div  id="utilisateurs">
+        <h2>Gérer les utilisateurs</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <tr>
+                    <th>Id</th>
+                    <th>Email</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Pseudo</th>
+                    <th>Téléphone</th>
+                    <th>Photo</th>
+                    <th>Rôle</th>
+                </tr>
+                {% for u in listeU %}
+                    
+                <tr>
+                    <td>{{ u.id }}</td>
+                    <td>{{ u.email }}</td>
+                    <td>{{ u.nom }}</td>
+                    <td>{{ u.prenom }}</td>
+                    <td>{{ u.pseudo }}</td>
+                    <td>{{ u.telephone }}</td>
+                    <td>{{ u.photo }}</td>
+                    <td>{{u.idRole}}{% if u.idRole == 1 %} Administrateur {% else %} Client {% endif %}</td>
+                </tr>
+                {% endfor %}        
+            </table>
+    </div>
+    </div>
+    <br>
+    <hr
+    <br>
+    <div id="jdr">
+        <h2>Gérer les jeux de rôle</h2>
+        {% for jdr in listeJDR %}
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Id</th>
+                        <th>Enoncé du jeu</th>
+                        <th>Etat</th>
+                        <th>Nombre de joueur maximum</th>
+                        <th>Date évènement</th>
+                    </tr>
+                    {% for jdr in listeJDR %}
+                    <tr>
+                        <td>{{ jdr.idJeu }}</td>
+                        <td>{{ jdr.libelleJeu }}</td>
+                        <td>{{ jdr.etat }}</td>
+                        <td>{{ jdr.nbJoueurMax }}</td>
+                        <td>{{ jdr.dateEvenement }}</td>
+                    {% endfor %}        
+                </table>
+            </div>
+        {% endfor %}
+    </div>    
+    <br>
+    <hr>
+    <br>
+    <div id="carousel">
+        <h2>Gérer le carousel</h2>
+        <div class="table-responsive">
+            <table class="table table-condensed table-bordered">
+                <tr>
+                    <th>Id</th>
+                    <th>Image</th>
+                    <th>Titre</th>
+                    <th>Libelle</th>
+                </tr>
+                {% for c in listeCarousel %}
+                <tr>
+                    <td>{{ c.id }}</td>
+                    <td>{{ c.photo }}</td>
+                    <td>{{ c.titre }}</td>
+                    <td>{{ c.libelle }}</td>
+                {% endfor %}        
+            </table>
+        </div>
+    </div>  
+    </div>
+    </div>
+{% endblock %}

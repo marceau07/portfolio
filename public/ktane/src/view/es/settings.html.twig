@@ -1,0 +1,58 @@
+{% extends "es/base.html.twig" %}
+
+{% block title %}Opciones{{parent()}}{% endblock %}
+
+{% block style %}
+
+{% endblock %}
+
+{% block content %}
+    {#{% if session is not defined %}#}
+    <div class="col">
+        <form method="post" class="pl-5">
+            <div class='row'>
+                <div class="col">
+                    <label for="lang" class="text-white">Idioma:</label>    
+                </div>
+                <div class="col">
+                    <select class="form-control" id="lang" name="lang">
+                        {% for al in acceptLang %}
+                            <option title="{{ al }}"><img src="../../web/images/es.png" alt=""/>
+&nbsp;{{ al }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class='row'>
+                <div class="col">
+                    <label for="nickname" class="text-white">Nickname:</label>    
+                </div>
+                <div class="col">
+                    <input type="text" name="nickname" id="nickname" value="{{ session.nickname }}"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="idDifficulty" class="text-white">Game difficulty:</label>  
+                </div>
+                <div class="col">
+                    <select class="form-control" id="idDifficulty" name="idDifficulty">
+                        {% for d in form.difficulties %}
+                            <option value="{{ d.idDifficulty }}" title="{{ d.descriptionDifficulty }}">{{ d.labelDifficulty }}&nbsp;({{ d.timer }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row text-center justify-content-center">
+                <input type="submit" class="btn btn-success" value="Commencer la partie">/>
+            </div>
+        </form>
+    </div>
+    {#{% else %}
+    
+    {% endif %}#}
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

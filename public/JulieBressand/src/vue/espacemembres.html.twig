@@ -1,0 +1,78 @@
+{% extends "base.html.twig" %}
+
+{% block style %}
+    <style>
+        .background {
+            background: url('../web/images/bg01.jpg') ;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    </style>
+{% endblock %}
+
+{% block contenue %}
+    <div class="site-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-7">
+                    <h2 id="service" class="site-section-heading font-weight-light text-black text-center">Espace membre</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-4 text-center mb-5 mb-lg-5">
+                    <div class="h-100 p-4 p-lg-5 bg-light site-block-feature-7">
+{#                        <h3 class="text-black h4"><a href="../faq">F.A.Q</a></h3>#}
+                        <h3 class="text-black h4"><a href="../web/index.php?page=faq">F.A.Q</a></h3>
+                        <p>Foire aux questions</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 text-center mb-5 mb-lg-5">
+                    <div class="h-100 p-4 p-lg-5 bg-light site-block-feature-7">
+{#                        <h3 class="text-black h4"><a href="../gestioncompte-{{session.login}}">Gestion de compte</a></h3>#}
+                        <h3 class="text-black h4"><a href="../web/index.php?page=gestioncompte&email={{session.login}}">Gestion de compte</a></h3>
+                        <p>Modification des informations du compte.<br/>Suppression de votre compte.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 text-center mb-5 mb-lg-5">
+                    <div class="h-100 p-4 p-lg-5 bg-light site-block-feature-7">
+{#                        <h3 class="text-black h4"><a href="../mesrdv"> Mes rendez-vous</a></h3>#}
+                        <h3 class="text-black h4"><a href="../web/index.php?page=mesrdv"> Mes rendez-vous</a></h3>
+                        <p>Liste des rendez-vous.</p>
+                    </div>
+                </div>
+                {% if form.avis.nb == 1 %}
+                    <div class='container-fluid'>
+                        <div class='row justify-content-center mb-5'>
+                            <div class="col-md-12 col-lg-8 justify-content-center mb-10 mb-lg-10">
+                                <div class="h-100 p-4 p-lg-5 bg-light site-block-feature-7">
+{#                                    <h3 class="text-black h4"><center><a href='../priserdv'>Vous ne pouvez donner qu'une seule fois votre avis.</a></center></h3>#}
+{#                                    <p>Pour modifier rendez-vous sur <a href='../priserdv'>cette page</a> pour modifier le votre</p>#}
+                                    <h3 class="text-black h4"><center><a href='../web/index.php?page=priserdv'>Vous ne pouvez donner qu'une seule fois votre avis.</a></center></h3>
+                                    <p class="text-center">Pour modifier rendez-vous sur <a href='../web/index.php?page=priserdv'>cette page</a> pour modifier le votre</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    {% if form.user.email is defined %} 
+                        <div class='container-fluid'>
+                            <div class='row justify-content-center mb-5'>
+                                <div class="col-md-12 col-lg-8 justify-content-center mb-10 mb-lg-10">
+                                    <div class="h-100 p-4 p-lg-5 bg-light site-block-feature-7">
+{#                                        <h3 class="text-black h4"><center><a href="../ajouterAvis">Donnez votre avis sur ma prestation</a></center></h3>#}
+                                        <h3 class="text-black h4"><center><a href="../web/index.php?page=ajouterAvis">Donnez votre avis sur ma prestation</a></center></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block newsletter %}
+    
+{% endblock %}

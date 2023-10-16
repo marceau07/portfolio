@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Ajout d'une équipe {% endblock %}
+
+{% block contenu %} <h1> Ajout d'un employé </h1> 
+
+    {% if form.valide is defined %} 
+        {% if form.valide == true %}
+             <div style="margin: 0 auto;  text-align: center;">
+            <h1 >Ajout réussi</h1>
+              <a href="index.php?page=employeeadd">Ajouter un nouvel employé</a><br>
+        <a href="index.php?page=employee">Retourner à la liste des employés</a>
+             </div>
+        {% else %} 
+            <h1 class="h3 mb-3 font-weight-normal">{{ form.valide.message }}</h1> 
+        {% endif %}     
+    {% else %}      
+
+        <div class="panel-body">
+            <form  class="form-signin" action="index.php?page=employeeadd" method="post" enctype="application/x-www-form-urlencoded">
+                
+                <label for="lastNameEmployee" class="sr-only">Nom</label>
+                <input type="text" id="lastNameEmployee" name="lastNameEmployee" class="form-control" placeholder="Nom" required autofocus>
+                  <label for="firstNameEmployee" class="sr-only">Prénom</label>
+                <input type="text" id="firstNameEmployee" name="firstNameEmployee" class="form-control" placeholder="Prénom" required >
+                  <label for="cityEmployee" class="sr-only">Ville</label>
+                <input type="text" id="cityEmployee" name="cityEmployee" class="form-control" placeholder="Ville" required >
+                <label for="levelEmployee" class="sr-only">Niveau de compétence:</label>
+                <input type="text" id="levelEmployee" name="levelEmployee" class="form-control" placeholder="Niveau de compétence" required >
+                <select name="idTeamEmployee" class="form-control">
+                    <option value="null">N/A</option> 
+                    {% for t in listeT %}
+                        <option value="{{ t.idTeam }}">{{t.nameTeam}}</option> 
+                    {% endfor%}    
+                </select>    
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit" name="btAdd">Ajouter</button>
+            </form>
+        </div>    
+    {% endif %}
+{% endblock %} 

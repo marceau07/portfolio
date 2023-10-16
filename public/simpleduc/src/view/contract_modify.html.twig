@@ -1,0 +1,43 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Modification d'un contrat {% endblock %}
+
+{% block contenu %}
+
+    {% if form.contract is defined %} 
+        {% if form.contract != null %}    
+            <div class="panel-body">
+                <form  class="form-signin" action="index.php?page=contractmodify" method="post" enctype="application/x-www-form-urlencoded">
+                    <h1 class="h3 mb-3 font-weight-normal">Modifier un contrat</h1>
+
+                    <label for="labelContract" class="sr-only">Nom du contrat:</label>
+                    <input type="text" id="labelContract" name="labelContract" class="form-control" value="{{ form.contract.labelContract }}" placeholder="Libellé" required autofocus>
+                    <label for="dateSignatureContract">Date de signature:</label>
+                    <input type="date" id="dateSignatureContract" name="dateSignatureContract" class="form-control" value="{{ form.contract.dateSignatureProject|date("Y-m-d")}}" required>
+                    <label for="dateBegProject">Début du projet:</label>
+                    <input type="date" id="dateBegProject" name="dateBegProject" class="form-control" value="{{ form.contract.dateBegProject|date("Y-m-d")}}" required >
+                    <label for="dateEndProject">Fin du projet:</label>
+                    <input type="date" id="dateEndProject" name="dateEndProject" class="form-control" value="{{ form.contract.dateEndProject|date("Y-m-d") }}" required>
+                    <label for="costProject" class="sr-only">Coût du projet:</label>
+                    <input type="text" id="costProject" name="costProject" class="form-control" value="{{ form.contract.costProject }}€" placeholder="Version" required >
+
+                    <input type="hidden" name="idContract" value="{{ form.contract.idContract }}"/>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btModify">Modifier</button>
+
+                </form>
+            </div> 
+        {% else %}  
+            {% if form.valide == true %}
+                <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+                <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=contract" class="violet">Retourner sur la liste des contrats</a></h1>
+            {% else %}    
+        <h1 class="alert alert-info" role="alert">{{ form.message }}</h1> 
+                <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=contract" class="violet">Retourner sur la liste des contrats</a></h1>
+            {% endif %} 
+        {% endif %} 
+    {% else %} 
+        <h1 class="alert alert-info" role="alert">{{ form.message }}</h1> 
+        <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=contract" class="violet">Retourner sur la liste des contrats</a></h1>
+
+    {% endif %}
+{% endblock %} 

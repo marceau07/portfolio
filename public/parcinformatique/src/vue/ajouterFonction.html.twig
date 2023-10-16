@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{# Page d'ajout de Fonction#}
+
+{% block title %} {% endblock %}
+
+{% block contenu %}
+    {% if form.valide is defined %}
+        {% if form.valide == false %}
+            <div class="alert alert-warning" role="alert">{{ form.message }}</div>
+        {% else %}
+            <div class="alert alert-success" role="alert">{{ form.message }}</div>
+        {% endif %}
+    {% else %}
+        <form class="well form-horizontal" action="index.php?page=utilisateur" method="post" id="contact_form">
+            <fieldset>
+                <legend>Ajouter une fonction</legend>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Fonction:</label>  
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"></span>
+                            <input name="titre" placeholder="Quel sera le titre de la Fonction ?" class="form-control" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label"></label>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-warning" name="btAjouterFonction">Ajouter une Fonction<span class="glyphicon glyphicon-send"></span></button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    {% endif %}
+{% endblock %}

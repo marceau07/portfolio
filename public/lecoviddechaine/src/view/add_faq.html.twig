@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Ajouter une FAQ{{ parent() }} {% endblock %}
+
+{% block style %}
+    <link rel='stylesheet' href='css/add_faq.css'>
+{% endblock %}
+
+{% block header %}Ajouter une FAQ{% endblock %}
+
+{% block content %}
+    {% if form.valide is defined %}
+        {% if form.valide == false %}
+            <div class="alert alert-warning" role="alert">{{ form.message }}</div>
+        {% else %}
+            <div class="alert alert-success" role="alert">{{ form.message }}</div>
+            <p>Souhaitez vous en ajouter <a href='index.php?page=addfaq'>une nouvelle</a> ?</p>
+        {% endif %}
+    {% else %}
+        <div class='row align-content-center'>
+            <div class='col-sm-12'>
+                <article>
+                    <form action="index.php?page=addfaq" method="post" enctype="multipart/form-data" id="addfaq">
+                        <fieldset class='contour'>
+                            <legend>Ajouter une FAQ</legend>
+                            <div class='form-group'>
+                                <label>Question</label>
+                                <input class='col-md-12' form="addfaq" type="text" id="titleFaq" name="titleFaq" placeholder="Question posée" required autofocus autocomplete="off"/>
+                            </div>
+                            <div class='form-group'>
+                                <label>Réponse</label>
+                                <textarea class='col-md-12' form='addfaq' id='answerFaq' name='answerFaq' placeholder="Réponse à la question" required></textarea>
+                            </div>
+                            <div class='form-group'>
+                                <label>Catégorie concernée</label>
+                                <select class='col-md-12' form='addfaq' name='idCategory' required>
+                                    <option selected disabled>Catégorie</option>
+                                    {% for c in listC %}
+                                        <option value="{{ c.idCategory }}">{{ c.labelCategory }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class='form-group'>
+                                <input type='submit' name='btAjouterFaq' class="btn btn-md" value='Ajouter' />
+                            </div>
+                        </fieldset>
+                    </form>
+                </article>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

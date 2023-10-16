@@ -1,0 +1,161 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Inscription {% endblock %}
+
+{% block style %}
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+        .background {
+            background: url('../web/images/bg01.jpg') ;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .login-page {
+            width: 360px;
+            padding: 8% 0 0;
+            margin: auto;
+        }
+        .form {
+            position: relative;
+            z-index: 1;
+            background: #FFFFFF;
+            max-width: 560px;
+            margin: 0 auto 100px;
+            padding: 45px;
+            text-align: center;
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        }
+        .form input {
+            font-family: "Roboto", sans-serif;
+            outline: 0;
+            background: #f2f2f2;
+            width: 100%;
+            border: 0;
+            margin: 0 0 15px;
+            padding: 15px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        .form button {
+            font-family: "Roboto", sans-serif;
+            text-transform: uppercase;
+            outline: 0;
+            background: #4CAF50;
+            width: 100%;
+            border: 0;
+            padding: 15px;
+            color: #FFFFFF;
+            font-size: 14px;
+            -webkit-transition: all 0.3 ease;
+            transition: all 0.3 ease;
+            cursor: pointer;
+        }
+        .form button:hover,.form button:active,.form button:focus {
+            background: #43A047;
+        }
+        .form .message {
+            margin: 15px 0 0;
+            color: #b3b3b3;
+            font-size: 12px;
+        }
+        .form .message a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        .form .register-form {
+            display: none;
+        }
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        .container:before, .container:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+        .container .info {
+            margin: 50px auto;
+            text-align: center;
+        }
+        .container .info h1 {
+            margin: 0 0 15px;
+            padding: 0;
+            font-size: 36px;
+            font-weight: 300;
+            color: #1a1a1a;
+        }
+        .container .info span {
+            color: #4d4d4d;
+            font-size: 12px;
+        }
+        .container .info span a {
+            color: #000000;
+            text-decoration: none;
+        }
+        .container .info span .fa {
+            color: #45a332;
+        }
+        .g-recaptcha
+        {
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
+{% block contenue %}
+
+    <br /><br /><br /><br /><br />
+
+    <div class="row">
+        <div class="col-md-6 col-lg-4 text-center mb-5 mb-lg-5"></div>
+        <div class="col-md-6 col-lg-4 text-center mb-5 mb-lg-5">
+            <div class="form">
+                {% if form.valide is defined %}
+                    {% if form.valide == true %}
+                        <h1 class="h3 mb-3 font-weight-normal">Votre inscription est bien validée</h1><br><br>
+                        <h1 class="h3 mb-3 font-weight-normal">Vous avez reçue un mail contenant les informations de votre compte </h1><br>
+{#                        <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} Cliquez <a href="/connexion">ici</a> pour vous connecter à votre nouveau compte.</h1><br>#}
+                        <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} Cliquez <a href="../web/index.php?page=connexion">ici</a> pour vous connecter à votre nouveau compte.</h1><br>
+                    {% else %}
+                        <h1 class="h3 mb-3 font-weight-normal text-danger">Echec lors de l'inscription</h1><br>
+                        <h1 class="h3 mb-3 font-weight-normal">Erreur : {{form.message}}</h1><br><br>
+{#                        <h1 class="h3 mb-3 font-weight-normal"><a href="/inscription">Retourner sur la page d'inscription</a></h1>#}
+                        <h1 class="h3 mb-3 font-weight-normal"><a href="../web/index.php?page=inscription">Retourner sur la page d'inscription</a></h1>
+                    {% endif %}
+                {% else %}
+                    <h1>Inscription</h1>
+                    <hr>
+{#                    <form  method="post" class="login-form" action="/inscription">#}
+                    <form  method="post" class="login-form" action="../web/index.php?page=inscription">
+                        <input type="text" name="nom" placeholder="Nom" required autofocus/>
+                        <input type="text" name="prenom" placeholder="Prenom" required/>
+                        <input type="email" name="email" placeholder="Email" required/>
+                        <input type="password" name="pass" placeholder="Mot de passe" required autocomplete/>
+                        <input type="password" name="pass2" placeholder="Confirmation du mot de passe" required autocomplete/><br />
+                        <input type="number" name="telephone" placeholder="Telephone" required/>
+
+{#                        <div class="g-recaptcha" data-sitekey="6LeCyqUUAAAAAK63lPMv8A9fkTna29QMGIcd6M6A" required></div><br />#}
+                        <div class="g-recaptcha" data-sitekey="6LcI-4QcAAAAAEpZuRhRKXK8JhDTrePwJLeun7D7" required></div><br />
+{#                        <p class="message">En cliquant sur le bouton &#171;&nbsp;Inscription&nbsp;&#187; vous acceptez les <a href="/cgu">Conditions Générales d'Utilisation.</a></p><br />#}
+                        <p class="message">En cliquant sur le bouton &#171;&nbsp;Inscription&nbsp;&#187; vous acceptez les <a href="../web/index.php?page=cgu">Conditions Générales d'Utilisation.</a></p><br />
+
+                        <button type="submit" name="btInscrire">Inscription</button>
+{#                        <p class="message">Vous avez déjà un compte ? <a href="/connexion">Connexion</a>.</p>#}
+                        <p class="message">Vous avez déjà un compte ? <a href="../web/index.php?page=connexion">Connexion</a>.</p>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block newsletter %}
+    
+{% endblock %}
+
+{% block js%}
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+{% endblock %}

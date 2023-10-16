@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=no, shrink-to-fit=no">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="application-name" content="Legendarium">
+        <meta name="apple-mobile-web-app-title" content="Legendarium">
+        <link rel="shortcut icon" href="images/legendarium_icon.ico" />
+
+        <title> {% block title %} Librairie Arras → Légendarium, votre librairie spécialisée à Arras. {% endblock %}</title>
+
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'>
+        <link href="css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+        {% block style %} {% endblock %}
+    </head>    
+    <body class="bg-light">
+        {% block body %}
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
+                <a class="navbar-brand" href="index.php">Legendarium</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>            </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="index.php"><i class='fas fa-home'></i><span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?page=catalogue">Catalogue</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?page=calendar">Calendrier</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="jdr" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Jeux de rôle
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="jdr">
+                                <a class="dropdown-item" href="index.php?page=proposer"><i class='fas fa-dice-d20'>&nbsp;Proposer un jeu de rôle</i></a>
+                                <a class="dropdown-item" href="index.php?page=participer">Participer à un jeu de rôle</a>
+                                <div class="dropdown-divider"></div>
+                            </div>
+                        </li>
+                        {%if session.role == 1 %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Administration
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="index.php?page=manageutilisateurs">Gestion des utilisateurs</a>
+                                    <a class="dropdown-item" href="index.php?page=managejdr"><i class='fas fa-dice-d20'>&nbsp;Gestion des jeux de rôle</i></a>
+                                    <a class="dropdown-item" href="index.php?page=managecarousel">Gestion carousel</a>
+                                    <a class="dropdown-item" href="index.php?page=ajouterlivre">Ajouter un livre</a>
+                                    <a class="dropdown-item" href="index.php?page=essai">&nbsp;Essai</a>
+                                </div>
+                            </li>
+                        {% endif %}
+                        {% if session.email is defined %}
+                            <li class='nav-item'>
+                                <a class="nav-link" href='index.php?page=moncompte'><i class="fas fa-id-card-o"></i>&nbsp;{{ session.pseudo }}</a>
+                            </li>
+                            <li class='nav-item'>
+                                <a class="nav-link" href='index.php?page=deconnexion'><i class="fas fa-log-out"></i>&nbsp;Se déconnecter</a>
+                            </li>
+                        {% else %}
+                            <li class='nav-item'>
+                                <a class="nav-link" href='index.php?page=connexion'><i class='fas fa-user-circle'></i>&nbsp;Se connecter</a>
+                            </li>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <li class='nav-item'>
+                                <a class="nav-link" href='index.php?page=inscrire'><i class='fab fa-d-and-d'></i>&nbsp;&nbsp;S'inscrire</a>
+                            </li>        
+                        {% endif %}
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="btRechercher">Rechercher</button>
+                    </form>
+                </div>
+            </nav>
+            {% block logo %}
+            <center><img src="../web/images/legendarium_logo.png" style="width: 35%;" alt="Logo de la librairie Legendarium"></center>
+            {% endblock %}
+            {% block contenu %}
+            {% endblock %}
+        <br>
+        <footer>
+            <div class="footer">
+                <br>
+                <p>Legendarium ©, tous droits réservés. Site développé par RODRIGUES Marceau & KATA Romain .
+                </p>
+            </div>
+        </footer>
+    {% endblock %} 
+    <!-- Bootstrap core JavaScript
+================================================== -->
+    <!-- Placed at the end of the document so the pages load faster 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    {% block scripts %}
+
+    {% endblock %}
+</body>
+</html>

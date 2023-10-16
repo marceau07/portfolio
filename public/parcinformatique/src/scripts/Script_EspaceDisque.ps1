@@ -1,0 +1,1 @@
+get-WmiObject Win32_LogicalDisk | Select FreeSpace >>EspaceDisque.txt

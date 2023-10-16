@@ -1,0 +1,43 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/style-signin.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} Accueil {% endblock %}
+
+{% block contenu %} 
+    <div class="d-flex flex-column">
+        <div class="flex-row flex-center text-center">
+            <h2 class="h2-responsive">Notre métier</h2>
+            <img src="../web/images/code.jpg" alt="Image de code"/>
+            <p class='text-dark'>Notre entreprise est spécialisée dans la conception de logiciels éducatifs.</p>
+        </div>
+        <div class="flex-row text-center">
+            {% if session.emailUser is not defined %}  
+
+            {% else %}    
+                <h1 class="h3 mb-3 font-weight-normal">Vous êtes connecté sur le tableau de bord</h1>
+                {%if session.idRoleUser == 1 %}
+                    <div class="panel">
+                        <div class="panel-heading background-violet">En tant qu'utilisateur vous avez accès à :</div>
+                        <div class="panel-body violet">
+                            <ul>
+                                <li>Votre compte</li>
+                                <li>Votre équipe</li>
+                            </ul>    
+                        </div>    
+                    </div> 
+                {% else %}
+                    <div class="panel">
+                        <div class="panel-heading background-violet">En tant qu'administrateur vous avez accès à :</div>
+                        <div class="panel-body violet">
+                            <ul class='list-unstyled'>
+                                <li><a href="index.php?page=user" class="violet">Gestion des utilisateurs</a></li>
+                                <li><a href="index.php?page=team" class="violet">Gestion des équipes</a></li>
+                            </ul>    
+                        </div>    
+                    </div>
+                {% endif %}    
+            {% endif %} 
+        </div>
+    </div>
+
+{% endblock %} 
+

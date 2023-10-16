@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} - Télécharger l'application{% endblock %}
+
+{% block style %}
+    <style>
+        i{
+            font-size: 300%;
+        }
+        center{
+             align-content: center;
+        }
+    </style>
+{% endblock %}
+
+{% block contenu %}
+    <div class="container-fluid">
+        <table id="dtBasicExample" class="table table-striped table-bordered table-responsive-sm white" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th class="th-sm">Système d'exploitation</th>
+                    <th class="th-sm">Téléchargement</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="center"><i class="fab fa-android">&nbsp;Android</i></td>
+                    <td><a href="gameFile/Android/Sundry.apk">Cliquez-ici pour télécharger votre application</a></td>
+                </tr>
+                <tr>
+                    <td class="center"><i class="fab fa-windows">&nbsp;Windows</i></td>
+                    <td><a href="gameFile/EXE/Sundry.rar">Cliquez-ici pour télécharger votre application</a></td>
+                </tr>
+                <tr>
+                    <td class="center"><i class="fab fa-apple">&nbsp;iOS / iPad</i></td>
+                    <td><a href="#{#gameFile/iOS/Sundry.ipa#}">Cliquez-ici pour télécharger votre application</a></td>
+                </tr>
+        </table>
+    </div>
+{% endblock %}
+
+{% block js %}{% endblock %}

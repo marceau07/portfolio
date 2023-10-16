@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{# Page d'ajout d'Os#}
+
+
+{% block title %} {% endblock %}
+
+{% block contenu %}
+     {% if form.valide is defined %}
+        {% if form.valide == false %}
+            <div class="alert alert-warning" role="alert">{{ form.message }}</div>
+        {% else %}
+            <div class="alert alert-success" role="alert">{{ form.message }}</div>
+        {% endif %}
+    {% else %}
+        <form class="well form-horizontal" action="index.php?page=ajouterOs" method="post" id="contact_form">
+            <fieldset>
+                <legend>Ajouter un Os</legend>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Nom de l'os:</label>  
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"></span>
+                            <input name="nomOs" placeholder="Quel sera le nom de l'OS ?" class="form-control" type="text">
+                        </div>
+                    </div>
+                </div>
+                <!-- Button -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label"></label>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-warning" name="btAjouterOs">Ajouter un OS<span class="glyphicon glyphicon-send"></span></button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        {% endif %}
+    {% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+{% block title %} Mails {% endblock %}
+    {% block logo %}
+
+    {% endblock %}
+    {% block contenu %} 
+        {% if form.valide is defined %} 
+            {% if form.valide == true %}
+                {% if form.resul == true %}
+                    {% include 'inscriptionReussie.html.twig'%}                
+                {% endif %} 
+            {% else %}
+                {% include 'echecInscription.html.twig'%}
+            {% endif %} 
+        {% else %}  
+            <div class="col-md-12">
+                <div class="container" id="log-in-form">
+                    <h1>Envoyer un message à tous les utilisateurs !</h1><br><br>
+                    <div class="row">
+                        <form action="index.php?page=essai" method="post">
+                            <div class="form-group">
+                                <input type="text" id="inputMessage" name="inputMessage" class="form-control" placeholder="Message" required autofocus>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="inputObjet" name="inputObjet" class="form-control" placeholder="Objet" required>
+                            </div>
+                            <div class="form-group form-group-btn">
+                                <button type="submit" name="btEnvoyer" class="btn btn-success btn-lg">Envoyer !</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endif %}  
+    {% endblock %} 

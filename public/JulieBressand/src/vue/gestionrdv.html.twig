@@ -1,0 +1,155 @@
+{% extends "panel.html.twig" %}
+{% block style %}
+    <style>
+        .scrollbar {
+            margin-left: 30px;
+            float: left;
+            height: 300px;
+            width: 65px;
+            background: #fff;
+            overflow-y: scroll;
+            margin-bottom: 25px;
+        }
+        .force-overflow {
+            min-height: 450px;
+        }
+        .scrollbar-primary::-webkit-scrollbar {
+            width: 12px;
+            background-color: #F5F5F5; }
+        .scrollbar-primary::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+            background-color: #4285F4; }
+        .scrollbar-danger::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+            background-color: #F5F5F5;
+            border-radius: 10px; }
+        .scrollbar-danger::-webkit-scrollbar {
+            width: 12px;
+            background-color: #F5F5F5; }
+        .scrollbar-danger::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+            background-color: #ff3547; }
+        .scrollbar-warning::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+            background-color: #F5F5F5;
+            border-radius: 10px; }
+        .scrollbar-warning::-webkit-scrollbar {
+            width: 12px;
+            background-color: #F5F5F5; }
+        .scrollbar-warning::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+            background-color: #FF8800; }
+        .scrollbar-success::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+            background-color: #F5F5F5;
+            border-radius: 10px; }
+        .scrollbar-success::-webkit-scrollbar {
+            width: 12px;
+            background-color: #F5F5F5; }
+        .scrollbar-success::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+            background-color: #00C851; }
+        .scrollbar-info::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+            background-color: #F5F5F5;
+            border-radius: 10px; }
+        .scrollbar-info::-webkit-scrollbar {
+            width: 12px;
+            background-color: #F5F5F5; }
+        .scrollbar-info::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+            background-color: #33b5e5; }
+        .scrollbar-default::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+            background-color: #F5F5F5;
+            border-radius: 10px; }
+        .scrollbar-default::-webkit-scrollbar {
+            width: 12px;
+            background-color: #F5F5F5; }
+        .scrollbar-default::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+            background-color: #2BBBAD; }
+        .scrollbar-secondary::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+            background-color: #F5F5F5;
+            border-radius: 10px; }
+        .scrollbar-secondary::-webkit-scrollbar {
+            width: 12px;
+            background-color: #F5F5F5; }
+        .scrollbar-secondary::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+            background-color: #aa66cc; }
+        .thin::-webkit-scrollbar {
+            width: 6px; }
+        </style>
+        <!-- MDBootstrap Datatables  -->
+        <link href="../web/mdb/css/addons/datatables.min.css" rel="stylesheet">
+    {% endblock %}
+    {% block panel %}
+        <br/><br/><br/>
+        <div class="container-wrapper">
+        <div class="row text-justify">
+            <div class='col-lg-12'>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>
+                            Mes rendez-vous
+                        </h4>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="table" class="table table-condensed table-responsive table-striped table-hover scrollbar-danger table-bordered table-primary">
+                            <thead>
+                                <tr>
+                                    <th class="col-lg-1">Date</th>
+                                    <th class="col-lg-1">Option</th>
+                                    <th class="col-lg-1">Nom</th>
+                                    <th class="col-lg-1">Prénom</th>
+                                    <th class="col-lg-1">Heure</th>
+                                    <th class="col-lg-1">Pseudo&nbsp;Skype</th>
+                                    <th class="col-lg-1">Téléphone</th>
+                                    <th class="col-lg-1">Adresse</th>
+                                    <th class="col-lg-1">Message</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for rv in liste %}
+                                    <tr>
+                                        <th scope="row" class="col-lg-1">{% if date(form.date)|date('Y-m-d') == date(rv.date)|date('Y-m-d') %}<span style="background-color: red;">{{rv.date|date('Y-m-d')}}</span>{% else %}{{ rv.date|date('Y-m-d') }}{% endif %}</th>
+                                        <td class="col-lg-1">{{rv.method}} </td>
+                                        <td class="col-lg-1">{{rv.nom}} </td>
+                                        <td class="col-lg-1">{{rv.prenom}} </td>
+                                        <td class="col-lg-1">{{rv.horaireDeb}} </td>
+                                        <td class="col-lg-1">{% if rv.pseudoskype is null %} -- {% else %} {{rv.pseudoskype}} {% endif %}</td>
+                                        <td class="col-lg-1">{{rv.telephone}} </td>
+                                        <td class="col-lg-1">{% if rv.adresse is null %} -- {% else %} {{rv.adresse}} {% endif %}</td>
+                                        <td class="col-lg-1"><textarea cols="33" rows="3" autocapitalize="words" readonly>{{rv.message}}</textarea></td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+{% endblock %}
+
+{% block js %}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- MDBootstrap Datatables  -->
+    <script type="text/javascript" src="../web/mdb/js/addons/datatables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table').DataTable();
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+{% endblock %}

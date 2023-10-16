@@ -1,0 +1,22 @@
+{# Génération du PDF #}
+{% block style %}
+    <link href="css/pdf.css" rel="stylesheet" type="text/css"/>
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Contrat</th>
+            <th>Module</th>
+        </tr>
+        {% for p in listeP %}
+            <tr>
+                <td>{{p.nameProject}}</td>
+                <td>{{p.descProject}}</td>
+                <td>{{p.labelContract}}</td>
+                <td>{{p.labelModule}}</td>
+            </tr> 
+        {% endfor %}    
+    </table>
+    <br/>
+    <hr/>
+{% endblock %}

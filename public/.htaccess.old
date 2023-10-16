@@ -1,0 +1,4 @@
+AuthName "Page d'administration protégée, veuillez vous identifier"
+AuthType Basic
+AuthUserFile "/var/www/html/symfony4-4017/public/.htpasswd"
+Require valid-user

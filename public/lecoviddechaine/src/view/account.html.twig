@@ -1,0 +1,207 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Mon compte{{ parent() }}{% endblock %}
+
+{% block style %}
+    <link href="css/account.css" rel="stylesheet" type="text/css"/>
+    {% if form.user.isSubscribed == false %} 
+        <script src="https://www.paypal.com/sdk/js?currency=EUR&client-id=AfOh40dQkqDwH4hU8d_m5xe3E7XULL9OMkqngmQsKDEE1o_5JOX5SgxCYT6jQB9pdClShqt-6mPmrwnB"></script>
+        <script>
+            paypal.Buttons({
+                style: {
+                    color: 'blue',
+                    shape: 'pill',
+                    label: 'pay',
+                    height: 40,
+                },
+                createOrder: function (data, actions) {
+                    // This function sets up the details of the transaction, including the amount and line item details.
+                    return actions.order.create({
+                        purchase_units: [{
+                                amount: {
+                                    currency_code: 'EUR',
+                                    value: '1.00'
+                                }
+                            }]
+                    });
+                },
+                onApprove: function (data, actions) {
+                    $.ajax({
+                        url: "index.php?page=myaccount",
+                        type: 'post',
+                        data: {
+                            nicknameUser: $('#nicknameUser').val(),
+                            isSubscribed: $('#current-subscription').data('secret').toString()
+                        },
+                        success: function (data) {
+                            document.location.reload(true);
+                        },
+                        error: function (result, statut, error) {
+                            console.log(result);
+                        }
+                    });
+                    // This function captures the funds from the transaction.
+                    return actions.order.capture().then(function (details) {
+                        // This function shows a transaction success message to your buyer.
+                        $('#paypal-button-container').hide();
+                        $('#paypal-button-container').after('Transaction complétée par ' + details.payer.name.given_name);
+                    });
+                }
+            }).render('#paypal-button-container');
+            // This function displays Smart Payment Buttons on your web page.
+        </script>
+    {% endif %}
+{% endblock %}
+
+{% block header %}Mon compte{% endblock %}
+
+{% block content %}
+    <div class='d-flex flex-center'>
+        <div class='flex-column text-center'>
+            {% if form.valide is defined %}
+                {% if form.valide == true %}
+                    <h4 class="h4 mb-4 alert alert-info" role="alert">{{ form.message }}</h4>
+                {% else %}    
+                    <h4 class="h4 mb-4 alert alert-danger" role="alert">{{ form.message }}</h4> 
+                {% endif %} 
+            {% else %}
+                <div class="flex-row">
+                    <h4>Mes informations personnelles</h4>
+                    <form method="post">
+                        <input type="text" id='nicknameUser' name="nicknameUser" value="{{ form.user.nicknameUser }}" readonly disabled/>
+                        <input type="password" value="••••••••••" readonly disabled/>
+                        <input type="password" name="oldPasswd" id="oldPasswd" autocomplete="current-password" placeholder="Ancien mot de passe" required/>
+                        <input type="password" name="newPasswd" id="newPasswd" autocomplete="new-password" placeholder="Nouveau mot de passe" required/>
+                        <input type="password" name="confirmPasswd" id="confirmPasswd" autocomplete="new-password" placeholder="Confirmer votre nouveau mot de passe" required/>
+                        <div id="error"></div>
+                        <input type="submit" name="btModifyAccount" class="btn btn-md" value="Mettre à jour"/>
+                        <a class='btn btn-md btn-danger' onclick='deleteAccount();' id='delButton' disabled>Supprimer mon Compte</a>
+                    </form>
+                </div>
+                <br/>
+                <div class="flex-row">
+                    <h4>Mon abonnement</h4>
+                    <table class="table table-responsive-md">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Visiteur</th>
+                                <th>Abonné</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Prix</th>
+                                <th data-price="5" id="abo1" class="abo1">Gratuit</th>
+                                <th data-price="10" id="abo2" class="abo2">1,00 €</th>
+                            </tr>
+                            <tr>
+                                <th>Accéder au site</th>
+                                <th><i class="fas fa-check abo1"></i></th>
+                                <th><i class="fas fa-check abo2"></i></th>
+                            </tr>
+                            <tr>
+                                <th>Accéder aux articles complets</th>
+                                <th><i class="fas fa-check abo1"></i></th>
+                                <th><i class="fas fa-check abo2"></i></th>
+                            </tr>
+                            <tr>
+                                <th>Débloquez du contenu bonus</th>
+                                <th><i class="fas fa-times abo1"></i></th>
+                                <th><i class="fas fa-check abo2"></i></th>
+                            </tr>
+                            <tr>
+                                <th>Obtenez une chance de remporter un prix.</th>
+                                <th><i class="fas fa-times abo1"></i></th>
+                                <th><i class="fas fa-check abo2"></i></th>
+                            </tr>
+                            <tr>
+                                <th>Débloquez l'envoi des articles directement sur votre mail, en pdf.</th>
+                                <th><i class="fas fa-times abo1"></i></th>
+                                <th><i class="fas fa-check abo2"></i></th>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div id='current-subscription'
+                         {% if form.user.isSubscribed == false %} 
+                             data-secret='1'>Je suis un visiteur.</div><div id="paypal-button-container"></div>
+                    {% else %}
+                        data-secret='0' class='alert alert-success'>Je suis abonné. Vous pouvez vous désabonner en cliquant <a href="">ici</a>. Tout paiement effectué ne sera pas remboursé.</div>
+                    <form class="form-group">
+                        <label>Insérez votre email ici, aucune autre action requise.</label>
+                        <input type="text" name="emailToSub" {% if form.user.email is not null %} placeholder="{{ form.user.email }}" {% else %} placeholder="Votre email ici" {% endif %} class="form-control-sm" id="emailToSub"/>
+                        <input type="hidden" name="nicknameUser"  value="{{ form.user.nicknameUser }}"/>
+                    </form>
+                {% endif %}                    
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        $('#emailToSub').blur(function () {
+            $.ajax({
+                url: "index.php?page=myaccount",
+                type: 'post',
+                data: {
+                    nicknameUser: $('#nicknameUser').val(),
+                    emailToSub: $('#emailToSub').val()
+                },
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (result, statut, error) {
+                    console.log(result);
+                }
+            });
+        });
+    </script>
+    <script>
+        function deleteAccount() {
+            $('#delButton').addClass('disabled');
+            let val = window.prompt("Êtes-vous sûr(e) de vouloir supprimer votre compte ?\n\
+                                        Cette action est irréversible.", "Saisissez CONFIRMER");
+            $.ajax({
+                url: "index.php?page=deleteaccount",
+                type: 'post',
+                data: {
+                    nicknameUser: $('#nicknameUser').val(),
+                    val: val
+                },
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (result, statut, error) {
+                    console.log(result);
+                }
+            });
+
+        }
+    </script>
+    <script>
+        changePasswd();
+        function changePasswd() {
+            oldPasswd = $('#oldPasswd');
+            newPasswd = $('#newPasswd');
+            confirmPasswd = $('#confirmPasswd');
+            newPasswd.blur(function () {
+                if (oldPasswd.val() === newPasswd.val()) {
+                    $('#error').show();
+                    $('#error').text("Veuillez choisir un mot de passe différent de l'ancien.");
+                } else {
+                    $('#error').hide();
+                }
+            });
+            confirmPasswd.blur(function () {
+                if (newPasswd.val() !== confirmPasswd.val()) {
+                    $('#error').show();
+                    $('#error').text("Les mots de passe ne correspondent pas.");
+                } else {
+                    $('#error').hide()
+                }
+            });
+        }
+    </script>
+{% endblock %}

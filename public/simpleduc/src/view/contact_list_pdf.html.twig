@@ -1,0 +1,17 @@
+{# Génération du PDF #}
+<table>
+    <tr>
+        <th>Nom</th>
+        <th>Téléphone</th>
+        <th>Email</th>
+    </tr>
+    {% for c in listeC %} {# c = contact #}
+        <tr>
+            <td>{{c.lastNameContact}}&nbsp;{{c.firsNameContact}}</td>
+            <td>{{c.telContact}}</td>
+            <td>{{c.mailContact}}</td>
+        </tr> 
+    {% endfor %}    
+</table>
+<br/>
+<hr/>

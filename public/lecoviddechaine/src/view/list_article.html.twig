@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Articles{{ parent() }} {% endblock %}
+
+{% block style %}
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="css/article.css" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block header %}Articles{% endblock %}
+
+{% block content %} 
+    {% for c in listCategory %}   
+        <h2 id="{{ c.labelCategory | lower }}">{{ c.labelCategory}}</h2>
+        {% for a in listA %}
+            {% if a.labelCategory == c.labelCategory %}
+
+                <div class="news-card">
+                    <div class="meta">
+                        <div class="img">{% if a.imageArticle == null %}<img src="img/articles/{{ a.labelCategory|lower|replace({'à':'a'})|replace({'é':'e'}) }}.png"/>{% else %}<img src="{% if a.idCategory != 5 %}img/articles/{% endif %}{{ a.imageArticle }}"/>{% endif %}</div>
+                        <div class="details">
+                            <div class="date">{{ a.dateArticle|date('d-m-Y') }}</div>
+                            <div class="category">
+                                <a href="index.php?page=category#{{ a.labelCategory|lower }}">{{ a.labelCategory }}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <h2>{{ a.titleArticle|striptags('<b>,<u>,<i>,<p>,<br>')|raw }}</h2>
+
+                        <p>{{ a[11]|striptags('<b>,<u>,<i>,<p>,<br>')|raw }}...</p>
+                        <p class="read-more">
+                            <a href="?page=fullarticle&idArticle={{ a.idArticle }}">Voir l'article complet</a>
+                        </p>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

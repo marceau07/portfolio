@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Ajout d'un contract {% endblock %}
+
+{% block contenu %}
+
+    {% if form.valide is defined %} 
+        {% if form.valide == true %}
+             <div style="margin: 0 auto;  text-align: center;">
+            <h1 >Ajout réussi</h1>
+              <a href="index.php?page=contractadd">Ajouter un nouveau contrat</a><br>
+        <a href="index.php?page=contract">Retourner à la liste des contrats</a>
+             </div>
+        {% else %} 
+            <h1 class="h3 mb-3 font-weight-normal">{{ form.valide.message }}</h1> 
+        {% endif %}     
+    {% else %}      
+
+        <div class="panel-body">
+            <form  class="form-signin" action="index.php?page=contractadd" method="post" enctype="application/x-www-form-urlencoded">
+                 <h1 class="h3 mb-3 font-weight-normal">Ajouter un contrat</h1>
+                <label for="labelContract" class="sr-only">Nom du contrat:</label>
+                <input type="text" id="labelContract" name="labelContract" class="form-control" placeholder="Libellé" required autofocus>
+                  <label for="dateSignatureContract">Date de signature:</label>
+                <input type="date" id="dateSignatureContract" name="dateSignatureContract" class="form-control" placeholder="Date de signature" required >
+                  <label for="dateBegProject">Début du projet:</label>
+                <input type="date" id="dateBegProject" name="dateBegProject" class="form-control" placeholder="Début du projet" required >
+                <label for="dateEndProject">Fin du projet:</label>
+                <input type="date" id="dateEndProject" name="dateEndProject" class="form-control" placeholder="Fin du projet" required >
+                <label for="costProject" class="sr-only">Coût du projet:</label>
+                <input type="text" id="costProject" name="costProject" class="form-control" placeholder="Coût du projet" required >
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit" name="btAdd">Ajouter</button>
+            </form>
+        </div>    
+    {% endif %}
+{% endblock %} 

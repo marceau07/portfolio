@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Modification d'un contact {% endblock %}
+
+{% block contenu %} <h1> Modification d'un contact </h1> 
+    {% if form.contact is defined %} 
+        {% if form.contact != null %}   
+
+            <div class="panel-body">
+                <form  class="form-signin" action="index.php?page=contactmodify" method="post" enctype="application/x-www-form-urlencoded">
+                    <input type="hidden" id="idContact" name="idContact" value="{{form.contact.idContact}}"/> 
+
+                    <label for="inputLastName" class="sr-only">Prénom:</label>
+                    <input type="text" id="inputLastName" name="inputLastName" class="form-control" placeholder="Saisir le prenom" value="{{form.contact.lastNameContact}}" required autofocus>
+
+                    <label for="inputFirstName" class="sr-only">Nom:</label>
+                    <input type="text" id="inputFirstName" name="inputFirstName" class="form-control" placeholder="Saisir le nom" value="{{form.contact.firstNameContact}}" required >
+
+                    <label for="inputTel" class="sr-only">Rue:</label>
+                    <input type="number" id="inputTel" name="inputTel" class="form-control" placeholder="Saisir le téléphone" value="{{form.contact.telContact}}" required >
+
+                    <label for="inputMail" class="sr-only">Mail:</label>
+                    <input type="text" id="inputMail" name="inputMail" class="form-control" placeholder="Saisir le mail" value="{{form.contact.mailContact}}" required >
+
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btModify">Modifier</button>
+                </form>
+            </div> 
+        {% else %}  
+            {% if form.valide == true %}
+                <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+                <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=firm" class="violet">Retourner sur la liste des contacts</a></h1>
+            {% else %}    
+                <h1 class="alert alert-info" role="alert">{{ form.message }}</h1> 
+                <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=firm" class="violet">Retourner sur la liste des contacts</a></h1>
+            {% endif %} 
+        {% endif %} 
+    {% else %} 
+        <h1 class="alert alert-info" role="alert">{{ form.message }}</h1> 
+        <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=firm" class="violet">Retourner sur la liste des contacts</a></h1>
+
+    {% endif %}
+{% endblock %} 

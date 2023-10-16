@@ -1,0 +1,70 @@
+
+blockquote {
+  font-family: 'Oswald', sans-serif;
+  line-height: 1.2em;
+  font-size: 1.8em;
+  column-span: 2;
+  -webkit-column-span: 2;
+  margin: 0px;
+  padding: 0px;
+  margin-left: 5px;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'PT Sans Narrow', sans-serif;
+}
+
+h2 {
+  font-size: 3em;
+  line-height: 1em;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 2.4em;
+  margin: 0px;
+  padding: 0px;
+  line-height: 0.8em;
+  padding-top: 20px;
+}
+
+article {
+    border: black solid;
+    padding: 10px;
+}
+
+@media only all and (min-width: 600px) {
+  article {
+    -moz-columns: 3;
+    /* How many columns? */
+    
+    -webkit-columns: 3;
+    columns: 3;
+    -webkit-column-gap: 40px;
+    -moz-column-gap: 40px;
+    column-gap: 40px;
+    line-height: 1.5em;
+    font-size: 1em;
+    -webkit-column-rule: 2px outset #444;
+    -moz-column-rule: 2px outset #444;
+    column-rule: 2px outset #444;
+  }
+  .today {
+    column-span: all;
+    -webkit-column-span: all;
+  }
+  p {
+    text-align: justify;
+    text-justify: inter-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    hyphenate-character: "\u2605";
+  }
+}

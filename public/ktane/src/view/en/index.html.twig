@@ -1,0 +1,33 @@
+{% extends "en/base.html.twig" %}
+
+{% block title %}Home{{ parent() }}{% endblock %}
+
+{% block style %}
+    <link href="../web/css/bootstrap-grid.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../web/css/countdown.css" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block content %}
+    <div class="col" id="buttons">
+        <div class="row justify-content-center">
+            <img src="../web/images/logo.png" alt="Logo" class='img-fluid'/>
+        </div>
+        <div class="row justify-content-center">
+            <a class="btn btn-success" id="play" href="#" onclick="initGame();"><i class="fas fa-play"></i>&nbsp;Play !</a>
+            <a class="btn btn-info" id="options" href="?page=options"><i class="fas fa-cog"></i>&nbsp;Options</a>
+        </div>
+    </div>
+    <div class="text-white">
+        <p id="msg">Choose one of the modules not completed on the left panel. Hurry, lives are at stake.</p>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $('#msg').hide();
+        function initGame() {
+            $('#buttons').remove();
+            $('#msg').show();
+        }
+    </script>
+{% endblock %}

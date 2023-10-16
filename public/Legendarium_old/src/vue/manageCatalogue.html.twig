@@ -1,0 +1,53 @@
+{% extends "base.html.twig" %}
+{% block title %} {{ parent() }} - Gerer le Catalogue{% endblock %}
+
+{% block contenu %}
+    <div class="col-md-12">
+        <div class="row">
+            {% for l in liste %}
+            <form action="index.php?page=catalogue" method="post" enctype="multipart/form-data">
+                {% endfor %}
+                <div class="form-group">
+                    <input type="hidden" id="idLivre" value="{{ form.catalogue.idLivre }}" name="idLivre" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="titre" value="{{ form.catalogue.titre }}" name="titre" class="form-control" placeholder="Titre" required autofocus>
+                </div>
+                <div class="form-group" name="isbn" placeholder='isbn'>{{ form.catalogue.isbn }}</div>
+                <div class="form-group">
+                    <textarea type="text" id="synopsis" name="synopsis" value="{{ form.catalogue.synopsis }}" class="form-control" placeholder="Synopsis"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="prix" value="{{ form.catalogue.prix }}" name="prix" class="form-control" placeholder="Prix" required >
+                </div>
+                <select name="quantite" class="form-group">
+                    {% for c in form.catalogue %}
+                        <option value="{{c.quantite}}">{{c.quantite}}</option>
+                    {% endfor %}
+                </select>
+                <div class="form-group">
+                    <input type="file" id="photo" value="{{c.photo}}" name="photo" class="form-control ">
+                </div>
+                <div class="form-group">
+                    <input type="hidden" id="coupDeCoeur" name="coupDeCoeur" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <input type="hidden" id="idDisponibilite" name="idDisponibilite" class="form-control"  required>
+                </div>
+                <div class="form-group">
+                    <input type="hidden" id="idGenre" name="idGenre" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <input type="hidden" id="idAuteur" name="idAuteur" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <input type="hidden" id="idEditeur" name="idEditeur" class="form-control" required>
+                </div>
+                <div class="form-group form-group-btn">
+                    <button type="submit" name="btModifierCat" class="btn btn-success btn-lg">Modifier</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %} 
+

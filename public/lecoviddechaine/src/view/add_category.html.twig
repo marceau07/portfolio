@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Ajouter une catégorie{{ parent() }} {% endblock %}
+
+{% block style %}
+    <link rel='stylesheet' href='css/add_category.css'>
+{% endblock %}
+
+{% block header %}Ajouter une catégorie{% endblock %}
+
+{% block content %} 
+    {% if form.valide is defined %}
+        {% if form.valide == false %}
+            <div class="alert alert-warning" role="alert">{{ form.message }}</div>
+        {% else %}
+            <div class="alert alert-success" role="alert">{{ form.message }}</div>
+            <p>Souhaitez vous en ajouter <a href='index.php?page=addcategory'>une nouvelle</a> ?</p>
+        {% endif %}
+    {% else %}
+        <div class='row align-content-center'>
+            <div class='col-sm-12'>
+                <article>
+                    <form action="index.php?page=addcategory" method="post" enctype="multipart/form-data" id="addcategory">
+                        <fieldset class='contour'>
+                            <legend>Ajouter une cétégorie</legend>
+                            <div class='form-group'>
+                                <label>Nom de la nouvelle catégorie</label>
+                                <input class='col-md-12' form="addcategory" type="text" id="labelCategory" name="labelCategory" placeholder="Nom de la nouvelle catégorie" required autofocus autocomplete="off"/>
+                            </div>
+                            <div class='form-group'>
+                                <input type='submit' name='btAddCategory' class="btn btn-md" value='Ajouter' />
+                            </div>
+                        </fieldset>
+                    </form>
+                </article>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

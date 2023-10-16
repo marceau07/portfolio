@@ -1,0 +1,18 @@
+{% extends "es/base.html.twig" %}
+
+{% block title %}Memory module {{ parent() }}{% endblock %}
+
+{% block style %}
+    <style>
+        .dial {
+            background: black;
+            color: white;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col dial">Hello</div>
+    </div>
+{% endblock %}

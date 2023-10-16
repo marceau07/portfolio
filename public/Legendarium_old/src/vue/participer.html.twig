@@ -1,0 +1,46 @@
+{% extends "base.html.twig" %}
+{% block title %} {{ parent() }} - Participer à un JDR {% endblock %}
+{% block contenu %}
+    {% if form.valide is defined %}
+        {% if form.valide == true %}
+            {% if form.resul == true %}
+                {% include 'jdrInscReussie.html.twig' %}
+            {% endif %}
+        {% else %}
+            {% include 'jdrInscFail.html.twig' %} 
+        {% endif %}    
+    {% else %}
+        <div class="table-responsive">
+            <div class="tab-content">
+                <h1>Formulaire de participation</h1>
+            </div>
+            <table class="table">
+                <tr>
+                    <th>Titre</th>
+                    <th>Résumé du jeu</th>
+                    <th>Nombre de joueur maximum</th>
+                    <th>Date de début</th>
+                    <th>Id rôle jeu</th>
+                    <th></th>
+                </tr>
+                {% for j in liste %}
+                    <tr>
+                        <td>{{ j.titreJeu }}</td>
+                        <td>{{ j.libelleJeu }}</td>
+                        <td>{{ j.nbJoueurMax }}</td>
+                        <td>{{ j.dateEvenement }}</td>
+                        <td>{% if j.idRoleJeu == 1 %} Maître de jeu {% else %} Joueur lambda{% endif %}</td>
+                        <td>
+                            <form class="form-signin" action="index.php?page=participer" method="post" enctype="application/x-www-form-urlencoded">
+                                {% for jdr in liste %}
+                                    <input type="hidden" name="idJeu" value ="{{ jdr.idJeu }}" required>
+                                {% endfor %}       
+                                <button class="btn btn-lg btn-primary btn-success" type="submit" name="btParticiper">Participer</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "fr/base.html.twig" %}
+
+{% block title %}Morse Code module {{ parent() }}{% endblock %}
+
+{% block style %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <fieldset style="background-color: grey; padding: 1em; margin: 280px;" id="fieldsetMorse">
+                <div class="row">
+                    <i class="fas fa-question-circle" style="color: #004d40; cursor: pointer;" title="Obtenir de l'aide" onclick="window.open('//ktane.fandom.com/wiki/Morse_Code', '_blank');"></i>
+                    <canvas id="light"></canvas>
+                    <i class="fas fa-circle morse-code" style="left: 6em;"></i>
+                </div>
+                <div class="row justify-content-center">
+                    <br/>
+                    <input type="range" min="250" max="700" class="slider form-control-range" id="slider" onmousemove="frequencyAssignment();"/>
+                </div>
+                <div class="row justify-content-center">
+                    <i class="fas fa-chevron-left" onclick="frequencyChanged('-');" style="font-size: 2em;"></i><span id="frequence" class="form-control-sm" style="background-color: black; color: white; font-size: 2em;"></span><i class="fas fa-chevron-right fa-2x" onclick="frequencyChanged('+');" style="font-size: 2em;"></i>
+                </div>
+                <div class="row justify-content-center">
+                    <button class="btn btn-amber btn-sm">TX</button>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        var lightCanvas = document.getElementById("light");
+        lightCanvas.height = 30;
+        lightCanvas.width = 70;
+        var ctxLight = lightCanvas.getContext("2d");
+        ctxLight.fillStyle = "#ffc966";
+        ctxLight.rect(8, 0, 62, 30);
+        ctxLight.fill();
+        //ctx.fillStyle = "#ffffff";
+        //ctx.rect(45, 0, 15, 30);
+        //ctx.fill(); 
+
+        function frequencyChanged(signe) {
+            if(signe === "-") {
+                $('#slider').val(parseInt($('#slider').val())-1);
+            } else if(signe === "+") {
+                $('#slider').val(parseInt($('#slider').val())+1);
+            }
+            frequencyAssignment();
+        }
+
+        function frequencyAssignment() {
+            $('#frequence')[0].innerText = '3.' + $('#slider').val() + ' MHz';
+        }
+    </script>
+{% endblock %}

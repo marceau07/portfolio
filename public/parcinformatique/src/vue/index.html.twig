@@ -1,0 +1,396 @@
+{% extends "base.html.twig" %}
+
+{# Page d'index, regroupant le carrousel des reseaux et la liste des ordinateurs permettant l'acces en SSH #}
+
+
+{% block style %}
+    <meta name="google-signin-client_id" content="944029488040-khgg3rdtvvsob8rsg01jpqpf75bi3h2o.apps.googleusercontent.com">
+    <link href="css/style2.css" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block contenu %}
+    {% if session.email is defined %} 
+        {% if form.test == "version non mobile" %}
+            <div class="container-fluid">
+                <div class="col text-center">
+                    <form method="post">
+                        <button type="submit" name="turnOff" class="btn btn-danger" onclick='spinner();'><a id='spinner'><span class="spinner-border spinner-border-sm fas fa-power-off"></span></a>&nbsp;Eteindre le parc complet&nbsp;<span class="fas fa-power-off"></span></button>
+                        {% if form.turnOff is defined %}
+                            {% if form.turnOff == true %}
+                                <a class="alert alert-success" role="alert">{{ form.turnOffMsg }}</a>
+                            {% elseif form.turnOff == false %}
+                                <a class="alert alert-warning" role="alert">{{ form.turnOffMsg }}</a>
+                            {% endif %}
+                        {% endif %}
+                    </form>
+                </div>
+
+                {% if listeO is defined %}
+                <form id="afficherCanvas">
+                    <label for="nbReseau">Afficher le réseau</label>
+                    <select class="form-control col-xs-3 col-sm-2 col-md-2 col-lg-1" name="nbReseau" id="nbReseau" onchange="chargerGraphique();changerLienPdf(this.value);">
+                        <option value="%"{% if session.numReseau is not defined %} selected{% endif %}>Tous</option>
+                        {% for value in nbNetworks %}
+                            <option value="{{ value.reseau }}"{% if session.numReseau is defined and session.numReseau == value.reseau %}selected{% endif %}>{{ value.reseau }}</option>
+                        {% endfor %}    
+                    </select>
+                </form>
+                {% endif %}
+                <div id="pc_networks" style="display: none;"></div>
+
+            </div>
+            <div class="container-fluid">
+                <table id="liste-pc" class="table table-bordered table-responsive align-content-sm-center" style="display: none;" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th class="th-sm"></th>
+                            <th class="th-sm">I.P.</th>
+                            <th class="th-sm">Système d'exploitation</th>
+                            <th class="th-sm">Etat</th>
+                            <th class="th-sm">Employe rattaché au PC</th>
+                            <th class="th-sm">En savoir plus</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                
+
+                <p>
+                    <a href="index.php?page=listeOrdinateurPdf{% if session.numReseau is defined %}&numReseau={{ session.numReseau }}{% endif %}" target="_blank" id="lienPdf"><i class="fas fa-download"></i>&nbsp;Télécharger la liste des ordinateurs visibles en pdf</a>
+                    <button class="btn btn-secondary" style="float: right;" onclick="genererCSV();"><i class="fas fa-file-csv fa-2x"></i></button>
+                </p>
+
+                <!-- Modal -->
+                <div id="sshModale" class="modal fade" role="dialog" tabindex="-1">
+                    <div class="modal-dialog modal-fluid modal-frame">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">PC</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <table border='0' width='100%'>
+                                    <tr>
+                                        <td>Adresse IP:</td><td id='ip'></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Adresse MAC:</td><td id='mac'></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Système d'exploitation:</td><td id='nomOs'></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Statut de l'appareil:</td><td id='nomStatut'></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Employé rattaché à ce PC:</td><td id='unEmploye'></td>
+                                    </tr>
+                                </table>
+                                <form id='serverbox'>
+                                    <p>Se connecter en SSH</p>
+                                    <div class='alert alert-danger hidden' id='erreur'></div>
+                                    <label>Serveur:</label><br>
+                                    <input type='text' id='server' name='server' title='Serveur' value='' placeholder="www.exemple.com"/><br>
+                                    <label>Port:</label><br>
+                                    <input type='number' min='1' id='port' name='port' title='Port' placeholder='port' value='4018'/><br>
+                                    <label>Nom d'utilisateur:</label><br>
+                                    <input type='text' id='login' name='login' title='Nom d&apos;utilisateur' placeholder='Nom d&apos;utilisateur' value='login4018'/><br>
+                                    <label>Mot de passe:</label><br>
+                                    <input type='password' id='password' name='password' title='Mot de passe' placeholder='Mot de passe' value="EMDduFSpXYBQzOe"/><br>
+                                    <button class='btn btn-success' onclick="connexionSsh(); return false;" name='btConnecter'>Se connecter&nbsp;<img id='loader' style='display: none' src='img/loader.gif' alt='loader'/></button>
+                                </form>
+                            </div>
+                            <div class='cmd'>
+                                <textarea class='cmd-field' id='prevCmd' cols="100" rows="10%"></textarea>
+                                <form id="cmd">
+                                    <input type='text' class="cmd-field" id='cmd-line' name='cmd-line'/>
+                                    <input type="submit" onclick="sendCommandLine();" style="display: none"/> 
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        {# Acces par mobile oblige telechargement de l'apk #}
+        {% elseif form.test == "version mobile" %}
+            <p>Pour avoir accès aux ressources sur mobiles et tablettes, veuillez télécharger l'application suivante:</p><a href='../apk/app-debug.apk' target='_blank'>ParcInformatique</a>
+        {% endif %}
+        <!--<div class="banner-wrapper">
+            <div id="cookie-banner" class="cookie-banner" role='dialog'>
+                <p>Pour que vous puissiez bénéficier de la meilleure expérience possible, nous utilisons des cookies. <br />En poursuivant votre navigation sur <em>parcinformatique.fr</em> nous considérons que vous les acceptez.</p>
+                <a class="button" href="#" id='btOkCookies'>OK</a>
+            </div>
+        </div>-->
+    {% else %}
+        <div class="container">
+            <div class="row">
+                <div class="h3-responsive col-sm-4">
+                    <a class="page-link" href="index.php?page=connexion"><i class="fa fa-address-card"></i>&nbsp;Connexion</a>
+                </div>
+                <div class="h3-responsive col-sm-4">
+                    <a class="page-link" href="https://accounts.google.com/o/oauth2/v2/auth?scope=email profile&access_type=online&redirect_uri={{ 'http://serveur1.arras-sio.com/symfony4-4017/public/parcinformatique/web/index.php?page=googleAuth'|url_encode() }}&response_type=code&client_id=944029488040-d090bocufmukr0lea89hvaobe0eeg471.apps.googleusercontent.com"><i class="fab fa-google"></i>&nbsp;Connexion via Google</a>
+                </div>
+                <div class="h3-responsive col-sm-4">
+                    <a class="page-link" href="index.php?page=inscription"><i class="fa fa-user-plus"></i>&nbsp;Inscription</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block js %}
+    <!-- AmCharts 5 -->
+    <script src="//cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="//cdn.amcharts.com/lib/5/hierarchy.js"></script>
+    <script src="//cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+{#    <script src="//cdn.amcharts.com/lib/5/themes/Dark.js"></script>
+    <script src="//cdn.amcharts.com/lib/5/themes/Dataviz.js"></script>
+    <script src="//cdn.amcharts.com/lib/5/themes/Frozen.js"></script>
+    <script src="//cdn.amcharts.com/lib/5/themes/Kelly.js"></script>
+    <script src="//cdn.amcharts.com/lib/5/themes/Material.js"></script>
+    <script src="//cdn.amcharts.com/lib/5/themes/Micro.js"></script>
+    <script src="//cdn.amcharts.com/lib/5/themes/Moonrise.js"></script>
+    <script src="//cdn.amcharts.com/lib/5/themes/Responsive.js"></script>
+    <script src="//cdn.amcharts.com/lib/5/themes/Spirited.js"></script>#}
+    <script src="//cdn.amcharts.com/lib/5/locales/fr_FR.js"></script>
+    
+    <script>
+        $(document).ready(function () {
+            chargerGraphique();
+        });
+        
+        function powerOff() {
+            $('#turnOff').hide();
+        }
+        
+        function genererCSV() {
+            $.ajax({
+                url: 'index.php',    
+                method: 'post', 
+                data: {
+                    genererCSV: 1
+                }, 
+                success: function() {
+                    window.location.href = window.location.href + "other/liste_parc_pc.xlsx";
+                }
+            });
+        }
+        
+        function chargerGraphique() {
+            id_network = $('#nbReseau').val();
+            $('#pc_networks').css('display', 'none');
+            $('#liste-pc').css('display', 'none');
+            
+            $.ajax({
+                url: 'index.php',    
+                dataType: 'json', 
+                method: 'post', 
+                data: {
+                    pc_networks: 1, 
+                    id_network: id_network
+                }, 
+                success: function(r) {
+                    $('#pc_networks').css('display', 'block');
+                    if(r.listePc != null) $('#liste-pc').css('display', 'table');
+                    if(window.datatableListePc != undefined) {
+                        window.datatableListePc.clear().draw();
+                        if(r.listePc != null) window.datatableListePc.rows.add(r.listePc);
+                        window.datatableListePc.columns.adjust().draw();
+                    } else {
+                        var dtbodyright 	= [];
+                        var dtbodyleft 		= [1, 2, 4];
+                        var dtheadcenter 	= [0, 3, 5];
+                        var dtbodycenter 	= [0, 3, 5];
+                        var dates 		= [];
+                        var formated_columns    = [];
+                        var order_columns 	= [[1, "asc"]];
+                        var not_orderable 	= [0, 5];
+
+                        window.datatableListePc = $('#liste-pc').DataTable({
+                            data: r.listePc,
+                            columns: [
+                                    {data: "pc_lien"}, 
+                                    {data: "pc_ip"}, 
+                                    {data: "pc_nom_os"}, 
+                                    {data: "pc_nom_statut"}, 
+                                    {data: "pc_nom_employe"}, 
+                                    {data: "pc_bouton"}
+                            ], 
+                            pageLength: 10,
+                            order: order_columns,
+                            info: true,
+                            searching: true,
+                            paging: true,
+                            columnDefs: [
+                                    {"className": "dt-body-left", "targets": dtbodyleft},
+                                    {"className": "dt-body-center", "targets": dtbodycenter},
+                                    {"type": "formatted-num", "targets": formated_columns },
+                                    {"type": 'date-euro', 'targets': dates },
+                                    {"orderable": false, 'targets': not_orderable },
+                            ]
+                        });
+                    }
+                    
+                    am5.ready(function() {
+                        // Supprime l'élément
+                        am5.disposeAllRootElements();
+
+                        // Create root element
+                        // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+                        var root = am5.Root.new("pc_networks");
+
+                        
+
+                        
+                        // Set themes
+                        // https://www.amcharts.com/docs/v5/concepts/themes/
+                        root.setThemes([
+{#                          am5themes_Animated.new(root),#}
+{#                          am5themes_Material.new(root), #}
+{#                          am5themes_Kelly.new(root)#}
+                        ]);
+                        
+                        root.locale = am5locales_fr_FR;
+
+                        // Create wrapper container
+                        var container = root.container.children.push(am5.Container.new(root, {
+                          width: am5.percent(100),
+                          height: am5.percent(100),
+                          layout: root.verticalLayout
+                        }));
+
+                        // Create series
+                        // https://www.amcharts.com/docs/v5/charts/hierarchy/#Adding
+                        var series = container.children.push(am5hierarchy.ForceDirected.new(root, {
+                          singleBranchOnly: false,
+                          downDepth: 1,
+                          initialDepth: 2,
+                          valueField: "value",
+                          categoryField: "name",
+                          childDataField: "children",
+                          fill: "fill",
+                          centerStrength: 0.5
+                        }));
+                        
+                        // Generate and set data
+                        // https://www.amcharts.com/docs/v5/charts/hierarchy/#Setting_data
+                        var child;
+                        
+                        var data = {
+                          name: "Réseaux",
+                          children: []
+                        };
+                        for(var i = 0 ; i < r.nbNetworks.length ; i++) {
+                            color = '#ff0' + i + i + '0';
+                            child = {
+                                name: "10.239." + r.nbNetworks[i].reseau + ".X", 
+                                children: []
+                            };
+                            for(var j = 0 ; j < r.listePc.length ; j++) {
+                                if(r.listePc[j].pc_ip.split('.')[2] === r.nbNetworks[i].reseau) {
+                                    childrens = {
+                                        name: r.listePc[j].pc_ip,
+                                        value: 1, 
+                                        fill: color
+                                    };
+                                    child.children.push(childrens);                                    
+                                }
+                            }
+                            data.children.push(child);
+                        }
+                        
+                        series.data.setAll([data]);
+                        series.set("selectedDataItem", series.dataItems[0]);
+                        
+                        // Make stuff animate on load
+                        series.appear(1000, 100);
+                    });
+                }, 
+                error: function() {
+                    $('#pc_networks').css('display', 'none');
+                }
+            });
+        }
+        function changerLienPdf(value) {
+            $('#lienPdf').attr('href', 'index.php?page=listeOrdinateurPdf');
+            if(value !== '%') $('#lienPdf').attr('href', 'index.php?page=listeOrdinateurPdf&numReseau=' + value);
+        }
+        function spinner() {
+            var spinner = document.getElementById("spinner");
+            spinner.style.display = 'inline-block';
+        }
+        function connexionSsh() {
+            $("#loader").show();
+            server = $("#server").val();
+            port = $("#port").val();
+            login = $("#login").val();
+            password = $("#password").val();
+
+            console.log(server);
+            console.log(port);
+            console.log(login);
+            console.log(password);
+
+            $.post("index.php?page=ssh", 
+            {   
+                server: server, 
+                port: port, 
+                login: login, 
+                password: password
+            }, 
+            function (data) {
+                $("#loader").hide();
+                if (data == 'ok') {
+                    $("#serverbox").hide();
+                    $(".cmd").show();
+                } else {
+                    $("#erreur").show();
+                    $("#erreur").removeClass('hidden');
+                    $("#erreur").empty().append(data);
+                }
+            });
+        }
+        
+        function ouvrirModaleSshAjax(id_pc) {
+            $.ajax({
+                url: 'index.php?page=modal',
+                method: 'post',
+                dataType: 'json', 
+                data: {
+                    idOrdinateur: id_pc
+                },
+                success: function (r) {
+                    $('#ip').html(r.ip);
+                    $('#mac').html(r.mac);
+                    $('#nomOs').html(r.nomOs);
+                    $('#nomStatut').html(r.nomStatut);
+                    (r.unEmploye != null ? $('#unEmploye').html(r.unEmploye) : 'N/A');
+                    $('#sshModale').modal('show');
+                    $('#sshModale').css('display', 'block');
+                    $("#erreur").hide();
+                    $(".cmd").hide();
+                }
+            });
+        }
+        
+        
+        $("#prevCmd").hide();
+        $(function () {
+            $("#cmd").submit(function () {
+                commande = $(this).find("input[name=cmd-line]").val();
+                if (commande === "clear") $("#prevCmd").empty();
+                $.post("index.php?page=cmd", {commande: commande}, function (data) {
+                    console.log(data);
+                    $("#prevCmd").show();
+                    $("#prevCmd").append(data);
+                });
+                return false;
+            });
+        });
+    </script>
+    {# Banniere Cookies #}
+    <script src="js/cookies.js" type="text/javascript"></script>
+{% endblock %}

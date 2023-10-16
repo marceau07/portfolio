@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Modification d'une équipe {% endblock %}
+
+{% block contenu %} <h1> Modification d'une équipe </h1> 
+
+    {% if form.skill is defined %} 
+        {% if form.skill != null %}    
+            <div class="panel-body">
+                <form  class="form-signin" action="index.php?page=skillmodify" method="post" enctype="application/x-www-form-urlencoded">
+                    <h1 class="h3 mb-3 font-weight-normal">Modifier une compétence</h1>
+
+                    <label for="nameSkill" class="sr-only">Nom:</label>
+                    <input type="text" id="nameSkill" name="nameSkill" class="form-control" placeholder="Nom" value="{{form.skill.nameSkill}}" required autofocus>
+                    <label for="descSkill" class="sr-only">Description de la compétence:</label>
+                    <input type="text" id="descSkill" name="descSkill" class="form-control" placeholder="Description" value="{{form.skill.descSkill}}" required>
+                    <label for="versionSkill" class="sr-only">Version de la compétence</label>
+                    <input type="text" id="versionSkill" name="versionSkill" class="form-control" placeholder="Version" value="{{form.skill.versionSkill}}" required>
+
+
+                    <input type="hidden" name="idSkill" value="{{ form.skill.idSkill }}"/>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btModify">Modifier</button>
+                </form>
+            </div> 
+        {% else %}  
+            {% if form.valide == true %}
+                <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+                <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=skill" class="violet">Retourner sur la liste des compétences</a></h1>
+            {% else %}    
+        <h1 class="alert alert-info" role="alert">{{ form.message }}</h1> 
+                <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=skill" class="violet">Retourner sur la liste des compétences</a></h1>
+            {% endif %} 
+        {% endif %} 
+    {% else %} 
+        <h1 class="alert alert-info" role="alert">{{ form.message }}</h1> 
+        <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=skill" class="violet">Retourner sur la liste des compétences</a></h1>
+
+    {% endif %}
+{% endblock %} 

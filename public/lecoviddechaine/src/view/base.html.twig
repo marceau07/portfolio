@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>{% block title %} | LCD{% endblock %}</title>
+        <!-- Fav Icon -->
+        <link rel="icon" type="image/png" href="../../img/logoLeCovidDechaine.png"/>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.11.2/css/all.css">
+        <!-- Google Fonts Roboto -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <!-- Material Design Bootstrap -->
+        <link rel="stylesheet" href="css/mdb.min.css">
+        <!-- DataTable -->
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/v/dt/dt-1.11.4/datatables.min.css"/>
+        <!-- Your custom styles (optional) -->
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link href="css/footer.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="css/newspaper.css">
+        <style>
+            .ui-autocomplete {
+                max-height: 100px;
+                overflow-y: auto;
+                /* prevent horizontal scrollbar */
+                overflow-x: hidden;
+            }
+            .welcome {
+                border: black ridge;
+            }
+        </style>
+        {% block style %}{% endblock %}
+    </head>
+    <body>
+        {% block body %}
+            <div class="container-fluid pt-4">
+                <div class="row">
+                    <div class="ml-4 mr-4 pb-4 pt-4 d-flex flex-column flex-center text-center">
+                        {% if session.nicknameUser is defined %}
+                            <div class="welcome flex-center">
+                                <span class='text-uppercase font-weight-bold text-center'>Bienvenue <i>{{ session.nicknameUser|upper }}</i></span>
+                                <span><a href="?page=myaccount" class='btn btn-sm justify-content-start'>Mon Compte</a></span>
+                                <span><a href="?page=logout" class='btn btn-sm bg-danger text-light justify-content-end'>Déconnexion</a></span>
+                                {% if session.idRoleUser == 2 %}
+                                    <span><a href='?page=panel' class='btn btn-sm mb-2'>Panel</a></span>
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <div class="welcome flex-center">
+                                <span class='text-uppercase font-weight-bold'>Bienvenue</span><br>
+                                <span><a href="?page=signin" class='btn btn-sm bg-dark text-light d-flex justify-content-start'>S'inscrire</a></span>
+                                <span><a href="?page=login" class='btn btn-sm d-flex justify-content-end'>Se connecter</a></span>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="title d-flex flex-column">
+                        <h1 class=""><a href="index.php">Le Covid déchaîné</a></h1>
+                    </div>
+                </div>
+                <h2 id="title">{% block header %}{% endblock %}</h2>
+                <div class="row today">
+                    <div class="col-md-4">
+                        <time>N°<span id="number"></span>&nbsp;<span id="date"></span></time>
+                    </div>
+                    <div class="col-md-4">
+                        <span id="test" ng-app="demo" ng-controller="DemoCtrl as demoCtrl">
+                            <ng-barcode
+                                ng-barcode-input="{{'{{demoCtrl.barcodeInput}}'}}"
+                                ng-barcode-code="code39">
+                            </ng-barcode>
+                        </span>
+                    </div>
+                    <div class="col-md-4">
+                        <div class='ui-widget'>
+                            <input type="search" placeholder="Un article, un mot clé..." id="q" name="q" size="30" minlength="1" required autocomplete="off"/>
+                            <button><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+                {% block content %}
+
+                {% endblock %}
+            </div>
+
+            <hr align="center" width="70%" color="#404040">
+
+            <!-- Footer -->
+            <footer class="page-footer arabia pt-4">
+
+                <!-- Footer Links -->
+                <div class="container text-center text-md-left">
+
+                    <!-- Footer links -->
+                    <div class="row text-center text-md-left mt-3 pb-3">
+
+                        <!-- Grid column -->
+                        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                            <h6 class="text-uppercase mb-4 font-weight-bold">Economie</h6>
+                            <div id='rechercher'></div>
+                            <p>
+                                <a href="?page=article#economie">Actualités</a>
+                            </p>
+                            <p>
+                                <a href="?page=faq#economie">FAQ</a>
+                            </p>
+                        </div>
+                        <!-- Grid column -->
+
+                        <hr class="w-100 clearfix d-md-none">
+
+                        <!-- Grid column -->
+                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                            <h6 class="text-uppercase mb-4 font-weight-bold">Droit</h6>
+                            <p>
+                                <a href="?page=article#droit">Actualités</a>
+                            </p>
+                            <p>
+                                <a href="?page=faq#droit">FAQ</a>
+                            </p>
+                        </div>
+
+                        <!-- Grid column -->
+                        <hr class="w-100 clearfix d-md-none">
+
+                        <!-- Grid column -->
+                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                            <h6 class="text-uppercase mb-4 font-weight-bold">Management</h6>
+                            <p>         
+                                <a href="?page=article#management">Actualités</a>
+                            </p>
+                            <p>
+                                <a href="?page=faq#management">FAQ</a>
+                            </p>
+                        </div>
+
+                        <!-- Grid column -->
+                        <hr class="w-100 clearfix d-md-none">
+
+                        <!-- Grid column -->
+                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                            <h6 class="text-uppercase mb-4 font-weight-bold">Scolaire</h6>
+                            <p>
+                                <a href="?page=article#scolaire">Actualités</a>
+                            </p>
+                            <p>
+                                <a href="?page=faq#scolaire">FAQ</a>
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <hr>
+
+                    <div class="row text-center text-md-left">
+                        <!-- Grid column -->
+                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3 text-center">
+                            <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+                            <div>
+                                <a href="?page=contact">Formulaire de contact</a>
+                            </div>
+                            <div>
+                                <a href="mailto:symfony4.4017@gmail.com">Envoyer un mail directement</a>
+                            </div>
+                        </div>    
+
+                        <hr class="w-100 clearfix d-md-none">
+
+                        <!-- Grid column -->
+                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3 text-center">
+                            <h6 class="text-uppercase mb-4 font-weight-bold">Règles</h6>
+                            <div>
+                                <a href="?page=cgu">Conditions Générales d'Utilisation</a>
+                            </div>
+                            <div>
+                                <a href="?page=mentions">Mentions Légales</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row text-center text-md-left">
+                        <!-- Grid column -->
+                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                            <h6 class="text-uppercase mb-4 font-weight-bold">Newsletter</h6>
+                            <div class='alert alert-success' id='msgNewsletterOk'></div>
+                            <div class='alert alert-danger' id='msgNewsletterNotOk'></div>
+                            <form method="post" id='newsletter'>
+                                <div class='form-group'>
+                                    <input type="email" name="email" placeholder="Email" class='form-control' required/>
+                                    <input type="submit" name="btNewsletter" value="S'inscrire" class='btn btn-md'/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- Footer links -->                    
+                    <!-- Grid row -->
+                    <div class="row d-flex align-items-center">
+
+                        <!-- Grid column -->
+                        <div class="col-md-7 col-lg-8">
+
+                            <!--Copyright-->
+                            <p class="text-center text-md-left">© 2019 - {{ "now"|date('Y') }} Copyright:
+                                <a href="./">
+                                    <strong>Le Covid Déchaîné</strong>
+                                </a>
+                            </p>
+                        </div>
+                        <!-- Grid column -->
+
+                    </div>
+                    <!-- Grid row -->
+
+                </div>
+                <!-- Footer Links -->
+
+            </footer>
+            <!-- Footer -->
+        {% endblock %}
+        <!-- jQuery -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="js/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="js/mdb.min.js"></script>
+        <!-- FR date picker -->
+        <script type="text/javascript" src="js/datepicker-fr.js"></script>
+        <!-- DataTable -->
+        <script type="text/javascript" src="//cdn.datatables.net/v/dt/dt-1.11.4/datatables.min.js"></script>
+        <script type="text/javascript" src="//cdn.datatables.net/plug-ins/1.11.4/sorting/date-euro.js"></script>
+         <script>
+            $(document).ready(function() {
+                $("#filtre_date").datepicker({
+                    changeMonth: true, 
+                    changeYear: true, 
+                    firstDay: 1, 
+                    gotoCurrent: true, 
+                    showButtonPanel: true, 
+                    dateFormat: 'dd/mm/yy', 
+                    minDate: new Date(2020, 04, 14), 
+                    maxDate: 0
+                }, $.datepicker.regional["fr"]);
+                changerVueListe('grille');
+            });
+        </script>
+        <script>
+            $("#date").append(
+                new Date().toLocaleDateString('fr-FR', {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
+            );
+        </script>
+        <script>
+            $('#number').append(
+                Math.floor(Math.random() * (999)) + 1
+            );
+        </script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
+        <script type="text/javascript" src="//rawgit.com/LuigiQuarta/ng-barcode/master/dist/ng-barcode.min.js"></script>
+        <script>
+            angular.module('demo', ['ngBarcode']).controller('DemoCtrl', [DemoCtrl]);
+
+            function DemoCtrl() {
+                this.barcodeInput = $('#number').html();
+            }
+        </script>
+        <script>
+            $(function () {                
+                $('#q').autocomplete({
+                    source: function (request, response) {
+                        $.ajax({
+                            url: "index.php?page=resultsearch",
+                            type: 'post',
+                            dataType: "json",
+                            data: {
+                                search: request.term
+                            },
+                            success: function (data) {
+                                response(data);
+                                console.log(data);
+                            },
+                            error: function (result, statut, error) {
+                                console.log(error);
+                            }
+                        });
+                    },
+                    select: function (event, ui) {
+                        window.location = "?page=" + ui.item.lien.toString();
+                        return false;
+                    }
+                });
+            });
+        </script>
+        <script>
+            $('#msgNewsletterOk').hide();
+            $('#msgNewsletterNotOk').hide();
+            $(function () {
+                $('#newsletter').submit(function () {
+                    email = $(this).find("input[name=email]").val();
+                    $.ajax({
+                        url: "?page=newsletter",
+                        type: 'post',
+                        data: {
+                            email: email
+                        },
+                        success: function (data) {
+                            console.log(data);
+                            $('#newsletter').hide();
+                            $('#msgNewsletterOk').show();
+                            $('#msgNewsletterOk').append("Votre inscription à la newsletter a bien été prise en compte.");
+                        },
+                        error: function (result, statut, error) {
+                            console.log(error);
+                            $('#newsletter').hide();
+                            $('#msgNewsletterNotOk').show();
+                            $('#msgNewsletterNotOk').append("Une erreur s'est produite.");
+                        }
+                    });
+                    return false;
+                });
+            });
+            
+            function changerVueListe(type) {
+                $('#type_icone_grille').css('color', '#404040');
+                $('#type_icone_ligne').css('color', '#404040');
+                                
+                switch(type) {
+                    case 'grille': 
+                        $('#type_icone_grille').css('font-size', '2.5em');
+                        $('#type_icone_ligne').css('font-size', '2em');
+                        $('#type_icone_grille').css('color', '#ffffff');
+                        break;
+                    case 'ligne': 
+                        $('#type_icone_ligne').css('font-size', '2.5em');
+                        $('#type_icone_grille').css('font-size', '2em');
+                        $('#type_icone_ligne').css('color', '#ffffff');
+                        break;
+                }
+            }
+
+            function actualiserListe() {
+                var data = new FormData();
+                var date = $('#filtre_date').val().toString().split('/')[2] + '-' + $('#filtre_date').val().toString().split('/')[1] + '-' + $('#filtre_date').val().toString().split('/')[0];
+                
+                data.append('id_category', $('#id_category').val());
+                data.append('date', date);
+                
+                $.ajax({
+                    url: 'index.php?page=articlecategory', 
+                    method: 'get', 
+                    processData: false,
+                    contentType: false,
+                    data: data, 
+                    success: function(r) {
+                        $('html').html('').html(r);
+                    }, 
+                    error: function() {
+                        alert('Erreur');
+                    }
+                });
+            }
+        </script>
+        <script src="js/newsletter.js" type="text/javascript"></script>
+        {% block script %}{% endblock %}
+    </body>
+</html>

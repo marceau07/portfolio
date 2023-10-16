@@ -1,0 +1,21 @@
+{% extends "fr/base.html.twig" %}
+
+{% block title %}Symbols module{{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="col" id="buttons">
+        <div class="row justify-content-center">
+            <fieldset style="background-color: grey; margin-top: 350px; padding: 1em;" id="fieldsetSymbols">
+                <i class="fas fa-question-circle" style="color: #004d40; bottom: 5px; cursor: pointer;" title="Obtenir de l'aide" onclick="window.open('//ktane.fandom.com/wiki/Keypad', '_blank');"></i>
+                <i class="fas fa-circle symbols" style="left: 100px; bottom: 5px;"></i>
+                <span style="padding: inherit; border: solid black; cursor: pointer;" id="{{ picturesList1|trim('.png') }}" onclick="clickedSymbol({{ form.images.0 }}, '{{ picturesList1|trim('.png') }}');"><img alt="{{ picturesList1 }}" src="images/keypad/{{ picturesList1 }}"/></span>
+                <span style="padding: inherit; border: solid black; cursor: pointer;" id="{{ picturesList2|trim('.png') }}" onclick="clickedSymbol({{ form.images.1 }}, '{{ picturesList2|trim('.png') }}');"><img alt="{{ picturesList2 }}" src="images/keypad/{{ picturesList2 }}"/></span><br/>
+                <span style="padding: inherit; border: solid black; cursor: pointer;" id="{{ picturesList3|trim('.png') }}" onclick="clickedSymbol({{ form.images.2 }}, '{{ picturesList3|trim('.png') }}');"><img alt="{{ picturesList3 }}" src="images/keypad/{{ picturesList3 }}"/></span>
+                <span style="padding: inherit; border: solid black; cursor: pointer;" id="{{ picturesList4|trim('.png') }}" onclick="clickedSymbol({{ form.images.3 }}, '{{ picturesList4|trim('.png') }}');"><img alt="{{ picturesList4 }}" src="images/keypad/{{ picturesList4 }}"/></span>
+            </fieldset>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+{% endblock %}

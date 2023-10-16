@@ -1,0 +1,24 @@
+{# Génération du PDF #}
+{% block style %}
+    <link href="css/pdf.css" rel="stylesheet" type="text/css"/>
+
+    <table>
+        <thead >
+            <tr>
+                <th >Nom de l'équipe</th>
+                <th >Nom prénom du responsable</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in listeT %}
+                <tr>
+                    <td>{{ t.nameTeam }} </td>
+                    <td>{{t.lastNameEmployee}} {{t.firstNameEmployee}} </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+    <br/>
+    <hr/>
+{% endblock %}

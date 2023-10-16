@@ -1,0 +1,12 @@
+<table>
+    <tr>
+        <th>Label</th>
+        <th>Description</th>
+    </tr>
+    {% for m in listeM %} 
+        <tr>
+            <td>{{m.labelModule}}</td>
+            <td>{{m.descModule}}</td>
+        </tr> 
+    {% endfor %}    
+</table>

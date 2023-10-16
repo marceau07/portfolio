@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Le cabinet <i>Julie Bressand</i> est un cabinet de naturopathie mettant en commun les compétences et les savoirs.">
+        <meta keywords="naturopathe natutropathie julie bressand douai"/>
+        <meta charset="UTF-8"/>
+        <link rel="stylesheet" type="text/css" href="../web/fonts/Poppins.css">
+        <link rel="stylesheet" type="text/css" href="../web/fonts/icomoon/style.css">
+        <link rel="stylesheet" type="text/css" href="../web/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../web/css/magnific-popup.css">
+        <link rel="stylesheet" type="text/css" href="../web/css/jquery-ui.css">
+        <link rel="stylesheet" type="text/css" href="../web/css/owl.carousel.min.css">
+        <link rel="stylesheet" type="text/css" href="../web/css/owl.theme.default.min.css">
+        <link rel="stylesheet" type="text/css" href="../web/css/bootstrap-datepicker.css">
+        <link rel="stylesheet" type="text/css" href="../web/fonts/flaticon/font/flaticon.css">
+        <link rel="stylesheet" type="text/css" href="../web/css/mediaelementplayer.css">
+        <link rel="stylesheet" type="text/css" href="../web/css/aos.css">
+        <link rel="stylesheet" type="text/css" href="../web/css/style.css">
+        <link rel="stylesheet" type="text/css" href="../web/css/formulaire.css">
+        
+        <link rel="icon" href="../web/favicon.ico" />
+
+        <title>{% block title %}Professions liberales{% endblock %}</title>
+        {% block style %}
+            {# Contenu ajouté dans les vues #}
+        {% endblock %}
+        <link rel="stylesheet" type="text/css" href="../web/css/loader.css" />
+        <link rel="stylesheet" type="text/css" href="../web/css/cookies.css" />
+        <style>
+            img.lazy{
+                display: block;
+                background-image: url('../web/images/loading.gif');
+                background-repeat: no-repeat;
+            }
+            .btn-newsletter {
+                margin-right: 20px;
+                overflow-wrap: break-word;
+            }
+            ::-webkit-scrollbar{
+                width: 10px;
+            }
+            ::-webkit-scrollbar-thumb{
+                border-radius: 10px;
+                background-color: #8BC34A;
+                box-shadow: inset 0 0 6px rgba(0,0,0,.5);
+            }
+            ::-webkit-scrollbar-track{
+                border-radius: 10px;
+                background-color: #d5f7f7;
+                box-shadow: inset 0 0 6px rgba(0,0,0,.4);
+            }
+        </style>
+        <script src="../web/js/cookies.js"></script>
+        <script>
+            window.addEventListener("load", function () {
+                window.cookieconsent.initialise({
+                    "palette": {
+                        "popup": {
+                            "background": "#0a1807",
+                            "text": "#e6e6e6"
+                        },
+                        "button": {
+                            "background": "#f1d600"
+                        }
+                    },
+                    "theme": "classic",
+                    "content": {
+                        "message": "Ce site utilise des cookies pour vous offrir une meilleure expérience. En poursuivant votre navigation sur notre site, vous en accepter l'utilisation.",
+                        "dismiss": "OK!",
+                        "link": "En savoir plus",
+                        "href": "../web/index.php?page=cookies"
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body>
+
+        <div class="site">
+            <div class="site-mobile-menu site-navbar-target">
+                <div class="site-mobile-menu-header">
+                    <a href="../web" style="text-align: center;"><p>Julie&nbsp;Bressand</p></a>
+                    <div class="site-mobile-menu-close mt-3">
+                        <span class="icon-close2 js-menu-toggle"></span>
+                    </div>
+                </div>
+                <div class="site-mobile-menu-body text-left"></div>
+            </div>
+
+            <div id="sticky-wrapper" class="sticky-wrapper" style="height: 68.8px;">
+                <header class="site-navbar js-sticky-header site-navbar-target" role="banner">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-6 col-xl-2">
+                                <a href="../web"><h1 style="font-size: 45px;font-family: Vivaldi, Poppins, sans-serif; text-align: left;padding-top: 5px;">Julie&nbsp;Bressand</h1></a>
+                            </div>
+                            <div class="col-12 col-md-10 d-none d-xl-block">
+                                <nav class="site-navigation position-relative text-right" role="navigation">
+
+                                    <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
+                                        <li class="has-children active">
+                                            <a href="../web" class="text-black">Accueil</a>
+                                            <ul class="dropdown">
+                                                {#<li><a href="../#horaires" class="nav-link">Horaires</a></li>
+                                                <li><a href="../#service" class="nav-link">Les services</a></li>
+                                                <li><a href="../#quijesuis" class="nav-link">Qui suis-je ?</a></li>
+                                                <li><a href="../#newsletter" class="nav-link">Newsletter</a></li>#}
+                                                <li><a href="../web/#horaires" class="nav-link">Horaires</a></li>
+                                                <li><a href="../web/#service" class="nav-link">Les services</a></li>
+                                                <li><a href="../web/#quijesuis" class="nav-link">Qui suis-je ?</a></li>
+                                                <li><a href="../web/#newsletter" class="nav-link">Newsletter</a></li>
+                                            </ul>
+                                        </li>
+{#                                        <li><a href="../actualites" class="nav-link">Actualités</a></li>#}
+                                        <li><a href="../web/index.php?page=actualites" class="nav-link">Actualités</a></li>
+{#                                        <li><a href="../faq" class="nav-link">F.A.Q</a></li>#}
+                                        <li><a href="../web/index.php?page=faq" class="nav-link">F.A.Q</a></li>
+                                        {% if session.login is defined %}
+{#                                            <li><a href="../espacemembres" class="nav-link">Espace membre</a></li>#}
+                                            <li><a href="../web/index.php?page=espacemembres" class="nav-link">Espace membre</a></li>
+                                        {% else %}
+{#                                            <li><a href="../connexion" class="nav-link">Connexion</a></li>#}
+                                            <li><a href="../web/index.php?page=connexion" class="nav-link">Connexion</a></li>
+                                        {% endif %}
+{#                                            <li><a href="../priserdv" class="nav-link">Prise de rendez-vous </a></li>#}
+                                            <li><a href="../web/index.php?page=priserdv" class="nav-link">Prise de rendez-vous </a></li>
+                                        {% if session.login is defined %}
+{#                                            <li><a href="../deconnexion" class="nav-link">Déconnexion</a></li>#}
+                                            <li><a href="../web/index.php?page=deconnexion" class="nav-link">Déconnexion</a></li>
+                                            {% if session.role == 2 %}
+{#                                                <li><a href="../panel" class="nav-link">Administration</a></li>#}
+                                                <li><a href="../web/index.php?page=panel" class="nav-link">Administration</a></li>
+                                            {% endif %}
+                                        {% endif %}
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="col-6 d-inline-block d-xl-none ml-md-0 py-3" style="position: relative; top: 3px;">
+                                <a href="#" class="site-menu-toggle js-menu-toggle float-right"><span class="icon-menu h3"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+            </div>
+            <div class="background">
+                {% block contenue %}
+                    <div class="slide-one-item home-slider owl-carousel">
+                        <div class="site-blocks-cover lazy" style="background-image: url(../web/images/hero_bg_1.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
+                            <div class="container">
+                                <div class="row align-items-center justify-content-center text-center">
+
+                                    <div class="col-md-8" data-aos="fade-up" data-aos-delay="400">
+                                        <h5 class="text-white font-weight-light text-uppercase">Douai,</h5>
+                                        <h2 class="text-white font-weight-light mb-2 display-1">Cabinet naturopathe</h2>
+{#                                        <p><a href="/priserdv" class="btn btn-black py-3 px-5">Réserver maintenant</a></p>#}
+                                        <p><a href="../web/index.php?page=priserdv" class="btn btn-black py-3 px-5">Réserver maintenant</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                        
+                        <div class="site-blocks-cover lazy" style="background-image: url('../web/images/hero_bg_2.jpg');" data-aos="fade" data-stellar-background-ratio="0.5">
+                            <div class="container">
+                                <div class="row align-items-center justify-content-center text-center">
+
+                                    <div class="col-md-8" data-aos="fade-up" data-aos-delay="400">
+                                        <h2 class="text-white font-weight-light mb-2 display-1">Les locaux</h2>
+{#                                        <p><a href="/priserdv" class="btn btn-black py-3 px-5">Réserver maintenant</a></p>#}
+                                        <p><a href="../web/index.php?page=priserdv" class="btn btn-black py-3 px-5">Réserver maintenant</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="site-section">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-4 text-center">
+                                    <h3 id="horaires"class="line-height-1 mb-3"><span class="d-block display-4 line-height-1 text-black">Bienvenue</span> <span class="d-block display-4 line-height-1"><em class="text-primary font-weight-bold">au cabinet </em></span></h3>
+                                    <p>Je m'appelle Julie Bressand et je vous propose mes service de naturopathe.</p>
+                                    <p><a href="#"><small class="text-uppercase font-weight-bold">En savoir plus</small></a></p>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <figure class="h-100 hover-bg-enlarge">
+                                        <div class="bg-image h-100 bg-image-md-height lazy" style="background-image: url('../web/images/cabinet.jpg');"></div>
+                                    </figure>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="border p-4 d-flex align-items-center justify-content-center h-100">
+                                        <div class="text-center">
+                                            <h2 class="text-primary h2 mb-5">Mes horaires</h2>
+                                            <p class="mb-4">
+                                                <span class="d-block font-weight-bold">Lundi – Vendredi </span>
+                                                9:30h – 18:30h
+                                            </p>
+
+                                            <p class="mb-4">
+                                                <span class="d-block font-weight-bold">Samedi</span>
+                                                9:30h – 18:30h
+                                            </p>
+
+                                            <p class="mb-4">
+                                                <span class="d-block font-weight-bold">Dimanche</span>
+                                                Fermé
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="container justify-content-center">
+                        <div class="col-sm-12">
+                            <h2 id="service" class="site-section-heading font-weight-light text-black text-center">Mes services</h2>
+                        </div>
+                    </div>
+
+                    <div class="site-blocks-cover overlay inner-page-cover lazy" style="background-image: url('../web/images/hero_bg_2.jpg'); background-attachment: fixed;">
+                        <div class="container">
+                            <div class="row">
+                                <div class="row align-items-center justify-content-center text-center">
+
+                                    <div class="col-md-6 col-lg-4 text-center mb-5 mb-lg-5">
+                                        <div class="h-100 p-4 p-lg-5 bg-light site-block-feature-7">
+
+                                            <h3 class="text-black h4">Sur place</h3><br/>
+                                            <p>Rendez-vous dans mes locaux</p>
+                                            <div class="price text-center mb-4">
+                                                <span class='bold'><span>50€</span> / séance</span>
+                                            </div>
+                                            <br/><br/><br/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-4 text-center mb-5 mb-lg-5">
+                                        <div class="h-100 p-4 p-lg-5 bg-light site-block-feature-7">
+
+                                            <h3 class="text-black h4">Skype</h3><br/>
+                                            <p>Séance par vidéo conférence</p>
+                                            <div class="price text-truncate text-center mb-4">
+                                                <span class='bold'><span>50€</span> / séance</span>
+                                            </div>
+                                            <br/><br/>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6 col-lg-4 text-center mb-5 mb-lg-5">
+                                        <div class="h-100 p-lg-5 bg-light site-block-feature-7">
+                                            <h3 class="text-black h3">A domicile</h3><br/>
+                                            <p>Je me déplace chez vous sans frais supplémentaires !<span class='required'>*</span></p>
+                                            <div class="price text-center mb-4 pad-top">
+                                                <span class='bold'><span>50€</span> / séance</span>
+                                            </div>
+                                            <p class='petit'>Néanmoins une séance par vidéo-conférence ou sur place est nécéssaire au préalable.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br/><br/><br/><br/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="site-section bg-light">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-6 bg-white p-md-5 align-self-center">
+                                    <h2 class="display-1 text-black line-height-1 site-section-heading mb-4 pb-3">Qui suis-je ?</h2>
+                                    <p class="text-black lead"><em>&ldquo;Je m'appelle Julie Bressand et je suis naturopathe&ldquo;</em></p>
+                                    <p class="lead text-black">&mdash; <em>Julie Bressand</em></p>
+                                </div>
+                                <div class="col-lg-6 mb-5">
+                                    <img id="quijesuis" class="img-md-fluid lazy" data-src="../web/images/person_7.jpg" alt="Image">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endblock %}
+            </div>
+
+            <footer class="site-footer" style="padding-bottom: 0px !important;padding-top: 100px;">
+                <div class="container">
+                    <div class="row text-center">
+                        {% block newsletter %}
+                            {% if form.valide is defined %}
+                                {% if form.valide == false %}
+                                    <div class='form'>
+                                        <h1 class="h3 mb-3 font-weight-normal">Erreur : {{form.message}}</h1>
+                                        <a href='../web'>Réessayer</a>
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                <div class='form pull-right' style="background-color: #333333" id='newsletter'>
+                                    <form method='post' class='login-form'>
+                                        <label class='text-white text-center'>Newsletter</label><br/>
+                                        <input type="email" name="email" placeholder="Email" required/><br/>
+                                        <div class="row text-black text-center">
+                                            <div class="col-6">
+                                                <button type="submit" name="btNewsletter" class='bg-primary btn-newsletter'>S'inscrire</button>
+                                            </div>
+                                            <div class="col-6">
+                                                <button type="submit" name="btUnsub" class="bg-danger btn-newsletter">Désinscrire</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            {% endif %}
+                            <br/><br/><br/><br/>
+                        {% endblock %}
+                        <div class="col-md-12">
+                            <div class="mb-5">
+                                <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
+                                <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
+                                <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
+                                <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
+                            </div>
+{#                            <a href="/cookies" class="pl-3 pr-3">Politique de cookies</a>#}
+{#                            <a href="/cgu" class="pl-3 pr-3">Conditions Générales d'Utilisation</a>#}
+                            <a href="../web/index.php?page=cookies" class="pl-3 pr-3">Politique de cookies</a>
+                            <a href="../web/index.php?page=cgu" class="pl-3 pr-3">Conditions Générales d'Utilisation</a>
+                            <br/>
+                            <p class="footer-section">
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <script src="js/jquery-migrate-3.0.1.min.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/jquery.stellar.min.js"></script>
+        <script src="js/jquery.countdown.min.js"></script>
+        <script src="js/jquery.magnific-popup.min.js"></script>
+        <script src="js/aos.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/lazy.js"></script>
+        <script>
+            $(function () {
+                $('.lazy').lazy();
+            });
+        </script>
+        {% block js%}
+
+        {% endblock %}
+        <noscript>Votre navigateur ne supporte pas JavaScript!</noscript>
+    </body>
+</html>

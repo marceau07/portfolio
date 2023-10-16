@@ -1,0 +1,51 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Mise à jour de la couverture du livre - {{ parent() }}{% endblock %}
+
+{% block style %}{% endblock %}
+
+{% block contenu %}
+    <form id="form_update_cover" action method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            {% if book_new_picture|raw is empty %}
+                <label for="form_cover_file">Nouvelle image de couverture</label>
+                <input type="file" class="form-control" id="form_cover_file" name="form_cover_file" />
+            {% else %}
+                <p>Aperçu ancienne/nouvelle couverture du livre : {{ b.book_title }}</p>
+            {% endif %}
+            <img src="../web/img/books/{{ b.book_picture|raw }}" />
+            {% if book_new_picture|raw is not empty %}
+            <img src="../web/img/books/{{ book_new_picture|raw }}" />
+            {% endif %}
+        </div>
+        {% if book_new_picture|raw is empty %}
+        <button type="submit" class="btn btn-primary" onclick="event.preventDefault(); updateCover({{ b.book_id }});">Mettre à jour la couverture !</button>
+        {% endif %}
+    </form>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        function updateCover(id_book) {
+            var formData = new FormData();
+            formData.append('form_cover_update', '1');
+            formData.append('form_cover_file', $('#form_cover_file')[0].files[0]);
+            $.ajax({
+                url: '//serveur1.arras-sio.com/symfony4-4017/legendarium/web/?page=updateCoverBookWeb&idBook=' + id_book,
+                method: 'post',
+                processData: false, 
+                contentType: false, 
+                data: formData,
+                success: function(r) {
+                    $('html').html(r);
+                }, 
+                complete: function() {
+                    console.log('complete');
+                }, 
+                error: function() {
+                    console.log('error');
+                }
+            });
+        }
+    </script>
+{% endblock %}

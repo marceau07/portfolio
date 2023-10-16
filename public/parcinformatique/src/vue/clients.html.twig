@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+
+{# Page qui liste les Clients #}
+
+{% block title %} {% endblock %}
+
+{% block contenu %}
+    <table id="dtBasicExample" class="table table-striped table-bordered table-responsive" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th class="th-sm">Ordinateurs
+                </th>
+                <th class="th-sm">IP
+                </th>
+                <th class="th-sm">MAC
+                </th>
+                <th class="th-sm">Réseau
+                </th>
+                <th class="th-sm">Operating System
+                </th>
+                <th class="th-sm">Status
+                </th>
+                <th class="th-sm">Employé
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for o in listeO %}
+                <tr>
+                    <td>o.ordinateurs</td>
+                    <td>o.ip</td>
+                    <td>o.mac</td>
+                    <td>o.reseau</td>
+                    <td>o.os</td>
+                    <td>o.status</td>
+                    <td>o.employe</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

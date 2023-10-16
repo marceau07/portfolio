@@ -1,0 +1,22 @@
+<table>
+    <tr>
+        <th>Nom</th>
+        <th>Ville</th>
+        <th>CP</th>
+        <th>Adresse</th>
+        <th>Téléphone</th>
+        <th>Fax</th>
+        <th>Contact</th>
+    </tr>
+    {% for f in listeF %} 
+        <tr>
+            <td>{{f.nameFirm}}</td>
+            <td>{{f.cityFirm}}</td>
+            <td>{{f.zipCodeFirm}}</td>
+            <td>{{f.streetFirm}}</td>
+            <td>{{f.telFirm}}</td>
+            <td>{{f.faxFirm}}</td>
+            <td>{{f.lastNameContact}}&nbsp;{{f.firstNameContact}}</td>
+        </tr> 
+    {% endfor %}    
+</table>

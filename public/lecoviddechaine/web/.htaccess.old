@@ -1,0 +1,16 @@
+#--------------------------------------------------
+# Répertoire : /web/
+#--------------------------------------------------
+
+# Le serveur doit suivre les liens symboliques :
+Options +FollowSymlinks
+
+# Activation du module de réécriture d'URL :
+RewriteEngine on
+
+#--------------------------------------------------
+# Règles de réécriture d'URL :
+#--------------------------------------------------
+
+# Redirection des pages sans paramètres supplémentaires:
+RewriteRule ^([a-zA-Z-0-9]*)$   /web/index.php?page=$1 [L]

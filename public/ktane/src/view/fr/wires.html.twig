@@ -1,0 +1,18 @@
+{% extends "fr/base.html.twig" %}
+
+{% block title %}Wires module{{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="col">
+        <div class="row justify-content-center">
+            <fieldset style="background-color: grey; margin-top: 350px; padding: 1em;" id="fieldsetWires">
+                <i class="fas fa-question-circle" style="color: #004d40; bottom: 5px; cursor: pointer;" title="Obtenir de l'aide" onclick="window.open('//ktane.fandom.com/wiki/Wires#Optimized_(Timwi)', '_blank');"></i>
+                <i class="fas fa-circle wires" style="left: 290px; bottom: 5px;"></i>
+                <span><canvas id="wiresModule" width="400"></canvas></span>
+            </fieldset>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+{% endblock %}

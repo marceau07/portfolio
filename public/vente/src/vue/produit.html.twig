@@ -1,0 +1,119 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} Accueil {% endblock %}
+
+{% block contenu %} 
+
+    {% if form.valide is defined %}
+        {% if form.valide == true %}
+            <h1 class="h3 mb-3 font-weight-normal">{{ form.message }}</h1>
+        {% else %}
+            <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+        {% endif %}
+    {% endif %}       
+
+    <h1>Liste des produits</h1>
+
+    <div class="panel panel-default">
+        <form class="form-signin" action="index.php?page=produit" method="post" enctype="application/x-www-form-urlencoded">
+            <div class="panel-heading">Liste des produits</div>
+
+            <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                    <tr>
+                        <th>Designation</th>
+                        <th>Description</th>
+                        <th>Prix</th>
+                        <th>Type</th>
+                        <th>Photo</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+
+                    {% for p in liste %}
+                        <tr>
+                            <td>{{p.designation}}</td>
+                            <td>{{p.description}}</td>
+                            <td>{{p.prix}}</td>
+                            <td>{{p.idType}}</td>
+                            <td>
+                                {% if p.photo is not empty %}
+                                    <p class="imgcenter"><img src="images/{{p.photo}}" alt= "image du produit" width="100" height="100"></p>
+                                    {% else %}
+                                    <p class="imgcenter"><img src="images/default.jpg" alt="image par défaut" width="100" height="100/></p>
+                                    {% endif %} 
+                            </td>
+                            <td> 
+                                <div class="btn-group btn-group-lg"><a href="index.php?page=modifproduit&id={{p.id}}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-lg"><a href="index.php?page=produit&id={{p.id}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="cocher[]" id="cocher[]" value="{{p.id}}">
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table> 
+
+
+                <a href="index.php?page=listeproduitpdf" target="_blank">Télécharger le pdf de la liste complète <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a> 
+
+
+                {% set nb = form.nbpages %}
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li>
+                            <a href="index.php?page=produit&nopage={{ 0 }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        {% for i in 1..nb %}
+                            <li><a href="index.php?page=produit&nopage={{ i-1 }}">{{ i }}</a></li>
+                            {% endfor %}
+                        <li>
+                            <a href="index.php?page=produit&nopage={{ nb-1 }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" name="btSupprimer">Supprimer</button>
+        </form> 
+    </div>
+
+    <div class="h3 mb-3 font-weight-normal">
+        <div class="panel panel-primary">
+
+            <div class="panel-heading">Ajouter un produit</div>
+
+            <div class="panel-body">
+                <form class="form-signin" action="index.php?page=produit" method="post" enctype="multipart/form-data">
+                    <label for="inputDesignation" class="sr-only">Designation:</label>
+                    <input type="text" id="inputDesignation" name="inputDesignation" class="form-control" placeholder="Saisir une désignation" required autofocus>
+
+                    <label for="inputDescription" class="sr-only">Description:</label>
+                    <textarea id="inputDescription" name="inputDescription" class="form-control" rows="5" placeholder="Saisir une description" required></textarea>
+
+                    <label for="inputPrix" class="sr-only">Prix:</label>
+                    <input type="text" id="inputPrix" name="inputPrix" class="form-control" placeholder="Saisir un prix" required autofocus>
+
+                    <label for="inputidType" class="sr-only">Type:</label>
+                    <input type="text" id="inputType" name="inputidType" class="form-control" placeholder="Saisir un type" required autofocus>
+
+                    <label for="photo" class="sr-only">Photo:</label>
+                    <input type="file" name="photo" id="photo" class="form-control">
+
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btAjouter">Ajouter</button>
+                </form>
+            </div>    
+        </div>
+    </div>
+
+
+{% endblock %}
+

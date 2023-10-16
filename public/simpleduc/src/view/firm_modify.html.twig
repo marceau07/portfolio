@@ -1,0 +1,59 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Modification d'une entreprise {% endblock %}
+
+{% block contenu %} <h1> Modification d'une entreprise </h1> 
+
+    {% if form.firm is defined %} 
+        {% if form.firm != null %}    
+            <div class="panel-body">
+                <form  class="form-signin" action="index.php?page=firmmodify" method="post" enctype="application/x-www-form-urlencoded">
+                    <input type="hidden" id="idFirm" name="idFirm" value="{{form.firm.idFirm}}"/> 
+
+                    <label for="inputName" class="sr-only">Nom:</label>
+                    <input type="text" id="inputName" name="inputName" class="form-control" placeholder="Saisir le nom" value="{{form.firm.nameFirm}}" required autofocus>
+
+                    <label for="inputCity" class="sr-only">Ville:</label>
+                    <input type="text" id="inputCity" name="inputCity" class="form-control" placeholder="Saisir la ville" value="{{form.firm.cityFirm}}" required autofocus>
+
+                    <label for="inputZipCode" class="sr-only">Code Postal:</label>
+                    <input type="number" id="inputZipCode" name="inputZipCode" class="form-control" placeholder="Saisir le code postal" value="{{form.firm.zipCodeFirm}}" required >
+
+                    <label for="inputStreet" class="sr-only">Rue:</label>
+                    <input type="text" id="inputStreet" name="inputStreet" class="form-control" placeholder="Saisir la rue" value="{{form.firm.streetFirm}}" required >
+
+                    <label for="inputTel" class="sr-only">Téléphone:</label>
+                    <input type="number" id="inputTel" name="inputTel" class="form-control" placeholder="Saisir le téléphone" value="{{form.firm.telFirm}}" required >
+
+                    <label for="inputFax" class="sr-only">Fax:</label>
+                    <input type="number" id="inputFax" name="inputFax" class="form-control" placeholder="Saisir le fax" value="{{form.firm.faxFirm}}" required >
+
+                    <label for="inputTel" class="sr-only">Téléphone:</label>
+                    <input type="number" id="inputTel" name="inputTel" class="form-control" placeholder="Saisir le Téléphone" value="{{form.firm.telFirm}}" required >
+
+                    <label for="inputContact" class="sr-only">Contact:</label>
+                    <select name="inputContact" class="form-control">
+                        <option value="{{ form.firm.idContactFirm }}">{{form.firm.firstNameContact}} {{form.firm.lastNameContact}}</option> 
+                        {% for c in listeC %}
+                            <option value="{{ c.idContact }}">{{ c.firstNameContact}} {{ c.lastNameContact }}</option> 
+                        {% endfor%}    
+                    </select>    
+
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btModify">Modifier</button>
+                </form>
+            </div> 
+        {% else %}  
+            {% if form.valide == true %}
+                <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+                <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=firm" class="violet">Retourner sur la liste des entreprises</a></h1>
+            {% else %}    
+        <h1 class="alert alert-info" role="alert">{{ form.message }}</h1> 
+                <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=firm" class="violet">Retourner sur la liste des entreprises</a></h1>
+            {% endif %} 
+        {% endif %} 
+    {% else %} 
+        <h1 class="alert alert-info" role="alert">{{ form.message }}</h1> 
+        <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=firm" class="violet">Retourner sur la liste des entreprises</a></h1>
+
+    {% endif %}
+{% endblock %} 

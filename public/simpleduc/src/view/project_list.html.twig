@@ -1,0 +1,61 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Gestion des projets {% endblock %}
+
+{% block contenu %} <h1> Gestion des projets </h1> 
+
+    {% if form.valide is defined %} 
+        {% if form.valide == true %}
+            <h1 class="h3 mb-3 font-weight-normal">{{ form.message }}</h1>
+        {% else %}  
+            <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+        {% endif %}         
+    {% endif %}         
+
+    <div class="panel">
+        <!-- Default panel contents -->
+        <div class="panel-heading background-violet">Liste des projets {% if session.idRoleUser == 2 %}
+            - <a href="index.php?page=projectadd" class="blanc">Ajouter un projet</a></div>                                                    {%endif%}                   
+
+
+        <!-- Table -->
+        <div class="table-responsive">
+            <table id="dtBasicExample" class="table table-hover table-striped">
+                <thead> <tr>
+                        <th>Nom</th>
+                        <th>Description</th>
+                        <th>Contrat</th>
+                        <th>Module</th>
+                        <th></th>
+                        <th></th>    
+                        <th></th>     
+
+                    </tr> </thead>
+                    {% for p in listeP %}
+                    <tr>
+                        <td>{{p.nameProject}}</td>
+                        <td>{{p.descProject}}</td>
+                        <td>{{p.labelContract}}</td>
+                        <td>{{p.labelModule}}</td>
+                        {% if session.idRoleUser == 2 %}
+                            <td><div class="btn-group btn-group-lg"><a href="index.php?page=projectmodify&idProject={{p.idProject}}"><i class="fas fa-edit"></i></a></div></td>
+                            <td><div class="btn-group btn-group-lg"><a href="index.php?page=project&idProject={{p.idProject}}"><i class="fas fa-trash"></i></a></div></td>
+                                    {%endif%}                   
+                        <td></td>
+                    </tr> 
+                {% endfor %}    
+            </table>
+        </div><a href="index.php?page=projectPDFWS">Télécharger sous format PDF <i class="far fa-file-pdf"></i></a>
+    </div>
+
+
+
+{% endblock %}
+{% block js %} 
+    <script>
+        $(document).ready(function () {
+            $('#dtBasicExample').DataTable();
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+{% endblock %}

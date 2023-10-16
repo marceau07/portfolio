@@ -1,0 +1,63 @@
+Ajax Simpleduc
+
+Aller dans jquery.tabledit_Skill.js et le copier coller. Changer le nom pour la table choisie.
+ctrl f de Skill. Changer le nom.
+
+ "adresse = 'page=skillWS&'+ serialize + "&action=" + action;"
+
+Aller dans controller_form
+Copier coller actionSkillWS
+Ctrl F skill, modifier avec la table choisie.
+
+" function actionSkillWS($twig, $db) {
+    
+    $idSkill = $_GET['idSkill'];
+    $nameSkill = $_GET['nameSkill'];
+ $descSkill = $_GET['descSkill'];
+    $versionSkill = $_GET['versionSkill']; 
+    $skill = new Skill($db);
+
+    if ($_GET['action'] == 'edit') {
+        $exec = $skill->update($idSkill, $nameSkill, $descSkill, $versionSkill );
+    } else if ($_GET['action'] == 'delete') {
+        $exec = $skill->delete($idSkill, $nameSkill, $descSkill, $versionSkill);
+    }
+} "
+
+
+Aller dans routing.
+Ajouter une route comme skillWS
+
+    "$lesPages['skillWS'] = "actionSkillWS;0";"
+
+
+Aller dans skill_list.
+Copier coller le block JS en bas dans la page souhaitée.
+
+ {% block js %} 
+                <script src="js/jquery.tabledit_Skill.js" type="text/javascript"></script>
+                <script>
+                    $('#dtBasicExample').Tabledit({
+                        url: 'index.php?page=skill',
+                        columns: {
+                            identifier: [0, 'idSkill'],
+                            editable: [[1, 'nameSkill'], [2, 'descSkill'], [3, 'versionSkill']]
+                        }
+                    });
+                </script>
+                <script>
+                    $(document).ready(function () {
+                        $('#dtBasicExample').DataTable();
+                        $('.dataTables_length').addClass('bs-select');
+                    });
+                </script>
+            {% endblock %}
+Reproduire la même mise en page.
+
+Si bug reproduire :
+page=skillWS&idSkill=3&nameSkill=Competence&descSkill=lol&versionSkill=lol&action=edit
+
+Pour changer la langue :
+datatables.min.js, ctr+f de "entities" 
+Traduire les phrases.
+Vérifier si le bon database est appelé. Vérifier qu'il n'est pas écrasé. 

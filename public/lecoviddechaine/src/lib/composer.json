@@ -1,0 +1,9 @@
+{
+    "require": {
+        "twig/twig": "2.*",
+        "twig/extensions": "^1.5",
+        "webonyx/graphql-php": "^0.13.8",
+        "twig/string-extra": "^3.0",
+        "spipu/html2pdf": "^5.2"
+    }
+}

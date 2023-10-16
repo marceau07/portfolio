@@ -1,0 +1,146 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 24 juin 2019, 07:06:41
+    Author     : marce
+*/
+body {
+  background: #f7f6f3;
+  font-family: sans-serif;
+}
+.calendar {
+  position: absolute;
+  width: 500px;
+  left: 40%;
+  top: 50%;
+  margin: -300px 0px 0px -400px;
+  background: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.ui-datepicker-header {
+  height: 50px;
+  line-height: 50px;
+  color: #b0aead;
+  background: #e9e5e3;
+  margin-bottom: 10px;
+}
+.ui-datepicker-prev,
+.ui-datepicker-next {
+  width: 20px;
+  height: 20px;
+  text-indent: 9999px;
+  border: 2px solid #b0aead;
+  border-radius: 100%;
+  cursor: pointer;
+  overflow: hidden;
+  margin-top: 12px;
+}
+.ui-datepicker-prev {
+  float: left;
+  margin-left: 12px;
+}
+.ui-datepicker-prev:after {
+  transform: rotate(45deg);
+  margin: -43px 0px 0px 8px;
+}
+.ui-datepicker-next {
+  float: right;
+  margin-right: 12px;
+}
+.ui-datepicker-next:after {
+  transform: rotate(-135deg);
+  margin: -43px 0px 0px 6px;
+}
+.ui-datepicker-prev:after,
+.ui-datepicker-next:after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 4px;
+  height: 4px;
+  border-left: 2px solid #b0aead;
+  border-bottom: 2px solid #b0aead;
+}
+.ui-datepicker-prev:hover,
+.ui-datepicker-next:hover,
+.ui-datepicker-prev:hover:after,
+.ui-datepicker-next:hover:after {
+  border-color: #5ed1cc;
+}
+.ui-datepicker-title {
+  text-align: center;
+}
+.ui-datepicker-calendar {
+  width: 100%;
+  text-align: center;
+}
+.ui-datepicker-calendar thead tr th span {
+  display: block;
+  width: 40px;
+  color: #00a8b2;
+  margin-bottom: 5px;
+  font-size: 13px;
+  padding: 10px;
+}
+.ui-state-default {
+  display: block;
+  text-decoration: none;
+  color: #b5b5b5;
+  line-height: 80px;
+  font-size: 12px;
+}
+.ui-state-default:hover {
+  background: rgba(0,0,0,0.05);
+}
+.ui-state-highlight {
+  color: #8dd391;
+}
+.ui-state-active {
+  color: #5ed1cc;
+  border: 1px solid #5ed1cc;
+}
+.ui-datepicker-unselectable .ui-state-default {
+  color: #eee;
+  border: 2px solid transparent;
+}
+.side {
+/*visibility:hidden;*/
+  background-color: #ebebeb;
+  position: absolute;
+  width: 500px;
+  left: 40%;
+  top: 50%;
+  margin: -300px 0px 0px 105px;
+  border-radius: 4px;
+  overflow: hidden;
+  padding-bottom: 40px;
+}
+.side .side-title {
+  background: #5ed1cc none repeat scroll 0% 0%;
+  padding: 15px 20px;
+  color: #fff;
+}
+.side .time-pic {
+  padding: 0 40px;
+}
+.side .time-pic p {
+  text-align: center;
+  font-size: 26px;
+  padding: 6px;
+}
+.side .time-pic .radio-option {
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.side .time-pic .radio-option .radio {
+  padding: 20px 10px;
+}
+.side .time-pic button {
+  padding: 10px 20px;
+  float: right;
+}

@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+{% block title %} Récupérer ses identifiants - Etape 1 {% endblock %}
+
+{% block contenu %}
+    <div class='row'>
+    <a href='index.php?page=forgetmdp'>Etape 1</a><a href='index.php?page=forgetmdpsecond'>Etape 2</a>
+    <hr>
+    </div>
+    {% if form.valide is defined %} 
+        {% if form.valide == true %}
+            {% if form.resul == true %}
+                {% include 'mdpRequestSuccess.html.twig'%}                
+            {% endif %} 
+        {% else %}
+            {% include 'mdpRequestFail.html.twig'%}
+        {% endif %} 
+    {% else %}
+        <div class="col-md-12">
+            <div class="container">
+                <div class="row">
+                    <p>Pour recevoir un code de réinitialisation de mot de passe de votre compte, veuillez renseigner votre adresse mail dans l'encadré si dessous.</p>
+                    <form class="form-signin" action="index.php?page=forgetmdpsecond" method="post" enctype="application/x-www-form-urlencoded">
+                        <input type="text" name="inputEmail" placeholder="Email" required autofocus>
+                        <button class="btn btn-lg btn-primary btn-success" type="submit" name="btRecuperer">Récupérer mes identifiants</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

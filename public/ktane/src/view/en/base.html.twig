@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content
+       must come *after* these tags -->
+        <link rel="shortcut icon" href="../web/images/favicon.ico" type="image/x-icon">
+        <title>{% block title %} | KTANE{% endblock %}</title>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.11.2/css/all.css">
+        <!-- Google Fonts Roboto -->
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <!-- Material Design Bootstrap -->
+        <link rel="stylesheet" href="css/mdb.min.css">
+        <link href="../web/css/navbar.css" rel="stylesheet" type="text/css"/>
+        <link href="../web/css/style.css" rel="stylesheet" type="text/css"/>
+        {% block style %}{% endblock %}
+    </head>
+    <body>
+        {% block body %}
+            <div class="wrapper">
+                <nav class="main-menu">
+                    <ul>
+                        <li>
+                            <a href="../web">
+                                <i class="fa fa-home fa-2x"></i>
+                                <span class="nav-text">Home</span>
+                            </a>
+                        </li>
+                        {% if session is defined %}
+                            {% for m in modules %}
+                                <li class="has-subnav">
+                                    <a href="?page={{ m.redirect }}" title="{{ m.nameModule }} {% if m.validatedModule == 1 %}validated{% else %}not validated{% endif %}">
+                                        <i class="{{ m.logoModule|raw }}" style="color:{% if m.validatedModule == 1 %}green{% endif %};"></i>
+                                        <span class="nav-text">{{ m.nameModule }}</span>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                            <li class="has-subnav">
+                                <a href="?page=history">
+                                    <i class="fas fa-clipboard-list"></i>
+                                    <span class="nav-text">History</span>
+                                </a>
+                            </li>
+                            <li class="has-subnav">
+                                <a href="../web/images/manual.pdf" target="_blank">
+                                    <i class="fas fa-file-pdf"></i>
+                                    <span class="nav-text">Manual</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+
+                    <ul class="logout">
+                        <li>
+                            <a href="?page=settings">
+                                <i class="fas fa-cog"></i>
+                                <span class="nav-text">Options</span>
+                            </a>
+                        </li>  
+                        <li>
+                            <a href="../../">
+                                <i class="fas fa-chevron-circle-left"></i>
+                                <span class="nav-text">Back to the portfolio</span>
+                            </a>
+                        </li>  
+                    </ul>
+                </nav>
+                {#                <div id="timer" data-timer="300" class="text-white"></div>#}
+                <div class='container'>
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        {% endblock %}
+        <!-- jQuery -->
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="js/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="js/mdb.min.js"></script>
+        {#<script>
+            var timeleft = $('#timer').data('timer');
+            var downloadTimer = setInterval(function () {
+                if (timeleft <= 0) {
+                    clearInterval(downloadTimer);
+                    document.getElementById("timer").innerHTML = "Finished";
+                } else {
+                    document.getElementById("timer").innerHTML = timeleft + " seconds remaining";
+                }
+                timeleft -= 1;
+            }, 1000);
+        </script>#}
+        <script>
+            let timeleft;
+
+            if (document.cookie && document.cookie.match('timer')) {
+                timeleft = document.cookie.match(/(^|;)timer=([^;]+)/);
+                console.log(timeleft);
+            } else {
+                document.cookie = 'timer=' + 300 + '; path=/; domain=serveur1.arras-sio.com';
+            }
+        </script>
+        {% block js %}{% endblock %}
+    </body>
+</html>

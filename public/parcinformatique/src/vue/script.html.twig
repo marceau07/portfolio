@@ -1,0 +1,148 @@
+{% extends "base.html.twig" %}
+
+{# Page de la liste des scripts #}
+
+{% block title %} Liste des scripts {% endblock %}
+{% block contenu %}
+    <div id="content">
+
+        <table id="dtBasicExample" class="table table-striped table-bordered table-responsive-sm" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th class="th-sm">#
+                    </th>
+                    <th class="th-sm">Nom
+                    </th>
+                    <th class="th-sm">Version
+                    </th>
+                    <th class="th-sm">Description
+                    </th>
+                    <th class="th-sm">OS
+                    </th>
+                    <th class="th-sm">Signature
+                    </th>
+                    <th class="th-sm">Fichier (<i class="fas fa-edit"></i>)
+                    </th>
+                    <th class="th-sm">Fichier (<i class="fas fa-download" title="Cliquez sur l'un de vos scripts pour le télécharger"></i>)
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for s in listeS %}            
+                    {% autoescape %}
+                        <tr>
+                            <td>{{s.idScript}}</td>
+                            <td id="{{s.idScript}}">{{s.nomScript}}</td>
+                            <td>{{s.version}}</td>
+                            <td>{{s.descScript}}</td>
+                            <td>{{s.nomOs}}</td>
+                            <td>
+                               {% if s.signature is not empty %}
+                               <br/>
+                               <img src="./img/signatures/{{s.signature}}" alt="Signature d'import"/>
+                               {% else %}
+                               <canvas id="signature-pad-{{s.idScript}}" width="400" height="200"></canvas>
+                               <div>
+                                   <button class="btn btn-sm" id="save-{{s.idScript}}">Save</button>
+                                   <button class="btn btn-sm" id="clear-{{s.idScript}}">Clear</button>
+                               </div>
+                               {% endif %}
+                           </td>
+                            <td>{{form[s.fichierScript]}}</td>
+                            <td style="cursor: pointer;" onclick="alert(this)" data-href="../src/scripts/{{ s.fichierScript }}" title='Cliquez pour télécharger votre script'>&nbsp;{{s.fichierScript|trim('.')}}</td>
+                            <td style="display: none"></td>
+                        </tr>
+                    {% endautoescape %}
+                {% endfor %}
+        </table>
+
+    </div>
+
+
+{% endblock %}
+
+{% block js %}
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+    <script src="js/jquery.tabledit_Script.js"></script>
+    <script>
+        {% for s in listeS %}
+            {% if s.signature is empty %}
+            chargerSignatures({{s.idScript}}, 'signature-pad-{{s.idScript}}', 'save-{{s.idScript}}', 'clear-{{s.idScript}}');
+            {% endif %}
+        {% endfor %}
+        function chargerSignatures(idScript, signaturePadId, saveButtonId, clearButtonId) {
+            var signaturePad = new SignaturePad(document.getElementById(signaturePadId), {
+                backgroundColor: 'rgba(255, 255, 255, 0)',
+                penColor: 'rgb(0, 0, 0)',
+                velocityFilterWeight: .7,
+                minWidth: 0.5,
+                maxWidth: 2.5,
+                throttle: 16, // max x milli seconds on event update, OBS! this introduces lag for event update
+                minPointDistance: 3,
+            });
+            var saveButton = document.getElementById(saveButtonId),
+                clearButton = document.getElementById(clearButtonId);
+                
+            saveButton.addEventListener('click', function(event) {
+                $.ajax({
+                    url: 'index.php?page=script',
+                    data: {
+                        majSignature: 1, 
+                        idScript: idScript, 
+                        image: signaturePad.toDataURL('image/png')
+                    }, 
+                    method: 'post', 
+                    success: function(r) {
+                        location.reload();
+                    }
+                });
+                // window.open(data);
+            });
+            clearButton.addEventListener('click', function(event) {
+                signaturePad.clear();
+            });
+        }
+        
+        $('#dtBasicExample').Tabledit({
+            url: 'index.php?page=script',
+            columns: {
+                identifier: [0, 'idScript'], 
+                editable: [[1, 'nomScript'], [2, 'version'], [3, 'descScript'], [4, 'idOS', 'select', '{"1": "Windows", "2": "Linux", "3": "Mac OS"}'], [6, 'fichierScript', 'textarea', '{"rows": "5", "cols": "10", "maxlength": "200", "wrap": "hard"}'], [7, 'nomFichier']]
+            },
+            onDraw: function () {
+                console.log('onDraw()');
+            },
+            onSuccess: function (data, textStatus, jqXHR) {
+                console.log('onSuccess(data, textStatus, jqXHR)');
+                console.log(data);
+                console.log(textStatus);
+                console.log(jqXHR);
+            },
+            onFail: function (jqXHR, textStatus, errorThrown) {
+                console.log('onFail(jqXHR, textStatus, errorThrown)');
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            },
+            onAlways: function () {
+                console.log('onAlways()');
+            },
+            onAjax: function (action, serialize) {
+                console.log('onAjax(action, serialize)');
+                console.log(action);
+                console.log(serialize);
+            }
+        });
+    </script>
+    <!--<script>
+        $(document).ready(function () {
+            $(window).keydown(function (event) {
+                if (event.keyCode == 13) {
+                    event.preventDefault();
+                    return false;
+                }
+            });
+        });
+    </script>-->
+{% endblock %}

@@ -1,0 +1,25 @@
+{# Génération du PDF #}
+{% block style %}
+    <link href="css/pdf.css" rel="stylesheet" type="text/css"/>
+
+    <table>
+        <tr>
+            <th>Nom du contrat </th>
+            <th>Date de signature </th>
+            <th>Début du projet </th>
+            <th>Fin du projet </th>
+            <th>Coût du projet (€)</th>
+        </tr>
+        {% for ct in listeCT %} {# ct = contract #}
+            <tr>
+                <td>{{ct.labelContract}}</td>
+                <td>{{ct.dateSignatureContract|date("d/m/Y")}} </td> 
+                <td>{{ct.dateBegProject|date("d/m/Y")}} </td>
+                <td>{{ct.dateEndProject|date("d/m/Y")}} </td>
+                <td>{{ct.costProject}}€</td>
+            </tr> 
+        {% endfor %}    
+    </table>
+    <br/>
+    <hr/>
+{% endblock %}

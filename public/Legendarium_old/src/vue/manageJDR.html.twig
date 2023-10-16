@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+{% block title %} {{ parent() }} - Gerer les JDR{% endblock %}
+
+{% block contenu %}
+    <div class="table-responsive">
+        <table class="table">
+            <tr>
+                <th>Titre</th>
+                <th>Résumé du jeu</th>
+                <th>Etat</th>
+                <th>Nombre de joueur maximum</th>
+                <th>Date de début</th>
+                <th>Id rôle jeu</th>
+                <th></th>
+            </tr>
+            {% for j in liste %}
+                <tr>
+                    <td>{{ j.titreJeu }}</td>
+                    <td>{{ j.libelleJeu }}</td>
+                    <td>{{ j.choixAdmin }}</td>
+                    <td>{{ j.nbJoueurMax }}</td>
+                    <td>{{ j.dateEvenement }}</td>
+                    <td>{% if j.idRoleJeu == 1 %} Maître de jeu {% else %} Joueur lambda{% endif %}</td>
+                    <td><a href="index.php?page=managejdrmodif&id={{ j.idJeu }}"><i class="fas fa-pen"></i>&nbsp;&nbsp;&nbsp;Modifier</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %} 
+

@@ -1,0 +1,63 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Gestion des équipes {% endblock %}
+
+{% block contenu %} <h1> Gestion des employés </h1> 
+
+    {% if form.valide is defined %} 
+        {% if form.valide == true %}
+            <h1 class="h3 mb-3 font-weight-normal">{{ form.message }}</h1>
+        {% else %}  
+            <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+        {% endif %}         
+    {% endif %}         
+
+    <div class="panel">
+        <!-- Default panel contents -->
+        <div class="panel-heading background-violet">Liste des employés                     {% if session.idRoleUser == 2 %}
+            - <a href="index.php?page=employeeadd" class="blanc">Ajouter un employé</a></div>                    {% endif %}
+
+
+        <!-- Table -->
+        <div class="table-responsive">
+            <table id="dtBasicExample" class="table table-hover table-striped">
+              <thead>    <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Ville</th>
+                    <th>Niveau</th>
+                    <th>Equipe</th>
+                        {% if session.idRoleUser == 2 %}
+                        <th></th>
+                        <th></th>
+                        {% endif %}
+                    <th></th>
+                </tr>  </thead>
+                {% for e in liste %} 
+                    <tr>
+                        <td>{{e.lastNameEmployee}}</td>
+                        <td>{{e.firstNameEmployee}} </td>
+                        <td> {{e.cityEmployee}} </td>
+                        <td> {{e.levelEmployee}} </td>
+                        <td> {{e.nameTeam}} </td>
+                        {% if session.idRoleUser == 2 %}
+                            <td><div class="btn-group btn-group-lg"><a href="index.php?page=employeemodify&idEmployee={{e.idEmployee}}"><i class="fas fa-edit"></i></a></div></td>
+                            <td><div class="btn-group btn-group-lg"><a href="index.php?page=employee&idEmployee={{e.idEmployee}}"><i class="fas fa-trash"></i></a></div></td>
+                                    {% endif %}
+                        <td></td>
+                    </tr> 
+                {% endfor %}    
+            </table>
+        </div><a href="index.php?page=employeePDFWS"> Télécharger sous format PDF <i class="far fa-file-pdf"></i></a>
+    </div>
+
+{% endblock %} 
+
+{% block js %} 
+    <script>
+        $(document).ready(function () {
+            $('#dtBasicExample').DataTable();
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+{% endblock %}

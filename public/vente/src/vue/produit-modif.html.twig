@@ -1,0 +1,51 @@
+{% extends "base.html.twig" %}
+
+{% block style %}<link href="css/style-signin.css" rel="stylesheet"> {% endblock %}
+
+{% block title %} {{ parent() }} Modifier un produit{% endblock %}
+
+{% block contenu %} 
+
+    {% if form.produit is defined %} 
+
+        {% if form.produit != null %}
+
+            <h1>Modifier un produit</h1>   
+
+            <form  class="form-signin" action="index.php?page=modifproduit" method="post" enctype="multipart/form-data">
+                {% if form.produit.photo is not empty %}
+                    <p class="imgcenter"><img src="images/{{form.produit.photo}}" alt= "image du produit"></p>
+                    {% else %}
+                    <p class="imgcenter"><img src="images/default.jpg" alt="image par défaut"/></p>
+                    {% endif %}    
+
+                <label for="id" class="sr-only">ID</label>
+                <input type="hidden" name="id" value="{{ form.produit.id }}"/>
+
+                <label for="designation" class="sr-only">Designation</label>
+                <input type="text" id="designation" name="designation" class="form-control" placeholder="Saisir une designation" required autofocus>
+
+                <label for="description" class="sr-only">Description</label>
+                <textarea style="resize:vertical" type="text" id="description" name="description" class="form-control" placeholder="Saisir une description" required autofocus></textarea>
+
+                <label for="prix" class="sr-only">Prix</label>
+                <input type="text" id="prix" name="prix" class="form-control" placeholder="Saisir un prix" required autofocus>
+
+                <select class="form-control" name="idType">
+                    {% for t in form.type %}
+                        <option value="{{ t.id }}">{{ t.libelle}}</option>
+                    {% endfor %}   
+                </select>
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit" name="btModifier">Modifier</button>
+            </form>
+
+        {% endif %}
+
+    {% else %}  
+
+        <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=produit">Retourner sur la liste des produits</a></h1>
+
+    {% endif %} 
+
+{% endblock %} 

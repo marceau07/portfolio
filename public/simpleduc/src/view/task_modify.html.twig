@@ -1,0 +1,47 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Modification d'une tâche {% endblock %}
+
+{% block contenu %} <h1> Modification d'une tâche </h1> 
+
+    {% if form.task is defined %} 
+        {% if form.task != null %}    
+            <div class="panel-body">
+                <form  class="form-signin" action="index.php?page=taskmodify" method="post" enctype="application/x-www-form-urlencoded">
+                    <input type="hidden" id="idTask" name="idTask" value="{{form.task.idTask}}"/> 
+
+                    <label for="labelTask" class="sr-only">Nom de la tâche:</label>
+                    <input type="text" id="labelTask" name="labelTask" class="form-control" placeholder="Saisir le prenom" value="{{form.task.labelTask}}" required autofocus>
+
+                    <label for="descTask" class="sr-only">Description:</label>
+                    <input type="text" id="descTask" name="descTask" class="form-control" placeholder="Saisir la description" value="{{form.task.descTask}}" required >
+
+                    <select name="idTeamTask" class="form-control">
+                        <option value="{{ form.task.idTeamTask }}">{{form.task.nameTeam}}</option> 
+                        {% for tk in listeTK %}
+                            <option value="{{ tk.idTeam }}">{{tk.nameTeam}}</option> 
+                        {% endfor%}  
+                    </select>
+
+
+                    <label for="costTask" class="sr-only">Prix:</label>
+                    <input type="number" id="costTask" name="costTask" class="form-control" placeholder="Saisir le prix" value="{{form.task.costTask}}" required >
+
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btModify">Modifier</button>
+                </form>
+            </div> 
+        {% else %}  
+            {% if form.valide == true %}
+                <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+                <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=task" class="violet">Retourner sur la liste des tâches</a></h1>
+            {% else %}    
+                <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+                <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=task" class="violet">Retourner sur la liste des tâches</a></h1>
+            {% endif %} 
+        {% endif %} 
+    {% else %} 
+        <h1 class="alert alert-info" role="alert">{{ form.message }}</h1> 
+        <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=task" class="violet">Retourner sur la liste des tâches</a></h1>
+
+    {% endif %}
+{% endblock %} 

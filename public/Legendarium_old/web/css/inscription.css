@@ -1,0 +1,76 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 20 mai 2019, 15:29:57
+    Author     : marce
+*/
+
+html{
+    background-color: #3c3838;
+}
+
+body{
+  background-color: transparent;
+}
+
+#log-in-form{
+    margin: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: white;
+    height: auto;
+    max-width: 800px;
+    background-image: url("https://dl.dropboxusercontent.com/s/x4tn6701lpu2oeh/notebook-chill.jpg?dl=0");
+    background-size: cover;
+    width: 100%;
+}
+
+.row{
+    margin: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+    float: none;
+    
+}
+
+
+@media screen and (max-width: 800px){
+    #log-in-form{
+        margin: 20px;
+    }
+
+    #log-in-form .form-group{
+        width: 60%;
+        float: none;
+        margin: 10px auto;
+    }
+
+    #log-in-form .form-group-btn{
+        margin-top: 30px;
+    }
+
+    #log-in-form .btn{
+        width: 100%;
+    }
+
+    #log-in-form .checkbox{
+        width: 60%;
+        float: none;
+        margin: 15px auto 50px auto;
+    }
+}
+
+@media screen and (max-width: 600px){
+    #log-in-form .form-group,
+    #log-in-form .checkbox{
+        width: 90%;
+    }
+}

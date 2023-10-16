@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Modification d'un employé {% endblock %}
+
+{% block contenu %} <h1> Modification d'un employé </h1> 
+
+    {% if form.employee is defined %} 
+        {% if form.employee != null %}    
+            <div class="panel-body">
+                <form  class="form-signin" action="index.php?page=employeemodify" method="post" enctype="application/x-www-form-urlencoded">
+                    <h1 class="h3 mb-3 font-weight-normal">Modifier un employé</h1>
+
+                   <label for="lastNameEmployee" class="sr-only">Nom du contrat:</label>
+                <input type="text" id="lastNameEmployee" name="lastNameEmployee" class="form-control" value="{{ form.employee.lastNameEmployee }}" placeholder="Libellé" required autofocus>
+                  <label for="firstNameEmployee" class="sr-only">Date de signature:</label>
+                <input type="text" id="firstNameEmployee" name="firstNameEmployee" class="form-control" value="{{ form.employee.firstNameEmployee }}" placeholder="Description" required >
+                  <label for="cityEmployee" class="sr-only">Début du projet:</label>
+                <input type="text" id="cityEmployee" name="cityEmployee" class="form-control" value="{{ form.employee.cityEmployee }}" placeholder="Version" required >
+                <label for="levelEmployee" class="sr-only">Fin du projet:</label>
+                <input type="text" id="levelEmployee" name="levelEmployee" class="form-control" value="{{ form.employee.levelEmployee }}" placeholder="Version" required >
+               
+                <select name="idTeamEmployee" class="form-control">
+                    <option value="{{ form.employee.idTeamEmployee }}">{{form.employee.nameTeam}}</option> 
+                    {% for t in listeT %}
+                        <option value="{{ t.idTeam }}">{{t.nameTeam}}</option> 
+                    {% endfor%}    
+                </select>    
+                    <input type="hidden" name="idEmployee" value="{{ form.employee.idEmployee }}"/>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btModify">Modifier</button>
+                    
+                    
+                </form>
+            </div> 
+        {% else %}  
+            {% if form.valide == true %}
+                <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+                <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=employee" class="violet">Retourner sur la liste des employés</a></h1>
+            {% else %}    
+        <h1 class="alert alert-info" role="alert">{{ form.message }}</h1> 
+                <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=employee" class="violet">Retourner sur la liste des employés</a></h1>
+            {% endif %} 
+        {% endif %} 
+    {% else %} 
+        <h1 class="alert alert-info" role="alert">{{ form.message }}</h1> 
+        <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=employee" class="violet">Retourner sur la liste des employés</a></h1>
+
+    {% endif %}
+{% endblock %} 

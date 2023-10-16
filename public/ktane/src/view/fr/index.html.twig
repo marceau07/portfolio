@@ -1,0 +1,35 @@
+{% extends "fr/base.html.twig" %}
+
+{% block title %}Accueil {{ parent() }}{% endblock %}
+
+{% block style %}
+    <link href="../web/css/bootstrap-grid.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../web/css/countdown.css" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block content %}
+    <div class="col" id="buttons">
+        <div class="row justify-content-center">
+            <img src="../web/images/logo.png" alt="Logo" class='img-fluid'/>
+        </div>
+        <div class="row justify-content-center" style="padding-top: 250px;">
+            <a class="btn btn-success" id="play" href="#" onclick="initGame();"><i class="fas fa-play"></i>&nbsp;Play !</a>
+            <a class="btn btn-info" id="options" href="?page=options"><i class="fas fa-cog"></i>&nbsp;Options</a>
+        </div>
+    </div>
+    <div class="text-white">
+        <p id="msg">Choisissez un des modules non complété sur le panneau de gauche. Faites vite, des vies sont en jeu.</p>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $('#msg').hide();
+        function initGame() {
+            $('#buttons').remove();
+            $('#msg').show();
+         
+            startingTimer();
+        }
+    </script>
+{% endblock %}

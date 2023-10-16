@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/style-signin.css" rel="stylesheet"> {% endblock %}
+{% block title %} Gestion des livres admin {% endblock %}
+{% block contenu %}
+    {% for l in liste %}
+        <div>
+            <table class="table table-bordered">
+            <tr>
+                <th>id           </th>
+                <th>titre        </th>
+                <th>isbn         </th>
+                <th>synopsis     </th>
+                <th>prix         </th>
+                <th>quantite     </th>
+                <th>photo        </th>
+                <th>disponibilite</th>
+                <th>auteur       </th>
+                <th>editeur      </th>
+            </tr>
+            <tr>
+                <td>{{ l.id }}</td>
+                <td>{{ l.titre }}</td>
+                <td>{{ l.isbn }}</td>
+                <td>{{ l.synopsis }}</td>
+                <td>{{ l.prix }}</td>
+                <td>{{ l.quantite }}</td>
+                <td>{{ l.photo }}</td>
+                <td>{{ l.disponibilite }}</td>
+                <td>{{ l.auteur }}</td>
+                <td>{{ l.editeur }}</td>
+            </tr>
+            </table>
+        </div>
+    {% endfor %} 
+{% endblock %}

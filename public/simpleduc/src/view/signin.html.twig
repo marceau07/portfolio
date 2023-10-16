@@ -1,0 +1,87 @@
+{% extends "base.html.twig" %}
+{% block style %}
+    <link href="css/style-signin.css" rel="stylesheet"> 
+    <link href="css/attention.css" rel="stylesheet">
+
+{% endblock %}
+{% block title %} {{ parent() }} Accueil - S'inscrire {% endblock %}
+
+{% block contenu %} 
+
+    {% if form.valide is defined %} 
+        {% if form.valide == true %}
+            <h1 class="h3 mb-3 font-weight-normal">Inscription réussie</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Voici votre identifiant : {{form.emailUser}}</h1>
+            {% if idRoleUser == 2 %}
+                <h1 class="h3 mb-3 font-weight-normal">Vous êtes Administrateur du site</h1>
+            {% else %}
+                <h1 class="h3 mb-3 font-weight-normal">Vous êtes un utilisateur du site </h1>
+            {% endif %}    
+            <h1 class="h3 mb-3 font-weight-normal"><a href="index.php">Connectez-vous</a></h1>
+        {% else %} 
+            <h1 class="h3 mb-3 font-weight-normal">Echec de l'inscription</h1> 
+            <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+            <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=signin">Retourner sur la page d'inscription</a></h1>
+        {% endif %}     
+
+    {% else %}
+        <div class="container">
+            <form name="signin" class="form-signin" action="index.php?page=signin" method="post" enctype="application/x-www-form-urlencoded">
+                <h1 class="h3 mb-3 font-weight-normal">Inscrivez-vous au tableau de bord</h1>
+
+                <label for="emailUser" class="sr-only">Email:</label>
+                <input type="email" id="emailUser" name="emailUser" class="form-control" placeholder="Email" required autofocus>
+
+                <label for="passwordUser1" class="sr-only">Mot de passe:</label>
+                <input type="password" id="passwordUser1" name="passwordUser1" class="form-control" placeholder="Mot de passe" required>
+
+                <label for="passwordUser2" class="sr-only">Mot de passe:</label>
+                <input type="password" id="passwordUser2" name="passwordUser2" class="form-control" placeholder="Confirmation mot de passe" required>
+
+                <label for="lastNameUser" class="sr-only">Nom:</label>
+                <input type="text" id="lastNameUser" name="lastNameUser" class="form-control" placeholder="Nom" required>
+
+                <label for="firstNameUser" class="sr-only">Prénom:</label>
+                <input type="text" id="firstNameUser" name="firstNameUser" class="form-control" placeholder="Prénom" required>
+
+                <label for="role" class="sr-only">Rôle:</label>
+                <select name="idRoleUser" id="idRoleUser" class="form-control" >
+                    <option value="1" readonly>Votre rôle</option> 
+                    {% for r in listeR %}
+                        <option  value="{{ r.idRole }}" >{{ r.labelRole }}</option>
+                    {% endfor %}
+                </select>
+                <input type="password" id="passwordAdmin" name="passwordAdmin" value="" class="form-control" placeholder="Mot de passe administrateur requis">
+
+                <button id="btSignin" class="btn btn-lg  btn-block" type="submit" name="btSignin">S'inscrire</button>
+
+            </form>
+
+            <a href="index.php?page=login">Se connecter</a>  
+        </div>
+    {% endif %}  
+{% endblock %} 
+
+{% block js %}
+
+    <script>
+        $("#passwordAdmin").hide()
+        $('#idRoleUser').on('change', function () {
+            console.log($(this).val());
+            if ($(this).val() == 2) {
+                new Attention.Prompt({
+                    title: 'Mot de passe administrateur requis',
+                    content: 'Mot de passe administrateur :',
+                    placeholderText: false,
+                    submitText: false, 
+                    onSubmit(component, value) {
+                        document.getElementById('passwordAdmin').value = value;
+                        
+                        document.getElementById('btSignin').click();
+                    }
+                });
+            }
+        });
+
+    </script>
+{% endblock %} 

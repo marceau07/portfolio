@@ -1,0 +1,27 @@
+<h1 class="h1-responsive">Liste des rendez-vous de la journée avec les matériels nécessaires pour le: <strong>{{ listeP.dateDeb|date('d-m-Y') }}</strong></h1>
+<table id="dtBasicExample" class="table table-striped table-bordered table-responsive-sm" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th class="th-sm">#
+            </th>
+            <th class="th-sm">Type de Prestation
+            </th>
+            <th class="th-sm">Montant
+            </th>
+            <th class="th-sm">Nom matériel
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for p in liste %}
+            <tr>
+                <td>{{ p.idPrest }}</td>
+                <td>{{p.typePrest}}</td>
+                <td>{{p.montant}} €</td>
+                <td>{{p.nomMateriel}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+

@@ -1,0 +1,351 @@
+
+/* About-us Banners Start */
+.banner.about-us {
+    .hero-area {
+        padding: 200px 0 120px;
+
+        .banner-content {
+            h2.title {
+                color: #fff;
+            }
+
+            p.text {
+                font-size: 18px;
+                font-weight: 500;
+                line-height: 28px;
+                padding-top: 10px;
+            }
+        }
+
+        .phone-coin {
+            .phone-lock {
+                position: absolute;
+                right: 1%;
+                bottom: 0%;
+                width: 45%;
+                animation: dan-bam 3s linear infinite;
+            }
+        }
+    }
+}
+
+/* mission Start */
+.mission {
+    position: relative;
+    padding: 114px 0 112px;
+
+    .content {
+        h3.subtitle {
+            color: $body-color-3;
+        }
+
+        h2.title {
+            color: $body-color-2;
+            padding: 19px 0 26px;
+        }
+
+        p.text {
+            color: $body-color;
+        }
+    }
+
+    .mission-img {
+        .mission-pic {
+            position: absolute;
+            top: 50%;
+            left: 1%;
+            transform: translateY(-50%);
+            width: 36%;
+        }
+    }
+}
+
+/* testomonial Start */
+.testomonial {
+    padding: 114px 0 100px;
+    position: relative;
+
+    .phone{
+        .right-phone{
+            position: absolute;
+            right: 0;
+            bottom: 6%;
+            width: 36%;
+        }
+    }
+    .sape{
+        .test-sape{
+            position: absolute;
+            top: 15%;
+            left: 1%;
+            width: 54%;
+        }
+    }
+    .test-girl{
+        .girl-pic{
+            position: absolute;
+            top: 35%;
+            left: -1%;
+            width: 15%;
+        }
+    }
+
+    .testo-box {
+        text-align: center;
+        padding: 20px 55px;
+        margin-top: 200px;
+        z-index: 0;
+
+        &::before{
+            position: absolute;
+            top: 10px;
+            left: 30px;        
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900; 
+            content: "\f10d";
+            color: #dbd3e5;
+            font-size: 60px;
+        }
+        &::after{
+            position: absolute;
+            bottom: 30px;
+            right: 10px;
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900; 
+            content: "\f10e";
+            color: #dbd3e5;
+            font-size: 60px;
+        }
+
+        .tumb{
+            img{
+                margin: 0 auto;
+                max-width: 140px;
+            }
+        }
+
+        .star {
+            color: #ffcc00;
+            padding: 26px 0 17px;
+        }
+
+        p.text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            line-height: 34px;
+            font-weight: 500;
+            color: $body-color-2;
+        }
+        
+        a.button {
+            background-color: rgba(0, 0, 0, 0.102);
+            width: 200px;
+            height: 50px;
+            border: none;
+            color: $body-color-2;
+            font-size: 24px;
+            line-height: 1.417;
+            font-weight: 400;
+            margin: 28px auto 0 auto;
+            transition: 0.1s;
+            &:hover{
+                background-color: rgba(0, 0, 0, 0.150);
+            }
+
+        } 
+          
+    }
+
+    .content {
+        h3.subtitle {
+            color: $body-color-3;
+        }
+
+        h2.title {
+            color: $body-color-2;
+            padding: 19px 0 26px;
+        }
+
+        p.text {
+            color: $body-color;
+        }
+
+    }
+}
+ 
+/* About-us Banners Start */
+.banner.about-us {
+    .hero-area {
+        padding: 200px 0 120px;
+
+        .banner-content {
+            h2.title {
+                color: #fff;
+            }
+
+            p.text {
+                font-size: 18px;
+                font-weight: 500;
+                line-height: 28px;
+                padding-top: 10px;
+            }
+        }
+
+        .phone-coin {
+            .phone-lock {
+                position: absolute;
+                right: 1%;
+                bottom: 0%;
+                width: 45%;
+                -webkit-animation: dan-bam 3s linear infinite;
+                        animation: dan-bam 3s linear infinite;
+            }
+        }
+    }
+}
+
+/* mission Start */
+.mission {
+    position: relative;
+    padding: 114px 0 112px;
+
+    .content {
+        h3.subtitle {
+            color: $body-color-3;
+        }
+
+        h2.title {
+            color: $body-color-2;
+            padding: 19px 0 26px;
+        }
+
+        p.text {
+            color: $body-color;
+        }
+    }
+
+    .mission-img {
+        .mission-pic {
+            position: absolute;
+            top: 50%;
+            left: 1%;
+            -webkit-transform: translateY(-50%);
+                    transform: translateY(-50%);
+            width: 36%;
+        }
+    }
+}
+
+/* testomonial Start */
+.testomonial {
+    padding: 114px 0 100px;
+    position: relative;
+
+    .phone{
+        .right-phone{
+            position: absolute;
+            right: 0;
+            bottom: 6%;
+            width: 36%;
+        }
+    }
+    .sape{
+        .test-sape{
+            position: absolute;
+            top: 15%;
+            left: 1%;
+            width: 54%;
+        }
+    }
+    .test-girl{
+        .girl-pic{
+            position: absolute;
+            top: 35%;
+            left: -1%;
+            width: 15%;
+        }
+    }
+
+    .testo-box {
+        text-align: center;
+        padding: 20px 55px;
+        margin-top: 200px;
+        z-index: 0;
+
+        &:before{
+            position: absolute;
+            top: 10px;
+            left: 30px;        
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900; 
+            content: "\f10d";
+            color: #dbd3e5;
+            font-size: 60px;
+        }
+        &:after{
+            position: absolute;
+            bottom: 30px;
+            right: 10px;
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900; 
+            content: "\f10e";
+            color: #dbd3e5;
+            font-size: 60px;
+        }
+
+        .tumb{
+            img{
+                margin: 0 auto;
+                max-width: 140px;
+            }
+        }
+
+        .star {
+            color: #ffcc00;
+            padding: 26px 0 17px;
+        }
+
+        p.text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            line-height: 34px;
+            font-weight: 500;
+            color: $body-color-2;
+        }
+        
+        a.button {
+            background-color: rgba(0, 0, 0, 0.102);
+            width: 200px;
+            height: 50px;
+            border: none;
+            color: $body-color-2;
+            font-size: 24px;
+            line-height: 1.417;
+            font-weight: 400;
+            margin: 28px auto 0 auto;
+            -webkit-transition: 0.1s;
+            transition: 0.1s;
+            &:hover{
+                background-color: rgba(0, 0, 0, 0.150);
+            }
+
+        } 
+          
+    }
+
+    .content {
+        h3.subtitle {
+            color: $body-color-3;
+        }
+
+        h2.title {
+            color: $body-color-2;
+            padding: 19px 0 26px;
+        }
+
+        p.text {
+            color: $body-color;
+        }
+
+    }
+}

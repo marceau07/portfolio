@@ -1,0 +1,29 @@
+Options +FollowSymlinks
+RewriteEngine on
+
+Rewritecond %{HTTP_HOST} ^juliebressand.livehost.fr
+Rewritecond %{REQUEST_URI} !(.*)juliebressand.livehost.fr/web/
+Rewriterule ^(.*)$ web/$1 [L]
+
+
+#--------------------------------------------------
+# Règles de réécriture si erreur :
+#--------------------------------------------------
+ErrorDocument 400 /web/index.php?page=error400
+ErrorDocument 401 /web/index.php?page=error401
+ErrorDocument 402 /web/index.php?page=error402
+ErrorDocument 403 /web/index.php?page=error403
+ErrorDocument 404 /web/index.php?page=error404
+ErrorDocument 405 /web/index.php?page=error405
+ErrorDocument 406 /web/index.php?page=error406
+ErrorDocument 407 /web/index.php?page=error407
+ErrorDocument 408 /web/index.php?page=error408
+ErrorDocument 409 /web/index.php?page=error409
+ErrorDocument 410 /web/index.php?page=error410
+ErrorDocument 411 /web/index.php?page=error411
+ErrorDocument 412 /web/index.php?page=error412
+ErrorDocument 413 /web/index.php?page=error413
+ErrorDocument 414 /web/index.php?page=error414
+ErrorDocument 415 /web/index.php?page=error415
+ErrorDocument 416 /web/index.php?page=error416
+ErrorDocument 417 /web/index.php?page=error417

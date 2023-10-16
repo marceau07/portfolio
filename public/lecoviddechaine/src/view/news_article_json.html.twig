@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                {% set nb_articles = form.articles.nb_fin - form.articles.nb_depart %}
+                <p>{% if form.articles.nb_fin - form.articles.nb_depart == 0 %}
+                    Aucun
+                    {% else %}
+                    &nbsp;{{ nb_articles }}&nbsp;
+                    {% endif %}
+                    article{% if nb_articles > 1 %}s{% endif %} importé{% if nb_articles > 1 %}s{% endif %}
+                </p>
+                {% set monday = now|date_modify('monday this week')|date('d-m-Y') %}
+                <a class="fas fa-eye" href="index.php?page=articlecategory&labelCategory=G%C3%A9n%C3%A9ral&date={{ monday }}">&nbsp;&nbsp;Consulter les articles de la semaine</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}

@@ -1,0 +1,116 @@
+[
+  {
+    "deliveries": [
+      {
+        "states": [
+          {
+            "LosSantos": [
+              {
+                "idDelivery": "0",
+                "start": "Murrieta Oil Field",
+                "destination": "",
+                "end": "Station-service de Davis",
+                "distance": ""
+              },
+              {
+                "idDelivery": "1",
+                "start": "Murrieta Oil Field",
+                "destination": "Raffinerie",
+                "end": "Station-service de l'héliport",
+                "distance": ""
+              },
+              {
+                "idDelivery": "2",
+                "start": "Murrieta Oil Field",
+                "destination": "",
+                "end": "Station-service de Mirror Park",
+                "distance": ""
+              },
+              {
+                "idDelivery": "3",
+                "start": "Murrieta Oil Field",
+                "destination": "",
+                "end": "Station-service d'Hawick",
+                "distance": ""
+              },
+              {
+                "idDelivery": "4",
+                "start": "Murrieta Oil Field",
+                "destination": "Raffinerie",
+                "end": "Station-service de l'Aéroport de Los Santos",
+                "distance": ""
+              }
+            ],
+            "SandyShores": [
+              {
+                "idDelivery": "5",
+                "start": "Murrieta Oil Field",
+                "destination": "",
+                "end": "Station-service de Sandy Shores",
+                "distance": ""
+              },
+              {
+                "idDelivery": "6",
+                "start": "Murrieta Oil Field",
+                "destination": "Raffinerie",
+                "end": "Station-service de Harmony",
+                "distance": ""
+              },
+              {
+                "idDelivery": "7",
+                "start": "Murrieta Oil Field",
+                "destination": "",
+                "end": "Station-service de Senora Freeway",
+                "distance": ""
+              },
+              {
+                "idDelivery": "8",
+                "start": "Murrieta Oil Field",
+                "destination": "",
+                "end": "Station-service de Grapeseed",
+                "distance": ""
+              },
+              {
+                "idDelivery": "9",
+                "start": "Murrieta Oil Field",
+                "destination": "Raffinerie",
+                "end": "Station-service Aéroport de Sandy Shores",
+                "distance": ""
+              }
+            ],
+            "PaletoBay": [
+              {
+                "idDelivery": "10",
+                "start": "Plateforme pétrolière en haute mer",
+                "destination": "",
+                "end": "Station-service de Paleto Bay",
+                "distance": ""
+              },
+              {
+                "idDelivery": "11",
+                "start": "Plateforme pétrolière en haute mer",
+                "destination": "",
+                "end": "Station-service de North Chumash",
+                "distance": ""
+              },
+              {
+                "idDelivery": "12",
+                "start": "Plateforme pétrolière en haute mer",
+                "destination": "",
+                "end": "Station-service de Chumash",
+                "distance": ""
+              },
+              {
+                "idDelivery": "13",
+                "start": "Murrieta Oil Field",
+                "destination": "",
+                "end": "Station-service du Fort Zancudo",
+                "distance": ""
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

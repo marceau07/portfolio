@@ -1,0 +1,34 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} - Mes rendez-vous{% endblock %}
+
+{% block contenu %}
+    {% if session.email is defined %}
+        <table id="dtBasicExample" class="table table-striped table-bordered table-responsive-sm" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th class="th-sm">Jour
+                    </th>
+                    <th class="th-sm">Heure
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ listeR.jour|date('d/m/Y') }}</td>
+                    <td>{{ listeR.heure|date('H') }} heure{% if listeR.heure|date('H') > 1 %}s {% endif %} {{ listeR.heure|date('i') }} minute{% if listeR.heure|date('i') > 1 %}s {% endif %}</td>
+                </tr>
+        </table>
+    {% else %}
+        <div class="container" id="formIndex">
+            <div class="row">
+                <div class="h3-responsive col-sm-6">
+                    <a class="page-link" href="index.php?page=connexion"><i class="fab fa-connectdevelop"></i>&nbsp;Connexion</a>
+                </div>
+                <div class="h3-responsive col-sm-6">
+                    <a class="page-link" href="index.php?page=inscription"><i class="fab fa-accessible-icon"></i>&nbsp;Inscription</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

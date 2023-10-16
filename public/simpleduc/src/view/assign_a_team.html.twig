@@ -1,0 +1,79 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {% endblock %}
+
+{% block style %}
+    <link href="css/dragAndDrop.css" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block contenu %}
+    <div class="container">
+        <div class="row">
+            <p>Glissez-déposez l'employé de votre choix dans l'une des cases, l'enregistrement se fait automatiquement.</p>
+        </div>
+    </div>
+    <form method="post" id="validTeam">
+        <div class="drag-container">
+            <ul class="drag-list">
+                <li class="drag-column drag-column-on-hold">
+                    <span class="drag-column-header"><h2>Utilisateurs non assignés:</h2></span>
+                    <ul class="drag-inner-list" id="1" data-default="NULL">
+                        {% for e in listeE %}
+                            <li class="drag-item" name="{{ e.idEmployee }}" data-idEmployee="{{ e.idEmployee }}">{{ e.lastNameEmployee }}&nbsp;{{ e.firstNameEmployee }}</li>
+                            {% endfor %}
+                    </ul>
+                </li>
+                {% for t in listeT %}
+                    <li class="drag-column drag-column-in-progress">
+                        <span class="drag-column-header"><h2>{{ t.nameTeam }}</h2></span>
+                        <ul class="drag-inner-list" id="{{ t.idTeam }}" data-idTeam="{{ t.idTeam }}">
+                            {% for e in listeEGotATeam %}
+                                {% if e.idTeamEmployee == t.idTeam %}
+                                    <li class="drag-item" name="{{ e.idEmployee }}" data-idEmployee="{{ e.idEmployee }}">{{ e.lastNameEmployee }}&nbsp;{{ e.firstNameEmployee }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>  
+        </div>   
+    </form>
+{% endblock %}
+
+{% block js %}   
+    <script src="//s3-us-west-2.amazonaws.com/s.cdpn.io/45226/dragula.min.js"></script>
+    {# Script permettant la prise en charge de plusieurs équipes #}
+    <script>
+        msgOK = $("#msg-returned-not-ok").hide();
+        msgNotOK = $("#msg-returned-is-ok").hide();
+        dragula([
+            document.getElementById('1'),
+        {% for t in listeT %}
+                document.getElementById('{{ t.idTeam }}'),
+        {% endfor %}
+            ]).on('drag', function (el) {
+                // add 'is-moving' class to element being dragged
+                el.classList.add('is-moving');
+            }).on('dragend', function (el) {
+                // remove 'is-moving' class from element after dragging has stopped
+                el.classList.remove('is-moving');
+                // add the 'is-moved' class for 600ms then remove it
+                window.setTimeout(function () {
+                    el.classList.add('is-moved');
+                    window.setTimeout(function () {
+                        el.classList.remove('is-moved');
+                    }, 600);
+                }, 100);
+                idEmployee = $(el).attr("data-idEmployee");
+                idTeam = $(el).parent().attr("data-idTeam");
+                if (idTeam == null) {
+                    idTeam = $(el).parent().attr("data-default");
+                } else {
+                    idTeam = idTeam;
+                }
+                $.post("index.php?page=assignateam", {idTeam: idTeam, idEmployee: idEmployee}, function (data) {
+                    console.log(data.toString());
+                });
+            });
+    </script>
+{% endblock %}

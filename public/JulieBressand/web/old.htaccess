@@ -1,0 +1,28 @@
+#--------------------------------------------------
+# Répertoire : /web/
+#--------------------------------------------------
+
+# Le serveur doit suivre les liens symboliques :
+Options +FollowSymlinks
+
+# Activation du module de réécriture d'URL :
+RewriteEngine on
+
+#--------------------------------------------------
+# Règles de réécriture d'URL :
+#--------------------------------------------------
+
+# Redirection des pages sans paramètres supplémentaires:
+RewriteRule ^([a-zA-Z-0-9]*)$   /web/index.php?page=$1 [L]
+
+# Redirection de la page comportant une variable email:
+#RewriteRule ^([a-z]*)-([a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4})$   /web/index.php?page=$1&email=$2
+
+# Redirection de la page comportant une variable idavis:
+RewriteRule ^([a-zA-Z]*)-([0-9]+)$   /web/index.php?page=$1&idavis=$2 [L]
+
+# Redirection de la page comportant une variable nopage:
+# RewriteRule ^([a-zA-Z]*)-([0-9]*)$   /web/index.php?page=$1&nopage=$2 [L]
+
+# Redirection de la page comportant une variable idactu:
+RewriteRule ^([a-zA-Z]*)-([0-9]*)-([a-zA-Z]*)$   /web/index.php?page=$1&idactu=$2&supprimer=$3 [L]

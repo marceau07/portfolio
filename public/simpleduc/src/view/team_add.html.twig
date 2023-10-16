@@ -1,0 +1,34 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Ajout d'une équipe {% endblock %}
+
+{% block contenu %} <h1> Ajout d'une équipe </h1> 
+
+    {% if form.valide is defined %} 
+        {% if form.valide == true %}
+             <div style="margin: 0 auto;  text-align: center;">
+            <h1>Ajout réussi</h1>
+              <a href="index.php?page=team">Ajouter une nouvelle équipe</a><br>
+              <a href="index.php?page=team" >Retourner sur la liste des équipes</a>
+             </div>
+        {% else %} 
+            <h1 class="h3 mb-3 font-weight-normal">{{ form.valide.message }}</h1> 
+        {% endif %}     
+    {% else %}      
+
+        <div class="panel-body">
+            <form  class="form-signin" action="index.php?page=teamadd" method="post" enctype="application/x-www-form-urlencoded">
+                <label for="nameTeam" class="sr-only">Nom de l'équipe:</label>
+                <input type="text" id="nameTeam" name="nameTeam" class="form-control" placeholder="Saisir un nom d'équipe" required autofocus>
+                <label for="idEmployee" class="sr-only">Responsable:</label>
+                <select name="idEmployee" class="form-control">
+                    <option value="non">Responsable non identifié</option> 
+                    {% for e in listeE %}
+                        <option value="{{ e.idEmployee }}">{{ e.lastNameEmployee }} {{ e.firstNameEmployee }}</option> 
+                    {% endfor%}    
+                </select>    
+                <button class="btn btn-lg btn-primary btn-block" type="submit" name="btAdd">Ajouter</button>
+            </form>
+        </div>    
+    {% endif %}
+{% endblock %} 

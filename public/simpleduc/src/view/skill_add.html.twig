@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Ajout d'une équipe {% endblock %}
+
+{% block contenu %} <h1> Ajout d'une compétence </h1> 
+
+    {% if form.valide is defined %} 
+        {% if form.valide == true %}
+            <div style="margin: 0 auto;  text-align: center;">
+                <h1>Ajout réussi</h1>
+              <a   href="index.php?page=skilladd">Ajouter une nouvelle compétence</a><br>
+              <a  href="index.php?page=skill" >Retourner sur la liste des compétences</a>
+            </div>
+        {% else %} 
+            <h1 class="h3 mb-3 font-weight-normal">{{ form.valide.message }}</h1> 
+        {% endif %}     
+    {% else %}      
+
+        <div class="panel-body">
+            <form  class="form-signin" action="index.php?page=skilladd" method="post" enctype="application/x-www-form-urlencoded">
+                <label for="nameSkill" class="sr-only">Nom de la compétence:</label>
+                <input type="text" id="nameTeam" name="nameSkill" class="form-control" placeholder="Libellé" required autofocus>
+                  <label for="descSkill" class="sr-only">Description de la compétence:</label>
+                <input type="text" id="descSkill" name="descSkill" class="form-control" placeholder="Description" required >
+                  <label for="versionSkill" class="sr-only">Version de la compétence</label>
+                <input type="text" id="versionSkill" name="versionSkill" class="form-control" placeholder="Version" required >
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit" name="btAdd">Ajouter</button>
+            </form>
+        </div>    
+    {% endif %}
+{% endblock %} 

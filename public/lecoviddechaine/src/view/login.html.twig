@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Connexion{{ parent() }}{% endblock %}
+
+{% block style %} 
+    <link rel="stylesheet" href="css/login.css">
+{% endblock %}
+
+{% block header %}Connectez-vous !{% endblock %}
+
+{% block content %}     
+    <div class='col text-center'>
+        {% if form.valide is defined %} 
+            {% if form.valide == false %}
+                <div class="alert-danger">
+                    <span>Echec de connexion</span> 
+                    <span role="alert">{{ form.message }}</span> 
+                    <span ><a href="index.php?page=login">Réessayer</a></span>
+                </div>
+            {% endif %}     
+        {% else %}
+            <article>
+                <form action="index.php?page=login" method="post" enctype="application/x-www-form-urlencoded" id="login"></form>
+                <section>
+                    <h2>Pseudonyme</h2>
+                    <input form="login" type="text" id="nicknameUser" name="nicknameUser" placeholder="Pseudonyme..." required autofocus>
+                </section> 
+                <section> 
+                    <h2>Mot de passe</h2>
+                    <input form="login" type="password" id="passwordUser" name="passwordUser" placeholder="Mot de passe" required>
+                </section> 
+
+            </article> 
+            <button form="login" type="submit" name="btLogin" class="btn btn-md">Connexion</button>
+            <a href="index.php?page=signin" class="text-dark">Pas encore inscrit ?</a>
+        {% endif %}
+    </div>
+{% endblock %}

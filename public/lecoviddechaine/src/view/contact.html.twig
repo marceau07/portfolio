@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Contact{{ parent() }}{% endblock %}
+
+{% block style %}
+
+{% endblock %}
+
+{% block header %}Contact{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% if form.valide is defined %}
+            {% if form.valide == true %}
+                {{ form.message }}
+            {% else %}
+                {{ form.message }}
+            {% endif %}
+        {% else %}
+            <div class="col">
+                <form action="?page=contact" method="post">
+                    <input type="text" class="form-control" name="email" placeholder="Votre email..." required/>
+                    <textarea name="reason" col="15" class="form-control" row="15" placeholder="Votre raison détaillée ici..." required></textarea>
+                    <input type="submit" name="btSendForm" value="Envoyer" class="btn btn-md"/>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

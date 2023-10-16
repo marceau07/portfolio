@@ -1,0 +1,68 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Liste des activités {% endblock %}
+{% block contenu %}
+    <div id="content">
+        <table id="dtBasicExample" class="table table-striped table-bordered table-responsive-sm" width="100%">
+            <thead>
+                <tr>
+                    <th class="th-sm">ID du règlement
+                    </th>
+                    <th class="th-sm">Nom du règlement
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for r in listeR %}
+                    <tr>
+                        <td>{{ r.idRegle }}</td>
+                        <td>{{r.typeRegle}}</td>
+                    </tr>
+                {% endfor %}
+
+        </table>
+        <div class="container">
+            <div class="row">
+                <a class="page-link" href="index.php?page=ajouterReglement">
+                    Ajouter un règlement
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="js/jquery.tabledit_Reglement.js"></script>
+    <script>
+        $('#dtBasicExample').Tabledit({
+            columns: {
+                identifier: [0, 'idRegle'],
+                editable: [[1, 'typeReglement']]
+            },
+            onDraw: function () {
+                console.log('onDraw()');
+            },
+            onSuccess: function (data, textStatus, jqXHR) {
+                console.log('onSuccess(data, textStatus, jqXHR)');
+                console.log(data);
+                console.log(textStatus);
+                console.log(jqXHR);
+            },
+            onFail: function (jqXHR, textStatus, errorThrown) {
+                console.log('onFail(jqXHR, textStatus, errorThrown)');
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            },
+            onAlways: function () {
+                console.log('onAlways()');
+            },
+            onAjax: function (action, serialize) {
+                console.log('onAjax(action, serialize)');
+                console.log(action);
+                console.log(serialize);
+            }
+        });
+    </script>
+{% endblock %}

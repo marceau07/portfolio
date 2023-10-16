@@ -1,0 +1,54 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/style-signin.css" rel="stylesheet"> {% endblock %}
+{% block title %} Ajouter un livre {% endblock %}
+{% block contenu %} 
+    {% if form.valide is defined %} 
+        {% if form.valide == true %}
+            <h1 class="h3 mb-3">Ajout réussi !</h1>
+        {% else %}
+            <h1 class="h3 mb-3">Erreur lors de l'insertion</h1> 
+            <h1 class="h3 mb-3">Erreur : {{form.message}}</h1>
+            <h1 class="h3 mb-3"><a href="index.php?page=ajouterlivre">Retourner sur la page d'ajout</a></h1>    
+        {% endif %} 
+    {% endif %}  
+    <form class="form-signin" action="index.php?page=ajouterlivre" method="post" enctype="multipart/form-data">
+        <h1 class="h3 mb-3">Ajouter un élément à ma bibliothèque !</h1>
+        <label for="id" class="sr-only">ID</label>
+        <input type="hidden" name="id" value="{{ form.livre.id }}"/>
+        <label for="titre" class="sr-only">Titre:</label> 
+        <input type="text" id="titre" name="titre" class="form-control" placeholder="Titre" required autofocus>
+        <label for="isbn" class="sr-only">ISBN:</label>
+        <input type="number" id="isbn" name="isbn" class="form-control" placeholder="isbn" required>
+        <label for="synopsis" class="sr-only">Synospis:</label>
+        <textarea id="synopsis" name="synopsis" class="form-control" rows="5" placeholder="Synopsis"></textarea>
+        <label for="prix" class="sr-only">Prix:</label>
+        <input type="number" id="prix" name="prix" class="form-control" placeholder="Prix" required>
+        <label for="quantite" class="sr-only">Quantité:</label>
+        <input type="number" id="quantite" name="quantite" class="form-control" placeholder="Quantité" required>
+        <select class="form-control" name="idDisponibilite">
+            {% for d in form.disponibilite %}
+                <option value="{{d.id}}">{{ d.libelle }}</option>
+            {% endfor %}
+        </select>
+
+        <select class="form-control" name="idGenre">
+            {% for g in form.genre %}
+                <option value="{{g.id}}">{{g.libelle}}</option>
+            {% endfor %}
+        </select>
+        <select class="form-control" name="idAuteur">
+            {% for a in form.auteur%}
+                <option value="{{a.id}}">{{a.Nom}}</option>
+            {% endfor %}
+        </select>
+        <select class="form-control" name="idEditeur">
+            {% for e in form.editeur %}
+                <option value="{{e.id}}">{{e.libelle}}</option>
+            {% endfor %}
+        </select>
+        <label for="photo" class="sr-only">Photo:</label>
+        <input type="file" id="photo" name="photo" class="form-control">
+        <br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="btAjouter">Ajouter</button>
+    </form>
+{% endblock %} 

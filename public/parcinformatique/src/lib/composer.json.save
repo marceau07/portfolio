@@ -1,0 +1,7 @@
+{
+    "require": {
+        "twig/twig": "2.*",
+        "mobiledetect/mobiledetectlib": "^2.8",
+        "spipu/html2pdf": "^5.2",
+    }
+}

@@ -1,0 +1,22 @@
+<svg width="93" height="118" xmlns="http://www.w3.org/2000/svg">
+ <script type="application/ecmascript" >
+    function changeColor(evt) {
+        Array.prototype.forEach.call(document.getElementsByClassName('range_annee_course'), function(el) {
+            el.setAttribute('fill', '#d03320');
+        });
+        evt.setAttribute('fill', '#09d073');
+    }
+ </script>
+ <title>range_annee_course</title>
+
+ <g>
+  <ellipse ry="10.5" rx="10" id="svg_2" cy="14.5" cx="17" stroke="#000" class="range_annee_course" fill="#d03320" onclick="changeColor(this);"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_3" y="23" x="39" stroke-width="0" stroke="#000" fill="#000000">2012</text>
+  <line id="svg_4" y2="49" x2="17" y1="24" x1="17" stroke="#000" fill="none"/>
+  <ellipse ry="10.5" rx="10" id="svg_5" cy="57.5" cx="17" stroke="#000" class="range_annee_course" fill="#d03320" onclick="changeColor(this);"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_6" y="66" x="39" stroke-width="0" stroke="#000" fill="#000000">2018</text>
+  <line id="svg_7" y2="94" x2="17" y1="69" x1="17" stroke="#000" fill="none"/>
+  <ellipse ry="10.5" rx="10" id="svg_8" cy="104.5" cx="17" stroke="#000" class="range_annee_course" fill="#09d073" onclick="changeColor(this);"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_9" y="111" x="39" stroke-width="0" stroke="#000" fill="#000000">2019</text>
+ </g>
+</svg>

@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Ajout d'un module {% endblock %}
+
+{% block contenu %} <h1> Ajout d'un module </h1> 
+
+    {% if form.valide is defined %} 
+        {% if form.valide == true %}
+            <div style="margin: 0 auto;  text-align: center;">
+                <h1>Ajout réussi</h1>
+                <a href="index.php?page=moduleadd">Ajouter un nouveau module</a><br>
+                <a href="index.php?page=module">Retourner à la liste des modules</a>
+            </div>
+        {% else %} 
+            <h1 class="h3 mb-3 font-weight-normal">{{ form.valide.message }}</h1> 
+        {% endif %}     
+    {% else %}      
+        <div class="panel-body">
+            <form  class="form-signin" action="index.php?page=moduleadd" method="post" enctype="application/x-www-form-urlencoded">                
+                <label for="labelModule" class="sr-only">Nom du module :</label>
+                <input type="text" id="labelModule" name="labelModule" class="form-control" placeholder="Nom" required autofocus>
+
+                <label for="descModule" class="sr-only">Description:</label>
+                <input type="text" id="descModule" name="descModule" class="form-control" placeholder="Description" required autofocus>
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit" name="btAdd">Ajouter</button>
+            </form>
+        </div>    
+    {% endif %}
+{% endblock %} 

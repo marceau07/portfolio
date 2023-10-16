@@ -1,0 +1,48 @@
+
+/*========	Table of Css Content ==========*/
+
+/* Typography */
+/* variables  */
+/* Normalize  */
+/*input and button type focus outline disable*/
+/* Global style */
+/* Preloader Css */
+/* Banners Start */
+/* Main-menu Start */
+/* Hero_area Start */
+/* About Us Start */
+/* Feature Start */
+/* How-use Start */
+/* Partners Start */
+/* Users Start */
+/* Counter Start */
+/* Update Start */
+/* Faq Start */
+/* Footer Start */
+/* Scroll To Top Start *
+
+/* 
+=========================
+
+=============================
+ */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap');
+/* 
+=========================
+ font-family: 'Poppins', sans-serif;
+ font-family: 'Roboto', sans-serif;
+=============================
+ */
+
+// Sass Global
+@import "main/_variables.scss";
+@import "main/_normalize.scss";
+@import "main/_global.scss";
+// pages
+@import "pages/_index-html.scss";
+@import "pages/_compare-html.scss";
+@import "pages/_about-us-html.scss";
+@import "pages/_guides-html.scss";
+@import "pages/_contact-html.scss";
+@import "pages/_rate-html.scss";
+@import "pages/_review-html.scss";

@@ -1,0 +1,26 @@
+{% extends "fr/base.html.twig" %}
+
+{% block title %}Historique{{ parent() }}{% endblock %}
+
+{% block content %}
+    <table class="table table-bordered table-responsive-sm text-white">
+        <thead>
+            <tr>
+                <th>Surnom</th>
+                <th>Bombe désamorcée en</th>
+                <th>Date</th>
+                <th>Difficulté</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% for h in form.history %}
+                    <td>{{ h.nickname }}</td>
+                    <td>{{ h.score }}/{{ h.timer }}</td>
+                    <td>{{ h.date|date('d/m/Y') }}</td>
+                    <td>{{ h.labelDifficulty }}</td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

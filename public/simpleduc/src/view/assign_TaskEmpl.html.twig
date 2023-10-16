@@ -1,0 +1,34 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {% endblock %}
+
+{% block contenu %}
+    <br/>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="h2-responsive">Employés:</h2>
+                <div class="btn-group btn-group-lg">
+                    <div>
+                        {% for e in listeEN %}
+                            {{e.lastNameEmployee}} {{e.firstNameEmployee}}
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <h2 class="h2-responsive">Equipe</h2>
+                {% for t in listeT %}
+                    <div class="btn-group btn-group-lg">
+                        <div>
+                            <input type="radio" id="{{t.nameTeam}}" name="drone" value="{{t.nameTeam}}" checked>
+                            <label for="{{t.nameTeam}}">{{t.nameTeam}}</label>
+                        </div>
+                    </div>
+                    <br/>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

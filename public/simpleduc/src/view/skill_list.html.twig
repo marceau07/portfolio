@@ -1,0 +1,68 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Gestion des équipes {% endblock %}
+
+{% block contenu %} <h1> Gestion des compétences </h1> 
+
+    {% if form.valide is defined %} 
+        {% if form.valide == true %}
+            <h1 class="h3 mb-3 font-weight-normal">{{ form.message }}</h1>
+        {% else %}  
+            <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+        {% endif %}         
+    {% endif %}         
+
+    <div class="panel">
+        <!-- Default panel contents -->
+        <div class="panel-heading background-violet">Liste des compétences {% if session.idRoleUser == 2 %}
+            - <a href="index.php?page=skilladd" class="blanc">Ajouter une compétence</a></div>   
+            {%endif%}                   
+
+
+            <!-- Table -->
+            <div class="table-responsive">
+                <table id="dtBasicExample" class="table table-bordered table-responsive-sm table-striped align-content-sm-center">
+                                    <thead>
+<tr>
+                        <th>#</th>
+                        <th>Libellé</th>
+                        <th>Description</th>
+                        <th>Version</th>
+
+                    </tr>    
+                                    </thead>
+
+                    {% for s in liste %}
+                        <tr>
+                            <td>{{s.idSkill}}</td>
+                            <td>{{s.nameSkill}}</td>
+                            <td>{{s.descSkill}} </td>
+                            <td> {{s.versionSkill}} </td>
+                        </tr> 
+                    {% endfor %}    
+                </table>
+            </div>                        <a href="index.php?page=skillPDFWS">Télécharger sous format PDF <i class="far fa-file-pdf"></i></a>
+
+        </div>
+
+        {% endblock %} 
+
+
+            {% block js %} 
+                <script src="js/jquery.tabledit_Skill.js" type="text/javascript"></script>
+                <script>
+                    $('#dtBasicExample').Tabledit({
+                        url: 'index.php?page=skill',
+                        columns: {
+                            identifier: [0, 'idSkill'],
+                            editable: [[1, 'nameSkill'], [2, 'descSkill'], [3, 'versionSkill']]
+                        }
+                    });
+                </script>
+                <script>
+                    $(document).ready(function () {
+                        $('#dtBasicExample').DataTable();
+                        $('.dataTables_length').addClass('bs-select');
+                    });
+                </script>
+            {% endblock %}

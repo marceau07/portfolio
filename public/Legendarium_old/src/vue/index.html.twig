@@ -1,0 +1,161 @@
+{% extends "base.html.twig" %}
+{% block title %} {{ parent() }} - Accueil {% endblock %}
+{% block style %}
+    <link href="css/index.css" rel="stylesheet">
+{% endblock %}
+{% block contenu %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="container">
+                    <div class="row">
+                        <h1><b>Nos coups de coeurs...</b></h1>
+                        {% for cc in liste %}
+                            {% if cc.coupDeCoeur == 1 %}
+                                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                    </ol>
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <img src="images/livres/couvertures/{{ cc.photo }}" class="d-block w-100" alt="Photo 1">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="images/img2.jpg" class="d-block w-100" alt="Photo 2">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        {% else %}
+                            <p> Il n'y a actuellement aucun livre en favori</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="container">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="images/img1.jpg" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="images/img2.jpg" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="images/img3.jpg" class="d-block w-100" alt="...">
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+            <br>
+            <div class="container">
+                <br>
+                <h1><b>Actualités</b></h1>
+                <div class="col-md-12">
+                    <table class="table table-responsive">
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="fb-page" data-href="https://www.facebook.com/Legendariumlibrairie" data-tabs="timeline" data-small-header="false" data-adapt-container-width="false" data-hide-cover="false" data-show-facepile="false">
+                                        <blockquote cite="https://www.facebook.com/Legendariumlibrairie" class="fb-xfbml-parse-ignore">
+                                            <a href="https://www.facebook.com/Legendariumlibrairie">Légendarium</a>
+                                        </blockquote>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <a class="twitter-timeline" data-width="500" data-height="500" data-theme="dark" data-link-color="#2B7BB9" href="https://twitter.com/Legendarium_Lib?ref_src=twsrc%5Etfw">Tweets by Legendarium_Lib</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row">  
+                <table class="table table-responsive table-bordered">
+                    <h1><b>Horaires</b></h1>
+                    <tr>
+                        <th>Jour</th>
+                        <th class="center">Matin</th>
+                        <th class="center">Après-midi</th>
+                    </tr>
+                    {% for h in infos.horaire %}
+                        <tr>
+                            <td class="jour">{{ h.schedule_day_label }}</td>
+                            {% if h.schedule_am_start is null or h.schedule_am_end is null %}
+                                <td class="center">Fermé</td>
+                            {% else %}
+                                <td class="heure">{{ h.schedule_am_start }} - {{ h.schedule_am_end }}</td>
+                            {% endif %}
+                            {% if h.schedule_pm_start is null or h.schedule_pm_end is null %}
+                                <td class="center">Fermé</td>
+                            {% else %}
+                                <td class="heure">{{ h.schedule_pm_start }} - {{ h.schedule_pm_end }}</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <br><br>
+            <div class="col-md-12">
+                <table class="table-responsive">
+                    <tr>
+                        <td><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2549.129613985812!2d2.778153177586274!3d50.28950835740199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47dd4876806fd45f%3A0x9e2e05bc2b75caae!2s20+Rue+Emile+Legrelle%2C+62000+Arras%2C+France!5e0!3m2!1sen!2suk!4v1555177195155!5m2!1sen!2suk" style="width:85%;height:300px" frameborder="20" style="border:0" allowfullscreen></iframe></td>
+                    </tr>
+                </table>
+            </div>
+            <br><br>            
+            <div><a href="https://twitter.com/legendarium_lib?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @legendarium_lib</a></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        window.onload = function () {
+
+            $('.dropdown').click(function () {
+                $(this).siblings(".submenu").toggleClass('hide');
+
+            });
+        }
+    </script>
+    <script>
+        twttr.widgets.createTimeline(
+                {
+                    sourceType: "profile",
+                    screenName: "Legendarium_Lib"
+                },
+                document.getElementById("container")
+                );
+    </script>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v3.3"></script>
+{% endblock %}

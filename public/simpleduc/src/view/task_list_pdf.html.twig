@@ -1,0 +1,24 @@
+{# Génération du PDF #}
+{% block style %}
+    <link href="css/pdf.css" rel="stylesheet" type="text/css"/>
+
+    <table>
+        <tr>
+            <th>Libellé</th>
+            <th>Description</th>
+            <th>Equipe</th>
+            <th>Coût (€)</th>
+        </tr>
+        {% for tk in listeTK %}
+            <tr>
+                <td>{{tk.labelTask}}</td>
+                <td>{{tk.descTask}}</td>
+                <td>{{tk.nameTeam}}</td>
+                <td>{{tk.costTask}}€</td>
+            </tr> 
+        {% endfor %}    
+
+    </table>
+    <br/>
+    <hr/>
+{% endblock %}

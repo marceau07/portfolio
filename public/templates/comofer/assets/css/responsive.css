@@ -1,0 +1,899 @@
+ /*******************************
+	All Responsive Code
+*******************************/
+
+@media (min-width: 1900px) {
+	.banner .hero-area {
+		padding: 120px 0 220px;
+	}
+	.banner .laptop .man-lap {
+		left: 2%;
+		bottom: 0%;
+		width: 24%;
+	}
+	.about .sape .about-sape {
+		right: 0%;
+		width: 32%;
+	}
+	.about .about-photo .about-img {
+		width: 36%;
+		;
+		left: 3%;
+	}
+	.how-use .photo .use-img {
+		width: 45%;
+	}
+	.how-use .video-box {
+		bottom: 12%;
+		left: 20%;
+	}
+	.how-use .usesape .usesape-img {
+		left: 0%;
+		top: 25%;
+		width: 43%;
+	}
+	.users .user-photo .right-pic {
+		width: 30%;
+	}
+	.users .man-pic .man-plant {
+		left: 1%;
+		bottom: -8%;
+		z-index: -1;
+		width: 14%;
+	}
+	.update .sape .update-bg {
+		left: 0%;
+		top: -8%;
+		width: 32%;
+	}
+	.update .phone .phone-img {
+		left: 11%;
+		width: 28%;
+	}
+	.faq .question .question-man {
+		right: 8%;
+		width: 31%;
+	}
+	.faq .sape .faq-bg {
+		width: 26%;
+	}
+	.banner.about-us .hero-area .phone-coin .phone-lock {
+		right: 7%;
+		width: 28%;
+	}
+	.mission .mission-img .mission-pic {
+		left: 5%;
+		width: 30%;
+	}
+	.banner.contact .bubble .bubble-img,
+	.banner.guides .bubble .bubble-img {  
+		right: 10%; 
+		width: 36%;
+	}
+	.prosandcoin .shap .pors-shap { 
+		top: -57%;
+		left: -5%;
+		width: 48%; 
+	}
+	.testomonial.man .sape .test-sape { 
+		top: -11%;
+		left: 17%;
+		width: 36%; 
+	}
+	.testomonial.man .man-testo .man-pic { 
+		top: -1%;
+		left: 6%; 
+	}
+	.testomonial .sape .test-sape { 
+		left: 15%;
+		width: 42%;
+	}
+
+}
+
+@media (max-width: 1899px) {
+	.banner .hero-area {
+		padding: 120px 0 208px;
+	}
+	.banner .laptop .man-lap {
+		left: -4%;
+	}
+	.about .about-photo .about-img {
+		width: 35%;
+		left: 1%;
+	}
+	.about .sape .about-sape {
+		right: 0%;
+		width: 32%;
+	}
+	.how-use .photo .use-img {
+		width: 47%;
+	}
+	.how-use .video-box {
+		bottom: 19%;
+	}
+	.how-use .usesape .usesape-img {
+		left: 0%;
+		width: 40%;
+	}
+	.users .user-photo .right-pic {
+		width: 28%;
+	}
+	.users .man-pic .man-plant {
+		left: 0%;
+		width: 17%;
+	}
+	.update .sape .update-bg {
+		left: -3%;
+		top: -9%;
+		width: 34%;
+	}
+	.faq .sape .faq-bg {
+		width: 23%;
+		top: 61%;
+	}
+	.faq .question .question-man {
+		right: 7%;
+		width: 29%;
+	}
+	.update .phone .phone-img {
+		left: 0;
+		width: 33%;
+	}
+	.banner.about-us .hero-area .phone-coin .phone-lock {
+		right: 3%; 
+		width: 30%;
+	}
+	.mission .mission-img .mission-pic { 
+		width: 31%;
+	}
+	.testomonial .sape .test-sape { 
+		top: 0%;
+		left: 10%;
+		width: 47%;
+	}
+	.testomonial .test-girl .girl-pic { 
+		top: 22%;
+		left: 1%; 
+	}
+	.testomonial .phone .right-phone { 
+		right: 10%; 
+		width: 26%;
+	}
+	.banner.contact .bubble .bubble-img,
+	.banner.guides .bubble .bubble-img { 
+		right: 4%; 
+		width: 34%;
+	} 
+	.testomonial.man .sape .test-sape { 
+		top: -19%;
+		left: 11%;
+		width: 40%;
+	}
+
+}
+
+@media (max-width: 1599px) {
+	.banner .laptop .man-lap {
+		left: -10%;
+	}
+	.how-use .video-box {
+		bottom: 27%;
+	}
+	.about .sape .about-sape {
+		right: -7%;
+		width: 38%;
+	}
+	.users .man-pic .man-plant,
+	.overview .main-box .pic .mamu,
+	.prosandcoin .shap .right-shap,
+	.testomonial.man .man-testo .man-pic {
+		display: none;
+	}
+	.update .sape .update-bg {
+		left: 0%;
+		width: 36%;
+	}
+	.faq .sape .faq-bg {
+		width: 26%;
+	}
+	.banner.about-us .hero-area .phone-coin .phone-lock {
+		width: 37%;
+	}
+	.mission .mission-img .mission-pic {
+		width: 34%;
+	}
+	.testomonial .sape .test-sape {
+		top: 20%;
+		left: 7%;
+		width: 47%;
+	}
+	.testomonial .test-girl .girl-pic {
+		top: 30%;
+		left: -1%;
+		width: 12%;
+	}
+	.testomonial .phone .right-phone {
+		right: 3%;
+		width: 34%;
+	}
+	.testomonial.man .sape .test-sape {
+		top: -1%;
+		left: 7%;
+		width: 42%;
+	}
+
+}
+
+@media (max-width: 1399px) {
+	.banner .laptop .man-lap {
+		left: -7%;
+	}
+	.about .sape .about-sape {
+		right: -16%;
+		width: 45%;
+	}
+	.faq .sape .faq-bg {
+		right: -14%;
+	}
+	.how-use .video-box {
+		bottom: 36%;
+	}
+	.faq .sape .faq-bg {
+		right: -6%;
+		top: 68%;
+	}
+	.banner.about-us .hero-area .phone-coin .phone-lock {
+		width: 42%;
+	}
+	.testomonial .test-girl .girl-pic { 
+		display: none;
+	}
+	.testomonial .sape .test-sape { 
+		left: 2%;
+		width: 53%;
+	}
+
+}
+
+@media (max-width: 1199px) {
+	.banner .hero-area .hero-form .country .language-select .nice-select .list {
+		width: 90%;
+	}
+	.banner .laptop .man-lap {
+		left: -7%;
+	}
+	.about .sape .about-sape {
+		right: -37%;
+		width: 63%;
+	}
+	.how-use .usesape .usesape-img {
+		left: 0%;
+		width: 45%;
+	}
+	.how-use .video-box {
+		bottom: 47%;
+		left: 6%;
+	}
+	.users .user-photo .right-pic {
+		width: 31%;
+	}
+	.update .sape .update-bg {
+		left: -22%;
+		width: 57%;
+	}
+	.faq .question .question-man {
+		position: absolute;
+		right: 2%;
+	}
+	.faq .sape .faq-bg {
+		right: -23%;
+		width: 50%;
+	}
+	.testomonial .sape .test-sape {
+		top: 30%;
+		width: 60%;
+	}
+	.provaider .provaider-box .content .pament-box .pament {
+		margin-right: 30px;
+	}
+	.provaider .provaider-box .content .pament-box .pament:after {
+		right: 0%; 
+	}
+	.testomonial.man .sape .test-sape,
+	.prosandcoin .shap .pors-shap{
+		display: none;
+	}
+	.banner.review .hero-area .review-img .review-pic { 
+		top: 18%; 
+		width: 42%;
+	}
+	.rate-tracker .rate-details .rate-box.four .box .form-box .textnum.date {
+		margin-left: 0px; 
+		-ms-flex-wrap: wrap; 
+		    flex-wrap: wrap;
+	}
+	.rate-tracker .rate-details .subscribe-box .form-control { 
+		width: 100%;
+	}
+
+}
+
+@media (max-width: 991px) {
+	h1.head {
+		font-size: 45px;
+		line-height: 55px;
+	}
+	h2.title {
+		font-size: 38px;
+		line-height: 48px
+	}
+	.mein-menu {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		box-shadow: 0px 5px 89.61px 13.39px rgb(23 29 113 / 5%);
+		background: -webkit-linear-gradient(top, rgba(153, 88, 255, 1) 100%, rgba(172, 97, 255, 1) 100%);
+		z-index: 99999;
+		padding: 10px 0 10px;
+	}
+	.mein-menu .navbar .navbar-toggler:focus {
+		box-shadow: 0;
+	}
+	.mein-menu .navbar #navbarNavDropdown ul.navbar-nav {
+		height: 350px;
+		overflow: auto;
+	}
+	.banner .mein-menu .navbar #navbarNavDropdown ul.navbar-nav {
+		margin-left: auto; 
+		-webkit-box-align: start; 
+		    -ms-flex-align: start; 
+		            -ms-grid-row-align: flex-start; 
+		        align-items: flex-start;
+	}
+	.banner .mein-menu .navbar #navbarNavDropdown ul.navbar-nav li.nav-item {
+		margin-left: 0;
+		margin-top: 10px;
+	}
+	.banner .mein-menu .navbar #navbarNavDropdown ul.navbar-nav li.nav-item a.nav-link:before,
+	.banner .mein-menu.nav-fixed .navbar #navbarNavDropdown ul.navbar-nav li.nav-item a.nav-link:before {
+		bottom: -6%;
+	}
+	.banner {
+		background-position: right center;
+	}
+	.banner .hero-area .hero-form {
+		margin-top: 30px;
+	}
+	.banner .hero-area {
+		padding: 150px 0px 0px;
+	}
+	.about {
+		padding: 114px 0 120px;
+	}
+	.how-use .content {
+		margin-top: 30px;
+	}
+	.footer .subcribe-box {
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		-ms-flex-direction: column;
+		flex-direction: column;
+	}
+	.footer .subcribe-box h3.subcribe,
+	.footer .subcribe-box .form-group {
+		width: 100%;
+	}
+	.footer .subcribe-box .form-group {
+		margin-top: 30px;
+	}
+	.footer .footer-box .footer-link {
+		text-align: center;
+		margin-top: 10px;
+	}
+	.footer .footer-box .footer-link li a {
+		margin-top: 10px;
+	}
+	.footer-box {
+		text-align: center;
+	}
+	.about .upper-content p.text,
+	.feature .upper-content p.text,
+	.users .total-content .content p.text {
+		padding: 0 0 0;
+	}
+	.update .phone { 
+		margin-bottom: 30px;
+	}
+	.about .about-photo .about-img {
+		width: 80%;
+		position: relative;
+		left: auto;
+	}
+	.how-use .photo .use-img {
+		position: relative;
+		left: auto;
+		width: 80%;
+	}
+	.how-use .video-box {
+		position: absolute;
+		left: 50%;
+		-webkit-transform: translateX(-50%);
+		transform: translateX(-50%);
+		bottom: auto;
+		top: 30%;
+	}
+	.users .man-pic .man-plant {
+		bottom: -19%;
+		width: 18%;
+	}
+	.update .phone .phone-img {
+		position: relative;
+		left: auto;
+		width: 60%;
+	}
+	.about .sape .about-sape,
+	.how-use .usesape .usesape-img,
+	.users .user-photo .right-pic,
+	.update .sape .update-bg,
+	.faq .sape .faq-bg,
+	.faq .question .question-man,
+	.testomonial .sape .test-sape,
+	.testomonial .phone .right-phone,
+	.provaider .provaider-box .content .pament-box .pament:after,
+	.banner.contact .bubble .bubble-img,
+	.banner.guides .bubble .bubble-img,
+	.really-easy .really-shap .shap {
+		display: none;
+	}
+	.update .content .get-link {
+		margin: 60px 0 30px;
+	}
+	.testomonial .testo-box{
+		margin: 30px auto 0px;
+	}
+	.mission .mission-img .mission-pic{
+		width: 75%;
+	}
+	.about .about-photo,
+	.how-use .photo,
+	.mission .mission-img,
+	.update.compare .girl,
+	.feature-box .featureimg{
+		text-align: center;
+		margin-bottom: 30px;
+	}
+	.banner.about-us .hero-area .phone-coin,
+	.banner.review .hero-area .review-img,
+	.banner.rate .hero-area .alert-pic {
+		text-align: center;
+		margin-top: 30px;
+	}
+	.banner.about-us .hero-area .phone-coin .phone-lock,
+	.mission .mission-img .mission-pic,
+	.update.compare .girl .alert-girl,
+	.banner.contact .hero-area .contact-info,
+	.banner.review .hero-area .review-img .review-pic,
+	.feature-box .featureimg .pic.left,
+	.feature-box .featureimg .pic.right {
+		position: relative;
+		top: auto;
+		left: auto;
+		right: auto;
+		bottom: auto;
+		width: auto;
+		-webkit-transform: none;
+		        transform: none;
+	}
+	.prosandcoin .cons {
+		padding: 30px 20px 30px;
+	}
+
+	.provaider .provaider-box { 
+		-webkit-box-orient: vertical; 
+		-webkit-box-direction: normal; 
+		    -ms-flex-direction: column; 
+		        flex-direction: column; 
+	}
+	.provaider .provaider-box .content .free-transfer { 
+		-webkit-box-pack: center; 
+		    -ms-flex-pack: center; 
+		        justify-content: center; 
+	}
+	.banner.contact .hero-area .hero-form.contact{
+		margin-bottom: 0;
+	}
+	.banner.review .hero-area {
+		padding: 200px 0 120px; 
+	}
+	.provaider .provaider-box .total { 
+		margin: 10px 0 0 0; 
+		padding: 30px 60px 30px;
+	} 
+	.banner.compare .hero-area,
+	.banner.contact .hero-area,
+	.banner.guides .hero-area {
+		padding: 200px 0 120px;
+	}
+	.banner.contact {
+		padding-bottom: 120px;
+		margin-bottom: 0px;
+	}
+	.banner.guides .hero-area .banner-content {
+		margin-top: 0px;
+	}
+	.banner.guides .hero-area .hero-form {
+		margin-bottom: 0px;
+	}
+	.provaider .provaider-box .ribbon .ribbon-img { 
+		width: 12%;
+	}
+	.banner.review .hero-area .review-img .review-pic{
+		width: 75%;
+	}
+	.overview .main-box,
+	.prosandcoin .cons {
+		margin-top: 30px; 
+	}
+	.really-easy .use-box{
+		margin-top: 40px; 
+	}
+	.really-easy .use-box .img span { 
+		left: 25%;
+	}
+	.testomonial.man .hcontent{
+		padding: 0px 0px 40px;
+	}
+	.feature-box .featureimg .pic.left,
+	.feature-box .featureimg .pic.right{
+		width: 75%;
+	}
+	.blog .blog-box .text-box {
+		position: relative;
+		margin: -30px 20px 30px 20px; 
+	}
+	.blog {
+		padding: 114px 0 90px;
+	}
+	.rate-tracker .rate-details .rate-box.four .box .form-box,
+	.rate-tracker .rate-details .rate-box.one,
+	.rate-tracker .rate-details .subscribe-box { 
+		-ms-flex-wrap: wrap; 
+		    flex-wrap: wrap; 
+	}  
+	.rate-tracker .rate-details .rate-box.one .country{
+		width: auto;
+	}
+
+}
+
+@media (max-width: 767px) {
+	.partners .partner-box .logo {
+		min-width: 65%;
+		min-height: 65%;
+	}
+	.page-counter {
+		margin-top: 30px;
+		text-align: center;
+	}
+	.footer-bottom {
+		text-align: center;
+	}
+	.footer .footer-bottom .social-style {
+		text-align: center;
+		margin-top: 30px;
+	}
+	.banner .laptop .man-lap,
+	.users .man-pic .man-plant {
+		display: none;
+	}
+	.how-use .photo .use-img {
+		width: 100%;
+	}
+	.counter {
+		padding: 90px 0 120px;
+	}
+	.update .phone .phone-img {
+		width: 85%;
+	} 
+	.about .content .compare-box { 
+		-webkit-box-align: self-start; 
+		    -ms-flex-align: self-start; 
+		            -ms-grid-row-align: self-start; 
+		        align-items: self-start; 
+	}
+	.about .content .compare-box .text-box p.text { 
+		padding: 22px 0px 0 0;
+	}
+	.update .alert-box .icon { 
+		width: 40%;
+	}
+	.mission .mission-img .mission-pic {
+		width: 100%;
+	}
+	.banner.review .hero-area .review-img .review-pic {
+		width: 100%;
+	}
+	.rate-tracker .rate-details .rate-box.one .country{
+		width: 100%;
+	}
+	.rate-tracker .rate-details .rate-box.three .form-box .form-group {
+		margin-right: 0px;
+	}
+	.rate-tracker .rate-details .rate-box.one .country, 
+	.rate-tracker .rate-details .rate-box.one p.text.value,
+	.rate-tracker .rate-details .subscribe-box button.button-1,
+	.rate-tracker .rate-details .subscribe-box .form-control,
+	.rate-tracker .rate-details .rate-box.three .form-box .form-group .textnum,
+	.rate-tracker .rate-details .rate-box.four .box .form-box .textnum.date,
+	.rate-tracker .rate-details .rate-box.four p.text{
+		margin-top: 15px;
+	}
+	.rate-tracker .rate-details .rate-box.one,
+	.rate-tracker .rate-details .subscribe-box,
+	.rate-tracker .rate-details .rate-box.three .form-box,
+	.rate-tracker .rate-details .rate-box.four .box .form-box  {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		    -ms-flex-direction: column;
+		        flex-direction: column; 
+		-webkit-box-align: start; 
+		    -ms-flex-align: start; 
+		        align-items: flex-start;  
+	} 
+	.rate-tracker .rate-details .rate-box label {
+		display: inline;
+	}
+
+}
+
+@media (max-width: 575px) {
+	.counter .page-counter {
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		-ms-flex-direction: column;
+		flex-direction: column;
+	}
+	.counter .page-counter .counter-item {
+		margin-left: 0px;
+		margin-top: 20px;
+	}
+	.update .container {
+		text-align: center;
+	}
+	.update .content .alert-box .text-box {
+		text-align: left;
+	}
+	.update .phone .phone-img {
+		width: 70%;
+	} 
+	.how-use .content {
+		margin-top: 60px;
+	}
+	.how-use .video-box { 
+		top: 27%;
+	}
+	.update .alert-box { 
+		-webkit-box-orient: vertical; 
+		-webkit-box-direction: normal; 
+		    -ms-flex-direction: column; 
+		        flex-direction: column;
+		-webkit-box-pack: center;
+		    -ms-flex-pack: center;
+		        justify-content: center;
+		-webkit-box-align: center;
+		    -ms-flex-align: center;
+		            -ms-grid-row-align: center;
+		        align-items: center;
+	}
+	.update .alert-box .text-box {
+		margin-left: 0px;
+		text-align: center;
+	}
+	.update .alert-box .icon {
+		width: auto;
+		margin-bottom: 30px;
+	}
+	.update .alert-box .text-box a.button{
+		margin: 26px auto auto auto;
+	}
+	.about .content .compare-box .tumb {
+		min-width: 28%;
+	}
+	.footer .subcribe-box .form-group button.button-1{
+		max-width: 150px;
+	}
+	.footer .subcribe-box .form-group .form-control { 
+		padding: 0px 155px 0px 24px;
+	}
+	.provaider .secure,
+	.provaider .provaider-match,
+	.provaider .provaider-box .content .pament-box,
+	.provaider .provaider-box .content .free-transfer,
+	.guides-detail .content .profile,
+	.banner.contact .hero-area .contact-info  { 
+		-webkit-box-orient: vertical; 
+		-webkit-box-direction: normal; 
+		    -ms-flex-direction: column; 
+		        flex-direction: column; 
+	}
+	.provaider .secure .sucure-icon,
+	.provaider .provaider-box .content .free-transfer .free-icon {
+		margin-right: 0px;
+		margin-bottom: 15px;
+	}
+	.provaider .provaider-box .content .pament-box .pament {
+		margin: 0px 0px 20px 0px;
+		text-align: left;
+	}
+	.provaider .provaider-box .ribbon .ribbon-img {
+		width: 18%;
+	}
+	.banner.contact .hero-area .contact-info .info-box.one {
+		margin: 0px 0px 30px ;
+	} 
+	.guides-detail .content .profile .date:after{
+		display: none;
+	}
+	.guides-detail .content .profile .date{
+		margin: 0px 0px 15px;
+		padding: 0;
+	}
+	.guides-detail .content .profile { 
+		-webkit-box-align: start; 
+		    -ms-flex-align: start; 
+		            -ms-grid-row-align: flex-start; 
+		        align-items: flex-start;
+	}
+	.rate-tracker .rate-details .subscribe-box .form-control,
+	.rate-tracker .rate-details .rate-box.four .box .form-box .textnum.date {
+		width: 100%;
+	}
+
+}
+
+@media (max-width: 414px) {
+
+	.footer .footer-box .footer-link li:nth-child(2),
+	.footer .footer-box .footer-link li:nth-child(4),
+	.footer .footer-box .footer-link li:nth-child(6) {
+		display: none;
+	}
+
+	.update .content .alert-box {
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		-ms-flex-direction: column;
+		flex-direction: column;
+	}
+
+	.update .content .alert-box .text-box {
+		margin-left: 0px;
+		margin-top: 20px;
+	}
+
+	.footer .subcribe-box .form-group .form-control {
+		padding: 0px 24px 0px 24px;
+	}
+
+	.footer .subcribe-box .form-group button.button-1 {
+		position: relative;
+		top: auto;
+		right: auto;
+		-webkit-transform: translateY(0%);
+		transform: translateY(0%);
+		margin: 30px auto 0 0;
+	}
+
+	.about .content .compare-box,
+	.feature .feature-box {
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		-ms-flex-direction: column;
+		flex-direction: column;
+	}
+
+	.about .content .compare-box .text-box,
+	.feature .feature-box .text-box {
+		text-align: center;
+		margin-left: 0px;
+		margin-top: 20px;
+	}
+
+	.about .content .compare-box .text-box p.text,
+	.feature .feature-box .text-box p.text {
+		color: #524f98;
+		padding: 22px 0px 0 0;
+	}
+
+	.about .about-photo .about-img {
+		width: 100%;
+	}
+
+	.update .phone .phone-img {
+		width: 90%;
+	}
+	.how-use .video-box {
+		top: 24%;
+	}
+	.about .content .compare-box,
+	.about .content .compare-box, .feature .feature-box { 
+		-webkit-box-orient: vertical; 
+		-webkit-box-direction: normal; 
+		    -ms-flex-direction: column; 
+		        flex-direction: column;
+		-webkit-box-pack: center;
+		    -ms-flex-pack: center;
+		        justify-content: center;
+		-webkit-box-align: center;
+		    -ms-flex-align: center;
+		            -ms-grid-row-align: center;
+		        align-items: center; 
+	}
+	.how-use .video-box { 
+		width: 334px;  
+		top: 21%;
+		 
+	}
+	.how-use .use-box .install { 
+		-webkit-box-orient: vertical; 
+		-webkit-box-direction: normal; 
+		    -ms-flex-direction: column; 
+		        flex-direction: column; 
+	}
+	.how-use .use-box .install .text-box {
+		margin-left: 0px;
+		margin-top: 30px;
+		text-align: center;
+	}
+	.testomonial .testo-box:before,
+	.testomonial .testo-box:after,
+	.testomonial .testo-box:before,
+	.testomonial .testo-box:after
+	 { 
+		font-size: 40px;
+	}
+	.feature-box .featureimg .pic.left,
+	.feature-box .featureimg .pic.right,
+	.rate-tracker .rate-details .rate-box.four .box .form-box .textnum.date,
+	.rate-tracker .rate-details .rate-box.three .form-box .form-group .textnum {
+		width: 100%;
+	}
+}
+ 
+@media (max-width: 360px) {
+	.how-use .video-box {
+		width: 335px; 
+		top: 18%;
+	}
+	.how-use .content {
+		margin-top: 80px;
+	}
+	.update .content .get-link .link:first-child {
+		margin-right: 0px;
+		margin-bottom: 30px;
+	}
+	.update .content .get-link .link {
+		display: block;
+	}
+	.really-easy .use-box .img span {
+		left: 6%;
+	}
+	.really-easy .button-box { 
+		-webkit-box-orient: vertical; 
+		-webkit-box-direction: normal; 
+		    -ms-flex-direction: column; 
+		        flex-direction: column; 
+	}
+	.really-easy .button-box a.button.button-1 { 
+		margin: 0px 0pc 30px; 
+	}
+	.testomonial .testo-box a.button { 
+		width: 178px; 
+	}
+
+}

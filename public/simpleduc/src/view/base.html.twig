@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title> {% block title %} Simpléduc - Gestion des projets {% endblock %}</title>
+        <script src="https://kit.fontawesome.com/3956edc49b.js" crossorigin="anonymous"></script>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+        <link href="css/style3.css" rel="stylesheet">
+        <link rel="icon" type="image/png" href="favicon.ico" />
+        {% block style %} {% endblock %}
+    </head>  
+    <body class="bg-light">
+        {% block body %}
+            <div class="wrapper">
+                <!-- Sidebar  -->
+                {% if session.emailUser is defined %}  
+
+                    <nav id="sidebar">
+                        <div id="dismiss">
+                            <i class="fas fa-arrow-left"></i>
+                        </div>
+
+                        <div class="sidebar-header">  
+                            <h3>Simpléduc</h3>
+                        </div>
+
+                        <ul class="list-unstyled components">
+                            <li class="active"><a href="index.php">Accueil</a></li>    
+                            <li role="separator" class="divider"></li>
+                                {% if session.idRoleUser == 2 %} 
+                                <li>
+                                    <a href="#usersSubmenu" data-toggle="collapse" aria-expanded="false">Utilisateurs</a>
+                                    <ul class="collapse list-unstyled" id="usersSubmenu">
+                                        <li><a href="index.php?page=user">Gestion des utilisateurs</a></li>
+                                    </ul>
+                                </li>
+                            {% endif %}
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="#teamSubmenu" data-toggle="collapse" aria-expanded="false">Equipes</a>        
+                                <ul class="collapse list-unstyled" id="teamSubmenu">    
+                                    <li><a href="index.php?page=team">Gestion des équipes</a></li>
+                                        {% if session.idRoleUser == 2 %}
+                                        <li><a href="index.php?page=teamadd">Ajout d'une équipe</a></li>
+                                        <li><a href="index.php?page=assignateampage">Assigner des employés</a></li>
+                                        {% endif %}
+
+                                </ul>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="#skillsSubmenu" data-toggle="collapse" aria-expanded="false">Compétences</a>
+                                <ul class="collapse list-unstyled" id="skillsSubmenu">
+                                    <li><a  href="index.php?page=skill">Liste des compétences</a></li>
+                                        {% if session.idRoleUser == 2 %}
+
+                                        <li><a  href="index.php?page=skilladd">Ajouter une compétences</a></li>
+                                        {% endif %}
+
+                                </ul>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="#contractsSubmenu" data-toggle="collapse" aria-expanded="false">Contrats</a>
+                                <ul class="collapse list-unstyled" id="contractsSubmenu">
+                                    <li><a  href="index.php?page=contract">Liste des contrats</a></li>
+                                        {% if session.idRoleUser == 2 %}
+
+                                        <li><a  href="index.php?page=contractadd">Ajouter une contrat</a></li>
+                                        {% endif %}
+
+                                </ul>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="#specificationsSubmenu" data-toggle="collapse" aria-expanded="false">Cahier des charges</a>
+                                <ul class="collapse list-unstyled" id="specificationsSubmenu">
+                                    <li><a  href="index.php?page=specification">Liste des Cahiers des charges</a></li>
+                                        {% if session.idRoleUser == 2 %}
+
+                                        <li><a  href="index.php?page=specificationadd">Ajouter un cachier des charges</a></li>
+                                        {% endif %}
+
+                                </ul>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="#firmsSubmenu" data-toggle="collapse" aria-expanded="false">Entreprises</a>
+                                <ul class="collapse list-unstyled" id="firmsSubmenu">
+                                    <li><a  href="index.php?page=firm">Liste des entreprises</a></li>
+                                        {% if session.idRoleUser == 2 %}
+
+                                        <li><a  href="index.php?page=firmadd">Ajouter une entreprise</a></li>
+                                        {% endif %}
+
+                                    <li><a  href="index.php?page=contact">Liste des contacts</a></li>
+                                        {% if session.idRoleUser == 2 %}
+
+                                        <li><a  href="index.php?page=contactadd">Ajouter un contact</a></li>
+                                        {% endif %}
+
+                                </ul>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="#employeeSubmenu" data-toggle="collapse" aria-expanded="false">Employés</a>
+                                <ul class="collapse list-unstyled" id="employeeSubmenu">
+                                    <li><a href="index.php?page=employee">Liste des employés</a></li>
+                                        {% if session.idRoleUser == 2 %}
+
+                                        <li><a href="index.php?page=employeeadd">Ajouter un employé</a></li>
+                                        <li><a href="index.php?page=assignaskillpage">Assigner une compétence</a></li>
+                                        {% endif %}
+
+                                </ul>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="#projectsSubmenu" data-toggle="collapse" aria-expanded="false">Projets</a>
+                                <ul class="collapse list-unstyled" id="projectsSubmenu">
+                                    <li><a href="index.php?page=project">Liste des projets</a></li>
+                                        {% if session.idRoleUser == 2 %}
+
+                                        <li><a href="index.php?page=projectadd">Ajouter un projet</a></li>
+                                        {% endif %}
+
+                                </ul>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="#modulesSubmenu" data-toggle="collapse" aria-expanded="false">Modules</a>
+                                <ul class="collapse list-unstyled" id="modulesSubmenu">
+                                    <li><a href="index.php?page=module">Liste des modules</a></li>
+                                        {% if session.idRoleUser == 2 %}
+
+                                        <li><a href="index.php?page=moduleadd">Ajouter un module</a></li>
+                                        <li><a href="index.php?page=assignamodulepage">Assigner à une tâche</a></li>
+                                        {% endif %}
+
+                                </ul>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="#tasks" data-toggle="collapse" aria-expanded="false">Tâches</a>
+                                <ul class="collapse list-unstyled" id="tasks">
+                                    <li><a href="index.php?page=task">Liste des tâches</a></li>
+                                        {% if session.idRoleUser == 2 %}
+
+                                        <li><a href="index.php?page=taskadd">Ajouter une tâche</a></li>
+                                        <li><a href="index.php?page=assignataskpage">Assigner à un employé</a></li>
+                                        {% endif %}
+
+                                </ul>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                        </ul>
+                        <ul>
+                            <li>
+                                <a href="index.php?page=about">À propos</a>
+                            </li>
+                            <li>
+                                <a href="index.php?page=mentions">Mentions légales</a>
+                            </li>
+                        </ul>
+                    </nav> 
+                {%endif %}
+
+                <!-- Page Content  -->
+                <div id="content" >
+
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <div class="container-fluid">
+                            {% if session.emailUser is defined %}  
+                                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                                    <i class="fas fa-align-left"></i>
+                                    <span>Menu</span>
+                                </button>     
+                            {%endif %}
+
+                            <img src="img/logo.png" alt=""/>
+
+                            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <i class="fas fa-align-justify"></i>
+                            </button>
+
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="nav navbar-nav ml-auto">
+                                    <li class="nav-item active">
+                                        {% if session.emailUser is not defined %}
+                                            <a  href="index.php?page=login">Se connecter</a>
+                                        {% else %}
+                                            {% if session.emailUser is defined %}
+                                                {{session.emailUser}}  
+                                            <li> &nbsp; &nbsp; &nbsp; &nbsp; </li>
+                                            <li> <a href="index.php?page=logout">Se déconnecter</a></li>
+
+                                        {%endif%}
+                                    {%endif%}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav> 
+
+                    {% block contenu %}
+
+                    {% endblock %} 
+                </div>
+            </div>
+        {% endblock %}  
+    </body>
+
+    <!-- SCRIPTS -->
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <!-- MDBootstrap Datatables  -->
+    <script type="text/javascript" src="js/addons/datatables.min.js"></script>
+    <!-- Popper.JS -->
+    <script src="js/popper.min.js"></script>
+    <script type="text/javascript" src="js/menu.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $(this).toggleClass('active');
+            });
+        });
+        $(document).ready(function () {
+            $('#dismiss').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $(this).toggleClass('active');
+            });
+        });
+    </script>
+    <script src="js/attention.js"></script>
+    {% block js %} {% endblock %}
+</body>
+</html>

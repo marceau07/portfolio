@@ -1,0 +1,6 @@
+Options +FollowSymlinks
+RewriteEngine on
+
+Rewritecond %{HTTP_HOST} ^serveur1.arras-sio.com
+Rewritecond %{REQUEST_URI} !(.*)/symfony4-4017/lecoviddechaine/web/
+Rewriterule ^(.*)$ /web/$1 [L]

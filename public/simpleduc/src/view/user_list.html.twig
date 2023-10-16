@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Gestion des utilisateurs {% endblock %}
+
+{% block contenu %} <h1> Gestion des utilisateurs </h1> 
+
+    {% if form.valide is defined %} 
+        {% if form.valide == true %}
+            <h1 class="h3 mb-3 font-weight-normal">{{ form.message }}</h1>
+        {% else %}  
+            <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+        {% endif %}         
+    {% endif %}         
+
+    <div class="panel">
+        <!-- Default panel contents -->
+        <div class="panel-heading background-violet">Liste des utilisateurs</div>
+
+        <!-- Table -->
+        <div class="table-responsive">
+            <table  id="dtBasicExample" class="table table-hover table-striped">
+             <thead>     <tr><th>Email</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Rôle</th>
+                </tr>  </thead>
+                {% for u in liste %}
+                    <tr><td>{{u.emailUser}}</td>
+                        <td>{{u.lastNameUser}}</td>
+                        <td>{{u.firstNameUser}}</td>
+                        <td>{{u.labelRole}}</td>
+                    </tr> 
+                {% endfor %}    
+            </table>
+        </div>                     <th><a href="index.php?page=userPDFWS">Télécharger sous format PDF <i class="far fa-file-pdf"></i></a></th>
+
+    </div>
+
+{% endblock %} 
+
+{% block js %} 
+    <script>
+        $(document).ready(function () {
+            $('#dtBasicExample').DataTable();
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+{% endblock %}

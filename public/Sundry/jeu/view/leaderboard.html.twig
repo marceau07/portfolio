@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+
+{% block contenu %}
+    <div id="content">
+
+        <table id="dtBasicExample" class="table table-striped table-bordered table-responsive-sm" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th class="th-sm">#
+                    </th>
+                    <th class="th-sm">E-mail
+                    </th>
+                    <th class="th-sm">Nom
+                    </th>
+                    <th class="th-sm">Prénom
+                    </th>
+                    <th class="th-sm">Rôle
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for e in listeE %}
+                    <tr>
+                        <td>{{ e.idEmploye }}</td>
+                        <td>{{e.email}}</td>
+                        <td>{{e.nomEmploye}}</td>
+                        <td>{{e.prenomEmploye}}</td>
+                        <td>{{e.descriptionRole}}</td>
+                    </tr>
+                {% endfor %}
+        </table>
+
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(document).ready(function () {
+            $('#dtBasicExample').DataTable();
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{% block contenue %}
+    <div class="text-center pt-5 pb-5">
+        {% if session.login is defined %}
+            {% if form.valide is defined %}
+                {% if form.valide == false %}
+                    <p>Erreur: {{ form.message }}</p>
+                {% else %}
+                    <p  class="form h3 mb-3">{{ form.message }}</p>
+                {% endif %}
+            {% else %}
+                <form method="post" class="login-form">
+                    <input type="hidden" value="{{ session.login }}" name="email" required/>
+                    <button class="bg-primary" type="submit" name="btRecuperer">Récuperer mes informations !</button>
+                </form>
+            {% endif %}
+        {% else %}
+            <div class='form'>
+{#                <a href="/connexion"><p>Veuillez vous connecter pour continuer.</p></a>#}
+                <a href="../web/index.php?page=connexion"><p>Veuillez vous connecter pour continuer.</p></a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block newsletter %}
+{% endblock %}
+
+{% block js %}
+{% endblock %}

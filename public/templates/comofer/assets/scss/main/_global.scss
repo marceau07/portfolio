@@ -1,0 +1,222 @@
+/* Global style */
+.button-1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px; 
+    color: rgb(41, 38, 105);
+    font-weight: 700;
+    line-height: 1.556;
+    text-align: center;
+    border: 1px solid  rgb(164, 164, 198);
+    width: 184px;
+    height: 54px;
+    border-radius: 30px;
+} 
+   
+.navbar-light .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.navbar-toggler {
+    border: none !important;
+    margin: 0px;
+    padding: 0px;
+}
+
+.navbar-toggler:focus {
+    outline: 0px;
+}
+
+
+h1.head {
+    font-family: 'Poppins', sans-serif;
+    font-size: 70px;
+    line-height: 1.143; 
+    font-weight: 700; 
+}
+
+h2.title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 60px;
+    line-height: 1.167; 
+    font-weight: 600;
+}
+
+h3.subtitle  {
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    line-height: 1.357;
+    font-weight: 600;  
+}
+  
+p.text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    line-height: 1.556;
+    font-weight: 400;  
+}  
+
+/* Preloader Css */
+
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 9999999;
+    transition: $transition;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &.hide {
+        opacity: 0;
+        display: none;
+    }
+}
+
+.loader {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 75px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.loader-1 .loader-outter {
+    position: absolute;
+    border: 4px solid #ff0000;
+    border-left-color: transparent;
+    border-bottom: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    -webkit-animation: loader-1-outter 1s cubic-bezier(.42, .61, .58, .41) infinite;
+    animation: loader-1-outter 1s cubic-bezier(.42, .61, .58, .41) infinite;
+}
+
+.loader-1 .loader-inner {
+    position: absolute;
+    border: 4px solid #ff0000;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    left: calc(50% - 20px);
+    top: calc(50% - 20px);
+    border-right: 0;
+    border-top-color: transparent;
+    -webkit-animation: loader-1-inner 1s cubic-bezier(.42, .61, .58, .41) infinite;
+    animation: loader-1-inner 1s cubic-bezier(.42, .61, .58, .41) infinite;
+}
+
+@-webkit-keyframes loader-1-outter {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes loader-1-outter {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes loader-1-inner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(-360deg);
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes loader-1-inner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(-360deg);
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes pulsani {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(2);
+    }
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+
+}
+ 
+
+@keyframes dan-bam {
+    0% {
+        transform: translateX(0);
+    }
+    33% {
+        transform: translateX(15px);
+    } 
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes upor-nis {
+    0% {
+        transform: translateY(0);
+    }
+    33% {
+        transform: translateY(20px);
+    } 
+    100% {
+        transform: translateY(0);
+    }
+}
+
+ 
+
+@keyframes borosoto {
+    0% {
+        transform: scale(1);
+    }
+    33% {
+        transform: scale(1.05);
+    }
+    67% {
+        transform: scale(1.076);
+    }
+    100% {
+        transform: scale(1);
+    }
+
+}
